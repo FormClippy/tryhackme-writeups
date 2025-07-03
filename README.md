@@ -175,6 +175,8 @@ cd ducky
 nano hashes.txt
 ```
 
+![Crack](images/15.png)
+
 3. วาง bcrypt hash ที่ได้จาก sqlmap (ในที่นี้ใส่เฉพาะของ user server-admin)
 > 📌 แนะนำให้ลบ hash อื่น ๆ ออก เพื่อให้ crack ได้เร็วขึ้น
 
