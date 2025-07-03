@@ -180,6 +180,8 @@ nano hashes.txt
 3. วาง bcrypt hash ที่ได้จาก sqlmap (ในที่นี้ใส่เฉพาะของ user server-admin)
 > 📌 แนะนำให้ลบ hash อื่น ๆ ออก เพื่อให้ crack ได้เร็วขึ้น
 
+![Crack](images/16.png)
+
 4. ตรวจสอบว่า hash ถูกบันทึกเรียบร้อย:
 
 ```bash
