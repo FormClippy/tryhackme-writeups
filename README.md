@@ -130,9 +130,9 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc -T user --dump
 
 ![Sqlmap](images/11.png)
 
-ผลลัพธ์: สังเกตคอลัมน์ credit_card ของ id = 6 พบ Flag ซ่อนอยู่
+ผลลัพธ์: สังเกตคอลัมน์ credit_card ของ id = 6 พบ Flag ซ่อนอยู่ เอาไปตอบใน Tryhackme
 
-![Sqlmap](images/12.png)
+![flag1](images/12.png)
 
 ---
 
@@ -250,3 +250,5 @@ cat flag2.txt
 ![flag2](images/19.png)
 
 ✅ ได้ Flag ที่สอง นำไปใช้ตอบใน TryHackMe 
+
+![flag2](images/20.png)
