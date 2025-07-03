@@ -129,3 +129,5 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc -T user --dump
 
 ผลลัพธ์ที่ได้จะแสดงข้อมูลในตาราง user
 ให้สังเกตคอลัมน์ credit_card ของ id = 6 ซึ่งมี Flag ซ่อนอยู่ ให้นำไปใช้ตอบใน TryHackMe
+
+![Sqlmap](images/12.png)
