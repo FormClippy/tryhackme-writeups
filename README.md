@@ -230,3 +230,19 @@ ssh server-admin@10.10.28.30
 ✅ หากเชื่อมต่อสำเร็จ จะได้ Shell ของเครื่องเป้าหมายในฐานะผู้ใช้ server-admin
 
 ![Crack](images/18.png)
+
+## 📁 5. ค้นหา Flag
+
+หลังจากเข้าสู่ระบบได้แล้ว ให้ลองดูไฟล์ใน home directory ของ server-admin:
+
+```bash
+ls
+```
+
+📌 ผลลัพธ์: พบไฟล์ชื่อ flag2.txt
+
+ใช้คำสั่งเพื่ออ่านเนื้อหา:
+
+cat flag2.txt
+
+✅ ได้ Flag ที่สอง นำไปใช้ตอบใน TryHackMe ได้เลย!
