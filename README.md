@@ -206,6 +206,6 @@ john --show hashes.txt
 
 ![Crack](images/17.png)
 
-✅ ตผลลัพธ์ที่ได้:
+✅ ผลลัพธ์ที่ได้:
 ได้รหัสผ่าน: inuyasha สำหรับ server-admin
 
