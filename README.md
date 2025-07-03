@@ -37,7 +37,7 @@
 
 ![Products-Path](images/2.png)
 
-- จะเห็นว่า Path เหมือนเดิมแต่ตัวเลขเปลี่ยนเป็น /products/2
+- จะเห็นว่า Path เหมือนเดิมแต่ตัวเลขเปลี่ยนเป็น `/products/2`
 
 ![Products-Path](images/3.png)
 
