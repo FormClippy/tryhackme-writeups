@@ -36,11 +36,16 @@
 - ให้เราสังเกต Path ด้านบนจะเป็น /products/1
 - ทีนี้ให้กลับไปหน้าเดิมแล้วคลิก LEARN MORE ของอีกสินค้า
 
-![Products](images/2.png)
+![Products-Path](images/2.png)
 
 - จะเห็นว่า Pathเหมือนเดิมแต่ตัวเลขเปลี่ยนเป็น /products/
 
-![Products](images/3.png)
+![Products-Path](images/3.png)
+
+- ที่นี้เราลองมาเล่นเปลี่ยนจากตัวเลข 2 เป็น 3 จาก Pathข้างบนเลย
+- จะได้สินค้าที่ 3 มาอยู่ในหน้าเว็บเพจ
+
+![Products-Path](images/4.png)
 
 ---
 
