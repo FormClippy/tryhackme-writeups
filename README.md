@@ -8,7 +8,7 @@
 
 > 🧩 URL: [Revenge](https://tryhackme.com/room/revenge)
 
-> 👨‍💻 ผู้ทำ: Thanyakorn]
+> 👨‍💻 ผู้ทำ: Thanyakorn
 
 
 
