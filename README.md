@@ -3,7 +3,7 @@
 > 🟡 หมวด: Web / Privilege Escalation  
 > 🧩 ความยาก: Medium  
 > 🕵️‍♂️ โหมด: CTF แบบ Capture Flag
-> > 🧩 URL: (https://tryhackme.com/room/revenge)
+> 🧩 URL: (https://tryhackme.com/room/revenge)
 > 👨‍💻 ผู้ทำ: Thanyakorn
 
 ---
