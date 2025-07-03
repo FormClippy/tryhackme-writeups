@@ -204,3 +204,7 @@ john --show hashes.txt
 ```
 
 ![Crack](images/17.png)
+
+✅ ตัวอย่างผลลัพธ์ที่ได้:
+inuyasha
+
