@@ -184,7 +184,7 @@ nano hashes.txt
 cat hashes.txt
 ```
 
-# 🧂 Crack Bcrypt Hash ด้วย John the Ripper
+## 🧂 Crack Bcrypt Hash ด้วย John the Ripper
 📦 เราจะใช้ john คู่กับ rockyou.txt ในการ brute-force:
 
 ```bash
