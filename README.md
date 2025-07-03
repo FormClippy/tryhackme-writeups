@@ -125,5 +125,7 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc -T user --dump
 - `-T user` ระบุตารางที่ต้องการดึงข้อมูล
 - `--dump` ให้ sqlmap ดึงข้อมูลทั้งหมดจากตารางที่ระบุ
 
+![Sqlmap](images/11.png)
+
 ผลลัพธ์ที่ได้จะแสดงข้อมูลในตาราง user
 ให้สังเกตคอลัมน์ credit_card ของ id = 6 ซึ่งมี Flag ซ่อนอยู่ ให้นำไปใช้ตอบใน TryHackMe
