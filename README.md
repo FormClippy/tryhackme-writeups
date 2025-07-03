@@ -57,7 +57,7 @@
 
 ![Products-Path](images/5.png)
 
-## 🔍 2. Enumeration
+## 🚪 2. Initial Access
 
 ### 🔸 2.1 Nmap Scan
 
