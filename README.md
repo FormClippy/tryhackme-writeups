@@ -1,9 +1,13 @@
 # 🧠 TryHackMe - Revenge
 
-> 🟡 หมวด: Web / Privilege Escalation  
-> 🧩 ความยาก: Medium  
+> 🟡 หมวด: Web / Privilege Escalation
+ 
+> 🧩 ความยาก: Medium
+
 > 🕵️‍♂️ โหมด: CTF แบบ Capture Flag
+
 > 🧩 URL: [Revenge](https://tryhackme.com/room/revenge)
+
 > 👨‍💻 ผู้ทำ: Thanyakorn]
 
 
