@@ -3,7 +3,7 @@
 > 🟡 หมวด: Web / Privilege Escalation  
 > 🧩 ความยาก: Medium  
 > 🕵️‍♂️ โหมด: CTF แบบ Capture Flag
-> 🧩 URL: (https://tryhackme.com/room/revenge)
+> 🧩 URL: [Revenge](https://tryhackme.com/room/revenge)
 > 👨‍💻 ผู้ทำ: Thanyakorn]
 
 
@@ -21,7 +21,7 @@
 - พอร์ตที่เปิด: 22, 80
 - ลองเข้าใช้งานเว็บไซต์และกดที่เมนู Products
   
-![Nmap Scan](images/1.png)
+![Web site](images/1.png)
 
 > จะเจอรูปสินค้า,ค าอธิบาย,ราคา,สี
 > ให้เราสังเกตุ Path ด้านบน จะเป็น /products/1
