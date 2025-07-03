@@ -194,3 +194,7 @@ john hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ⚠️ หมายเหตุ:
 > ถ้ามันขึ้นว่า No password hashes left to crack หมายความว่า john ได้ทำการถอดรหัสแฮชที่มีอยู่ในไฟล์ hashes.txt เรียบร้อยแล้วหรือไม่มีแฮชที่เหลือให้ทำการถอดรหัสจากไฟล์นั้น
 
+- หลังจากรันเสร็จรอจนกว่าจะ crack สำเร็จ จากนั้นดูผลลัพธ์ที่ได้โดยใช้คำสั่ง:
+```bash
+john --show hashes.txt
+```
