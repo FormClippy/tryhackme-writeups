@@ -202,3 +202,5 @@ john hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt
 ```bash
 john --show hashes.txt
 ```
+
+![Crack](images/17.png)
