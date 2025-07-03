@@ -59,7 +59,6 @@
 
 ## 🚪 2. Initial Access
 
-### 🔸 2.1 Nmap Scan
-
+### 🔸 2.1 Sqlmap
 ```bash
-nmap -sC -sV -oA revenge-scan 10.10.x.x
+sqlmap -u "http://10.10.28.30/products/3*" –dbs
