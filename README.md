@@ -285,7 +285,9 @@ sudoedit /etc/systemd/system/duckyinc.service
 ![sudoedit](images/23.png)
 
 ✅  พบว่าแอปพลิเคชันทำงานภายใต้ผู้ใช้ `flask-app` ซึ่งไม่ใช่ `root` 
+
 ✅ สันนิษฐานได้ว่าแอปนี้พัฒนาโดยใช้ **Flask** ซึ่งเป็น Python web framework สำหรับสร้างเว็บไซต์หรือ API
+
 ✅  ต้องทำ Privilege Escalation จากผู้ใช้ `flask-app` ไปเป็น `root`
 
 ![sudoedit](images/24.png)
