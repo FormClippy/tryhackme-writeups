@@ -9,8 +9,7 @@
 
 | ห้อง | หมวด | เทคนิคหลัก |
 |------|-------|-------------|
-| 🦆 [**Revenge**](./revenge/README.md) | Web | `SQLi`, `Privilege Escalation`, `Deface` |
-| 🐱 [**Dogcat**](./dogcat/README.md) | Web | `SSTI`, `LFI`, `RCE` |
+| 🦆 [**Revenge**](./revenge/README.md) | Web | 
 
 ---
 
