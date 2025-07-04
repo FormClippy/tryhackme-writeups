@@ -425,4 +425,21 @@ nano index.html
 
 ![template](images/33.png)
 
-✅ จะเห็นว่าหน้าเว็บเปลี่ยนไปตามที่เราแก้ไขจริง แสดงว่า การ Deface สำเร็จ
+✅ จะเห็นว่าหน้าเว็บเปลี่ยนไปตามที่เราแก้ไขจริง แสดงว่าการ Deface สำเร็จ
+
+## 🏁 8. ค้นหา Flag สุดท้าย (flag3.txt)
+
+- กลับไปที่ root directory:
+
+```bash
+cd /root
+ls
+```
+- จะพบไฟล์ flag3.txt ให้ใช้คำสั่งอ่าน:
+
+```bash
+cat flag3.txt
+```
+![lastFlag](images/34.png)
+
+- ✅ ได้ Flag สุดท้าย
