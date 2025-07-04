@@ -346,5 +346,5 @@ sudo -l
 ```bash
 sudo bash
 ```
-![sudo bash](images/30.png)
+![sudo bash](images/30.1.png)
 
