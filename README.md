@@ -390,3 +390,19 @@ ls -la
 ```bash
 cd /var/www/duckyinc/
 ```
+🔍 เมื่อเข้าไปจะพบโฟลเดอร์ชื่อ templates
+
+- ภายในนั้นคือไฟล์ .html ทั้งหมดที่ใช้สร้างเว็บ
+
+```bash
+cd templates
+ls
+```
+
+💡 ให้แก้ไขไฟล์ที่แสดงหน้าแรกของเว็บ เช่น index.html, home.html, หรือไฟล์ที่เห็นว่าถูกโหลดในหน้าแรกของเว็บ
+
+🛠 ใช้ editor ที่สะดวก เช่น nano:
+
+```bash
+nano index.html
+```
