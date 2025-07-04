@@ -299,6 +299,12 @@ sudoedit /etc/systemd/system/duckyinc.service
 sudo  systemctl daemon-reload
 sudo  systemctl restartduckyinc.service
 ```
+
+จากนั้นรีสตาร์ท service เพื่อให้โหลด config ใหม่:
+
+```bash
+sudo  systemctl restartduckyinc.service
+```
 ![sudoedit](images/25.png)
 
 
