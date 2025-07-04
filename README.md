@@ -411,3 +411,5 @@ nano index.html
 
 - nano เป็นโปรแกรม editor สำหรับแก้ไขไฟล์จาก command line
 - index.html คือไฟล์หน้าแรกของเว็บ — หากเราแก้ไขไฟล์นี้ หน้าแรกของเว็บไซต์ก็จะเปลี่ยนไปทันที
+
+![template](images/32.png)
