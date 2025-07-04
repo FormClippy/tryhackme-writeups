@@ -18,35 +18,33 @@ Revenge เป็นห้อง CTF สาย Web บน TryHackMe ที่ท
 > 👨‍💻 ผู้ทำ: Thanyakorn
 
 ---
+
 ## 📚 สารบัญ
 
-- [📌 ข้อมูลจากโจทย์](#ข้อมูลจากโจทย์)
-- [🛰️ 1. ข้อมูลเบื้องต้น (Target Info)](#1-ขอมลเบองตน-target-info)
-- [🌐 2. ทดลองเข้าใช้งานเว็บไซต์](#2-ทดลองเขาใชงานเวบไซต)
-- [📌 พิจารณาเบื้องต้น](#พจารณาเบองตน)
-- [🚪 3. Initial Access](#3-initial-access)
-  - [🔸 3.1 ตรวจสอบ SQL Injection ด้วย sqlmap](#31-ตรวจสอบ-sql-injection-ดวย-sqlmap)
-  - [🔸 3.2 ตรวจสอบโครงสร้างฐานข้อมูล](#32-ตรวจสอบโครงสรางฐานขอมล)
-  - [🔸 3.3 ดึงข้อมูลจากตาราง user](#33-ดงขอมลจากตาราง-user)
-  - [🔸 3.4 ดึงข้อมูลจากตาราง system_user](#34-ดงขอมลจากตาราง-system_user)
-  - [🔐 3.5 Credential Cracking with John the Ripper](#35-credential-cracking-with-john-the-ripper)
-- [🛠️ ขั้นตอนการเตรียมไฟล์ hash](#ขนตอนการเตรยมไฟล-hash)
-- [🧂 Crack Bcrypt Hash ด้วย John the Ripper](#crack-bcrypt-hash-ดวย-john-the-ripper)
-  - [📦 เราจะใช้ john คู่กับ rockyou.txt ในการ Dictionary attack:](#เราจะใช-john-คกบ-rockyoutxt-ในการ-dictionary-attack)
-- [🔐 4. SSH เข้าเครื่องเป้าหมาย](#4-ssh-เขาเครองเปาหมาย)
-- [📁 5. ค้นหา Flag](#5-คนหา-flag)
-- [🔼 6. Privilege Escalation](#6-privilege-escalation)
-  - [🔍 6.1 ตรวจสอบสิทธิ์ด้วยคำสั่ง:](#61-ตรวจสอบสทธดวยคำสง)
-  - [✏️6.2 แก้ไขไฟล์ Service ด้วย `sudoedit`](#62-แกไขไฟล-service-ดวย-sudoedit)
-  - [⚙️ 6.3 แก้ไข Unit File เพื่อ Exploit สิทธิ์ผ่าน Service](#63-แกไข-unit-file-เพอ-exploit-สทธผาน-service)
-  - [🔄 Reload และ Restart Service](#reload-และ-restart-service)
-  - [🧑‍💻 6.4 ยกระดับสิทธิ์เป็น Root](#64-ยกระดบสทธเปน-root)
-  - [📂 ค้นหา Flag เพิ่มเติม](#คนหา-flag-เพมเตม)
-- [🌐 7. แก้ไขหน้าเว็บ `(Deface)`](#7-แกไขหนาเวบ-deface)
-  - [📁 7.1 ค้นหา Directory เว็บไซต์](#71-คนหา-directory-เวบไซต)
-  - [✍️ 7.2 แก้ไขหน้าแรกของเว็บไซต์](#72-แกไขหนาแรกของเวบไซต)
-  - [🛠️ 7.3 ทำการแก้ไขหน้าเว็บและบันทึกการเปลี่ยนแปลง](#73-ทำการแกไขหนาเวบและบนทกการเปลยนแปลง)
-- [🏁 8. ค้นหา Flag สุดท้าย (flag3.txt)](#8-คนหา-flag-สดทาย-flag3txt)
+- 📌 ข้อมูลจากโจทย์  
+- 🛰️ 1. ข้อมูลเบื้องต้น (Target Info)  
+- 🌐 2. ทดลองเข้าใช้งานเว็บไซต์  
+- 📌 พิจารณาเบื้องต้น  
+- 🚪 3. Initial Access  
+  - 🔸 3.1 ตรวจสอบ SQL Injection ด้วย sqlmap  
+  - 🔸 3.2 ตรวจสอบโครงสร้างฐานข้อมูล  
+  - 🔸 3.3 ดึงข้อมูลจากตาราง user  
+  - 🔸 3.4 ดึงข้อมูลจากตาราง system_user  
+  - 🔐 3.5 Credential Cracking with John the Ripper  
+- 🔐 4. SSH เข้าเครื่องเป้าหมาย  
+- 📁 5. ค้นหา Flag  
+- 🔼 6. Privilege Escalation  
+  - 🔍 6.1 ตรวจสอบสิทธิ์ด้วยคำสั่ง  
+  - ✏️ 6.2 แก้ไขไฟล์ Service ด้วย `sudoedit`  
+  - ⚙️ 6.3 แก้ไข Unit File เพื่อ Exploit สิทธิ์ผ่าน Service  
+  - 🔄 Reload และ Restart Service  
+  - 🧑‍💻 6.4 ยกระดับสิทธิ์เป็น Root  
+  - 📂 ค้นหา Flag เพิ่มเติม  
+- 🌐 7. แก้ไขหน้าเว็บ (Deface)  
+  - 📁 7.1 ค้นหา Directory เว็บไซต์  
+  - ✍️ 7.2 แก้ไขหน้าแรกของเว็บไซต์  
+  - 🛠️ 7.3 ทำการแก้ไขหน้าเว็บและบันทึกการเปลี่ยนแปลง  
+- 🏁 8. ค้นหา Flag สุดท้าย (flag3.txt)
 
 ---
 
