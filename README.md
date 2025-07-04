@@ -293,7 +293,7 @@ sudoedit /etc/systemd/system/duckyinc.service
 
 ![sudoedit](images/24.png)
 
-- หลังจากแก้ไขไฟล์บริการแล้ว ต้อง reload daemon เพื่อให้ systemd รับการเปลี่ยนแปลง:
+หลังจากแก้ไขไฟล์บริการแล้ว ต้อง reload daemon เพื่อให้ systemd รับการเปลี่ยนแปลง:
 
 ```bash
 sudo  systemctl daemon-reload
@@ -321,4 +321,11 @@ sudo  systemctl restartduckyinc.service
 
 - ![sudoedit](images/27.png)
 
+### 🔄 Reload และ Restart Service
 
+- หลังจากแก้ไขไฟล์ .service ให้รันคำสั่งด้านล่างเพื่อให้ systemd โหลดค่าที่เปลี่ยนแปลง:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart duckyinc.service
+```
