@@ -330,4 +330,4 @@ sudo systemctl daemon-reload
 sudo systemctl restart duckyinc.service
 ```
 
-- ![sudoedit](images/28.png)
+![sudoedit](images/28.png)
