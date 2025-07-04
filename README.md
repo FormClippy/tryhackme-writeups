@@ -278,6 +278,7 @@ sudo -l
 ```bash
 sudoedit /etc/systemd/system/duckyinc.service
 ```
+
 ![sudoedit](images/22.png)
 
 💡 เมื่อกด Enter แล้ว ระบบจะเปิดไฟล์ด้วย editor (เช่น nano หรือ vi) ขึ้นมาให้แก้ไข config ได้ทันที
@@ -291,5 +292,14 @@ sudoedit /etc/systemd/system/duckyinc.service
 🔍  ต้องทำ Privilege Escalation จากผู้ใช้ `flask-app` ไปเป็น `root`
 
 ![sudoedit](images/24.png)
+
+- หลังจากแก้ไขไฟล์บริการแล้ว ต้อง reload daemon เพื่อให้ systemd รับการเปลี่ยนแปลง:
+
+```bash
+sudo  systemctl daemon-reload
+sudo  systemctl restartduckyinc.service
+```
+![sudoedit](images/25.png)
+
 
 
