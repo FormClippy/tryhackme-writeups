@@ -317,7 +317,7 @@ sudo  systemctl restartduckyinc.service
 
 ![sudoedit](images/26.png)
 
-- และอย่าลืมต่อท้าย app:app" ด้วย
+- และอย่าลืมต่อท้าย app:app ด้วย
 
 - ![sudoedit](images/27.png)
 
