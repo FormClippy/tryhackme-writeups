@@ -340,3 +340,11 @@ sudo systemctl restart duckyinc.service
 sudo -l
 ```
 ![sudo-l](images/29.png)
+
+- จากนั้นยกระดับสิทธิ์เป็น root โดยไม่ต้องใช้รหัสผ่าน:
+
+```bash
+sudo bash
+```
+![sudo bash](images/30.png)
+
