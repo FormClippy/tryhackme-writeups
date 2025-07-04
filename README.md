@@ -331,3 +331,5 @@ sudo systemctl restart duckyinc.service
 ```
 
 ![sudoedit](images/28.png)
+
+> การที่เราทำแบบนี้คือจะทำให้ผู้ใช้ server-admin สามารถเรียกใช้งาน /bin/bash ด้วยสิทธิ์rootได้โดยไม่ต้องกรอกรหัสผ่าน
