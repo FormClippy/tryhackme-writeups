@@ -5,5 +5,5 @@
 
 ## รายการห้อง
 
-- [Revenge](./revenge/README.md) – SQLi, PrivEsc, Deface
+- [Revenge](./revenge/README.md) 
 - Soon
