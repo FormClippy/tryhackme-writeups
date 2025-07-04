@@ -31,6 +31,9 @@ Revenge เป็นห้อง CTF สาย Web บน TryHackMe ที่ท
   - 🔸 3.3 ดึงข้อมูลจากตาราง user  
   - 🔸 3.4 ดึงข้อมูลจากตาราง system_user  
   - 🔐 3.5 Credential Cracking with John the Ripper  
+- 🛠️ ขั้นตอนการเตรียมไฟล์ hash  
+- 🧂 Crack Bcrypt Hash ด้วย John the Ripper  
+  - 📦 ใช้ john คู่กับ rockyou.txt  
 - 🔐 4. SSH เข้าเครื่องเป้าหมาย  
 - 📁 5. ค้นหา Flag  
 - 🔼 6. Privilege Escalation  
@@ -45,6 +48,9 @@ Revenge เป็นห้อง CTF สาย Web บน TryHackMe ที่ท
   - ✍️ 7.2 แก้ไขหน้าแรกของเว็บไซต์  
   - 🛠️ 7.3 ทำการแก้ไขหน้าเว็บและบันทึกการเปลี่ยนแปลง  
 - 🏁 8. ค้นหา Flag สุดท้าย (flag3.txt)
+
+
+
 
 ---
 
