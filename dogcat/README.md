@@ -69,6 +69,6 @@ http://10.10.85.123/?view=php://filter/convert.base64-encode/resource=dog/../ind
 
 8. เมื่อยิง URL นี้แล้ว เราจะได้เนื้อหาแบบ Base64 กลับมา
 
-→ ให้ copy ข้อความที่ได้แล้วเอาไปวางในเว็บ [CyberChef](https://gchq.github.io/CyberChef/)
+   → ให้ copy ข้อความที่ได้แล้วเอาไปวางในเว็บ [CyberChef](https://gchq.github.io/CyberChef/)
 
 9. ตั้งค่า CyberChef ให้ใช้ Recipe เป็น From Base64 ก็จะได้ Source code ของ index.php ออกมา
