@@ -34,6 +34,9 @@
 ```bash
 http://10.10.85.123/?view=dog/../../../../etc/passwd
 ```
+
+![dogcat](images/2.png)
+
 - ใช้ ../../../../ เพื่อพยายามออกจากโฟลเดอร์ /dog/ แล้วเข้าไปอ่านไฟล์ /etc/passwd
 - แต่ปรากฏว่าเจอ Error ขึ้นมาว่า:
 > failed to open stream: No such file or directory in /var/www/html/index.php
