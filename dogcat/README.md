@@ -220,5 +220,6 @@ http://10.10.85.123/?view=/var/log/apache2/access.log&ext=&cmd=whoami
 
 22. หลังจากที่วาง URL ไปแล้วจากนั้นทำการ Send สังเกตุจาก Response ด้านล่างสุดเห็นว่าเราไม่เจออะไรเลย เราจำเป็นต้องกด Send อีกที
 
+![log](images/14.png)
 
 
