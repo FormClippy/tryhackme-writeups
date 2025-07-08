@@ -89,4 +89,8 @@ http://10.10.85.123/?view=php://filter/convert.base64-encode/resource=dog/../ind
 ```bash
 include($_GET["view"] . $ext);
 ```
+→ แปลว่า ถ้าเราส่ง view=dog/../../../../etc/passwd เว็บจะพยายาม include:
+dog/../../../../etc/passwd.php → ซึ่งไม่มีจริง ก็เลย Error
+
+
   
