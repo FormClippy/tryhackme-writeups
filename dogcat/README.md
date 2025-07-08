@@ -143,5 +143,10 @@ http://10.10.85.123/?view=dog/../../../../etc/passwd&ext=
    - จากนั้นกด Send เพื่อลองเรียกดูเนื้อหาไฟล์
 
 ![log](images/7.png)
+
 ✅ 16.1 ตรวจสอบผลลัพธ์
 หาก Response แสดงเนื้อหาของ log เช่น บรรทัดที่เริ่มต้นด้วย IP, Request Line, หรือ User-Agent แสดงว่า สามารถเข้าถึง log ได้สำเร็จ
+
+ℹ️ หมายเหตุ:
+- log ที่ใช้คือ: /var/log/apache2/access.log ซึ่งเป็นที่เก็บ access log ของ Apache
+- ผมใช้ Wappalyzer (Browser Extension) เพื่อตรวจสอบว่า Web Server คือ Apache และใช้ PHP
