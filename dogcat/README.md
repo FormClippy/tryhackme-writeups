@@ -15,7 +15,6 @@
 > 🕵️‍♂️ โหมด: Capture The Flag
 
 > 🔗 URL: [Dogcat](https://tryhackme.com/room/dogcat)
-
 > 👨‍💻 ผู้ทำ: Thanyakorn
 
 ---
