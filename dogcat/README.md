@@ -41,4 +41,12 @@ http://10.10.85.123/?view=dog/../../../../etc/passwd
 - แต่ปรากฏว่าเจอ Error ขึ้นมาว่า:
 > failed to open stream: No such file or directory in /var/www/html/index.php
 
+3. จาก Error นี้ทำให้เรารู้ว่า Web กำลังเรียกใช้ไฟล์ index.php และมีการ include ไฟล์ที่รับมาจาก user
+ซึ่งแปลว่าแอปนี้น่าจะใช้พวก include() หรือ require() แล้วเอาค่าจากพารามิเตอร์ view ไปต่อ path
+
+4. ทีนี้เราสงสัยว่าทำไมมันถึงเปิดไฟล์ไม่ได้ ทั้งที่ /etc/passwd ก็น่าจะมี
+→ อาจจะเพราะ Web เติม .php ต่อท้ายให้อัตโนมัติ เช่น /etc/passwd.php (ซึ่งไม่มีจริงเลย Error)
+
+5. เพื่อพิสูจน์ว่า Web นี้กำลังทำงานยังไง และเข้าใจ Logic ด้านหลัง
+เราจึงต้องพยายาม อ่าน source code ของ index.php
 
