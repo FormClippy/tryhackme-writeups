@@ -1,3 +1,19 @@
+# 🐶🐱 Dog vs Cat Classification with CNN
+
+> 🔬 A simple Convolutional Neural Network (CNN) trained to classify between images of dogs and cats. Built with PyTorch and designed for clarity and learning.
+
+---
+
+## 📚 Table of Contents
+- [📌 Project Overview](#-project-overview)
+- [🧠 Model Architecture](#-model-architecture)
+- [🧪 Training Details](#-training-details)
+- [📊 Evaluation & Results](#-evaluation--results)
+- [📂 Dataset](#-dataset)
+- [🚀 How to Run](#-how-to-run)
+- [🖼️ Sample Predictions](#-sample-predictions)
+- [🧾 References](#-references)
+
 ## ✨ บทนำ
 ห้อง Dogcat เป็นห้อง CTF ที่เน้นการโจมตีผ่านช่องโหว่ Local File Inclusion (LFI) และการยกระดับสิทธิ์ในระบบ โดยมีเป้าหมายหลักคือการเจาะระบบและอ่านไฟล์ flag ที่ซ่อนอยู่
 
