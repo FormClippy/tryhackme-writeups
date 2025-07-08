@@ -222,4 +222,9 @@ http://10.10.85.123/?view=/var/log/apache2/access.log&ext=&cmd=whoami
 
 ![log](images/14.png)
 
+23. ทำไมต้องกด Send สองครั้ง?
+> หลังจากที่เรา inject โค้ด PHP ลงใน access.log และพยายามโหลดไฟล์นั้นผ่าน LFI เพื่อรันคำสั่ง เช่น whoami แล้ว
+ครั้งแรกที่เรากด Send ใน Burp Suite (หรือโหลด URL นั้นผ่านเบราว์เซอร์)
+อาจ ยังไม่เห็นผลลัพธ์ของคำสั่ง เพราะ Log file ยังไม่ถูกอัปเดตแบบ real-time ในช่วงวินาทีนั้น
+
 
