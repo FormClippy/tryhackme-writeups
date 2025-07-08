@@ -10,11 +10,17 @@
 
 # 🧠 TryHackMe - Dogcat 🐶🐱
 
-> 🟡 หมวด: Web Security / Privilege Escalation  
+> 🟡 หมวด: Web / Privilege Escalation  
 > 🧩 ความยาก: Medium  
-> 🕵️‍♂️ โหมด: Capture The Flag
-> 🔗 URL: [Dogcat](https://tryhackme.com/room/dogcat)
+> 🕵️‍♂️ โหมด: CTF แบบ Capture The Flag  
+> 🧩 URL: [Revenge](https://tryhackme.com/room/revenge)  
 > 👨‍💻 ผู้ทำ: Thanyakorn
+
+
+
+
+> 🔗 URL: [Dogcat](https://tryhackme.com/room/dogcat)
+
 
 ---
 
