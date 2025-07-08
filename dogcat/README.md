@@ -13,14 +13,8 @@
 > 🟡 หมวด: Web / Privilege Escalation  
 > 🧩 ความยาก: Medium  
 > 🕵️‍♂️ โหมด: CTF แบบ Capture The Flag  
-> 🧩 URL: [Revenge](https://tryhackme.com/room/revenge)  
+> 🧩 URL: [Dogcat](https://tryhackme.com/room/dogcat)  
 > 👨‍💻 ผู้ทำ: Thanyakorn
-
-
-
-
-> 🔗 URL: [Dogcat](https://tryhackme.com/room/dogcat)
-
 
 ---
 
