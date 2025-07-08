@@ -64,3 +64,5 @@ http://10.10.85.123/?view=php://filter/convert.base64-encode/resource=dog/../ind
 - `php://filter`: stream wrapper ของ PHP
 - `convert.base64-encode`: ให้ผลลัพธ์เป็น Base64
 - `dog/../index`: ย้อนกลับมาจาก `/dog/` แล้วเข้าไปยัง `index` (จริง ๆ ก็คือ index.php)
+
+![dogcat](images/3.png)
