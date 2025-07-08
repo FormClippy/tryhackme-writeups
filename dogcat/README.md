@@ -84,7 +84,7 @@ http://10.10.85.123/?view=php://filter/convert.base64-encode/resource=dog/../ind
     - ตัวเว็บจะ เติม .php เข้าไปให้โดยอัตโนมัติ เสมอ
     - ดูเหมือนว่า View ที่เราส่งเข้าไป (เช่น dog หรือ cat) จะเป็น input หลักที่เว็บนำไปใช้ในการ include ไฟล์
       
-ตัวอย่างเช่น:
+  ตัวอย่างเช่น:
 
 ```bash
 include($_GET["view"] . "." . $ext);
