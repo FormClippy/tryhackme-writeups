@@ -87,6 +87,6 @@ http://10.10.85.123/?view=php://filter/convert.base64-encode/resource=dog/../ind
    ตัวอย่างเช่น:
 
 ```bash
-include($_GET["view"] . "." . $ext);
+include($_GET["view"] . $ext);
 ```
   
