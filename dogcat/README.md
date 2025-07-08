@@ -141,3 +141,7 @@ http://10.10.85.123/?view=dog/../../../../etc/passwd&ext=
     view=dog/../../../../../../var/log/apache2/access.log
     ```
    - จากนั้นกด Send เพื่อลองเรียกดูเนื้อหาไฟล์
+
+![log](images/7.png)
+✅ 16.1 ตรวจสอบผลลัพธ์
+หาก Response แสดงเนื้อหาของ log เช่น บรรทัดที่เริ่มต้นด้วย IP, Request Line, หรือ User-Agent แสดงว่า สามารถเข้าถึง log ได้สำเร็จ
