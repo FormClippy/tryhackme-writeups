@@ -1,7 +1,3 @@
-# TryHackMe: Dogcat Writeup
-
-![Dogcat Room Banner](https://tryhackme-images.s3.amazonaws.com/room-icons/5e8a1a4a6787f152aa3e9338e0e5f8a8.png)
-
 ## ✨ บทนำ
 ห้อง Dogcat เป็นห้อง CTF ที่เน้นการโจมตีผ่านช่องโหว่ Local File Inclusion (LFI) และการยกระดับสิทธิ์ในระบบ โดยมีเป้าหมายหลักคือการเจาะระบบและอ่านไฟล์ flag ที่ซ่อนอยู่
 
