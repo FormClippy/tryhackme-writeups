@@ -227,6 +227,8 @@ http://10.10.85.123/?view=/var/log/apache2/access.log&ext=&cmd=whoami
 ครั้งแรกที่เรากด Send ใน Burp Suite (หรือโหลด URL นั้นผ่านเบราว์เซอร์)
 อาจ ยังไม่เห็นผลลัพธ์ของคำสั่ง เพราะ Log file ยังไม่ถูกอัปเดตแบบ real-time ในช่วงวินาทีนั้น
 
+![log](images/15.png)
+
 เมื่อทำแบบนี้ เราจะเห็น output เป็น:
 
 ```bash
