@@ -12,7 +12,8 @@
 > 🟡 หมวด: Web Security / Privilege Escalation  
 > 🧩 ความยาก: Medium  
 > 🕵️‍♂️ โหมด: Capture The Flag  
-> 🔗 URL: [Dogcat Room](https://tryhackme.com/room/dogcat)
+> 🔗 URL: [Dogcat](https://tryhackme.com/room/dogcat)
+
 > 👨‍💻 ผู้ทำ: Thanyakorn
 
 
