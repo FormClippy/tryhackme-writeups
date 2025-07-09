@@ -10,7 +10,7 @@
 | ห้อง | หมวด | 
 |------|-------|
 | 🦆 [**Revenge**](./revenge/README.md) | Web | 
-| 🐱 [**Dogcat**](./dogcat/README.md) | Web |
+| 🐶🐱 [**Dogcat**](./dogcat/README.md) | Web |
 
 ---
 
