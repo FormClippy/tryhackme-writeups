@@ -1,9 +1,7 @@
-<!--
-Title: TryHackMe - Dogcat Walkthrough (TH)
-Author: Thanyakorn
-Tags: CTF, TryHackMe, Dogcat, Web, LFI, Privilege Escalation
-Level: Medium
--->
+![TryHackMe](https://img.shields.io/badge/TryHackMe-Dogcat-blueviolet)
+![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
+![Web](https://img.shields.io/badge/Category-Web%20%2F%20Privilege%20Escalation-lightgrey)
+
 ## ✨ บทนำ
 ยินดีต้อนรับสู่บทวิเคราะห์ห้อง CTF "Dogcat" ที่เราจะสำรวจวิธีการเจาะระบบด้วย LFI และการยกระดับสิทธิ์แบบเจาะลึก 🐾
 ห้อง Dogcat เป็นห้อง CTF ที่เน้นการโจมตีผ่านช่องโหว่ Local File Inclusion (LFI) และการยกระดับสิทธิ์ในระบบ โดยมีเป้าหมายหลักคือการเจาะระบบและอ่านไฟล์ flag ที่ซ่อนอยู่
