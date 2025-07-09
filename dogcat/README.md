@@ -1,6 +1,9 @@
-![TryHackMe](https://img.shields.io/badge/TryHackMe-Dogcat-blueviolet)
-![Difficulty](https://img.shields.io/badge/Difficulty-Medium-yellow)
-![Web](https://img.shields.io/badge/Category-Web%20%2F%20Privilege%20Escalation-lightgrey)
+<!--
+Title: TryHackMe - Dogcat Walkthrough (TH)
+Author: Thanyakorn
+Tags: CTF, TryHackMe, Dogcat, Web, LFI, Privilege Escalation
+Level: Medium
+-->
 
 ## ✨ บทนำ
 ยินดีต้อนรับสู่บทวิเคราะห์ห้อง CTF "Dogcat" ที่เราจะสำรวจวิธีการเจาะระบบด้วย LFI และการยกระดับสิทธิ์แบบเจาะลึก 🐾
