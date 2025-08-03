@@ -82,3 +82,16 @@ ffuf -u http://10.201.120.42/indexFUZZ -w /usr/share/seclists/Discovery/Web-Cont
 - 🔒 `index.phps` → [Status: 403] (ถูกห้ามเข้าถึง)
 - 🔁 `index.php` → [Status: 302] (ถูก redirect ไปที่หน้าอื่น)
 
+## ขั้นตอนที่ 5: 
+
+- ใช้คำสั่ง ffuf ดังนี้:
+
+```bash
+ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -e .php,.txt
+```
+
+📌 คำอธิบายคำสั่งเพิ่มเติม:
+- `-u` กำหนด URL ที่ต้องการทดสอบ โดยตำแหน่ง FUZZ จะถูกแทนที่ด้วยคำจาก wordlist
+- `-w` ระบุไฟล์ wordlist ที่ใช้ค้นหาคำที่เป็นไปได้
+- `-e .php,.txt` บอก `ffuf` ให้ทดสอบด้วยนามสกุลไฟล์ที่ระบุ คือ `.php` และ `.txt` (extension) เพื่อค้นหาไฟล์ที่มีนามสกุลเหล่านี้
+
