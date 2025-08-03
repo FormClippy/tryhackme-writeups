@@ -82,16 +82,19 @@ ffuf -u http://10.201.120.42/indexFUZZ -w /usr/share/seclists/Discovery/Web-Cont
 - 🔒 `index.phps` → [Status: 403] (ถูกห้ามเข้าถึง)
 - 🔁 `index.php` → [Status: 302] (ถูก redirect ไปที่หน้าอื่น)
 
-## ขั้นตอนที่ 5: 
+## ขั้นตอนที่ 5: เพิ่มการค้นหาด้วยนามสกุลไฟล์ .php และ .txt
 
-- ใช้คำสั่ง ffuf ดังนี้:
+- ในขั้นตอนนี้ เราจะใช้คำสั่ง ffuf เพื่อค้นหาไฟล์หรือหน้าเว็บที่มีนามสกุล .php และ .txt
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -e .php,.txt
 ```
+
+![ffuf](images/5.png)
 
 📌 คำอธิบายคำสั่งเพิ่มเติม:
 - `-u` กำหนด URL ที่ต้องการทดสอบ โดยตำแหน่ง FUZZ จะถูกแทนที่ด้วยคำจาก wordlist
 - `-w` ระบุไฟล์ wordlist ที่ใช้ค้นหาคำที่เป็นไปได้
 - `-e .php,.txt` บอก `ffuf` ให้ทดสอบด้วยนามสกุลไฟล์ที่ระบุ คือ `.php` และ `.txt` (extension) เพื่อค้นหาไฟล์ที่มีนามสกุลเหล่านี้
 
+✅ จากการใช้คำสั่ง ffuf ค้นหาไฟล์โดยเพิ่มนามสกุล .php และ .txt พบว่าไฟล์ about.php มีขนาด 4840 ไบต์
