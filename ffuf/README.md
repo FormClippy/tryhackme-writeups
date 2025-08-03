@@ -109,6 +109,7 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 📊 ผลลัพธ์ที่ได้
 - เจอ directory ที่ตอบกลับสถานะ HTTP 301 (redirect) ได้แก่:
+  
  - docs
  - config
  - external
