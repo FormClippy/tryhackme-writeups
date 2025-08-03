@@ -237,7 +237,7 @@ ffuf -u 'http://10.201.92.170/sqli-labs/Less-1/?FUZZ=1' -c -w /usr/share/seclist
 ✅ ผลลัพธ์
 
 ```bash
-id        [Status: 200, Size: 1450, Words: 82, Lines: 65]
+id        [Status: 200, Size: 721, Words: 37, Lines: 29, Duration: 360ms]
 ```
 
 
