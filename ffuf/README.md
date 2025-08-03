@@ -110,7 +110,7 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 ![ffuf](images/6.png)
 
 📊 ผลลัพธ์ที่ได้
-- เจอ directory ที่ตอบกลับสถานะ HTTP 301 (redirect) ได้แก่:
+- เจอ directory ทั้งหมดได้แก่:
   - `docs`
   - `config`
   - `external`
