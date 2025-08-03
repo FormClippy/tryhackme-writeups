@@ -310,12 +310,12 @@ p@ssword       [Status: 200, Size: 1526, Words: 100, Lines: 50, Duration: 252ms]
 
 ## 📚 คำถามย่อยเกี่ยวกับ ffuf (ใน Task Reviewing the options)
 
-| ❓ Question | ✅ Correct Answer | 📌 Explanation |
-|------------|------------------|----------------|
-| **1. How do you save the output to a markdown file (`ffuf.md`)?** | `-of md -o ffuf.md` | Save scan results as a Markdown file. `-of` specifies format; `-o` specifies output filename. |
-| **2. How do you re-use a raw HTTP request file?** | `-request` | Load and replay a full HTTP request from a file (e.g., exported from Burp Suite). |
-| **3. How do you strip comments from a wordlist?** | `-ic` | Ignores comment lines in wordlist that start with `#`. Useful to clean up big lists. |
-| **4. How would you read a wordlist from STDIN?** | `-w -` | Accept input from a pipe, such as `seq`, `for`, or `cat`. Dash `-` means STDIN. |
-| **5. How do you print full URLs and redirect locations?** | `-v` | Enables verbose output to show full URLs, redirect targets, and more info. |
-| **6. What option would you use to follow redirects?** | `-r` | Automatically follow HTTP redirects during fuzzing. |
-| **7. How do you enable colorized output?** | `-c` | Show output in color (default in many terminals); improves readability. |
+| ❓ Question | ✅ Correct Answer | 📌 Explanation (ภาษาไทย) |
+|------------|------------------|---------------------------|
+| **1. How do you save the output to a markdown file (`ffuf.md`)?** | `-of md -o ffuf.md` | ใช้ `-of md` เพื่อระบุว่าให้ออกรูปแบบผลลัพธ์เป็น Markdown และ `-o ffuf.md` เพื่อระบุชื่อไฟล์ที่ต้องการบันทึก เช่น `ffuf.md` เหมาะกับการส่งรายงานหรือบันทึกผลแบบสวยงาม |
+| **2. How do you re-use a raw http request file?** | `-request` | ใช้ `-request` เพื่อโหลดคำขอ HTTP ที่เขียนไว้ล่วงหน้า เช่น จาก Burp Suite หรือ ZAP ซึ่งบันทึกไว้เป็น raw HTTP request ทั้งหมด (GET/POST + Header + Body) ใช้กรณี fuzzing form หรือ API |
+| **3. How do you strip comments from a wordlist?** | `-ic` | ใช้ `-ic` (ignore comments) สำหรับข้ามบรรทัดที่ขึ้นต้นด้วย `#` ใน wordlist เพื่อให้ ffuf ใช้เฉพาะคำที่จำเป็นจริง ๆ ลด noise และหลีกเลี่ยง error จากบรรทัดที่ไม่ใช่ payload |
+| **4. How would you read a wordlist from STDIN?** | `-w -` | เครื่องหมาย `-w -` หมายถึงให้อ่าน wordlist จาก STDIN เช่น `seq 1 100 | ffuf -w -` หรือ `for i in {0..255}; do echo $i; done | ffuf -w -` ช่วยให้ไม่ต้องสร้างไฟล์ wordlist ชั่วคราว |
+| **5. How do you print full URLs and redirect locations?** | `-v` | ใช้ `-v` (verbose) เพื่อให้แสดง URL เต็ม ๆ ที่ส่ง request ไป พร้อม redirect ที่เกิดขึ้น เช่น จาก HTTP 302 ที่พาไปหน้าล็อกอิน, หน้า error, หรือ location อื่น ๆ |
+| **6. What option would you use to follow redirects?** | `-r` | ใช้ `-r` (follow redirect) ถ้า target มีการเปลี่ยนเส้นทาง (301/302) เช่น Login Form ที่ Redirect เมื่อ login fail/success หรือเวลาทำ brute force แล้วโดน redirect ไป error page |
+| **7. How do you enable colorized output?** | `-c` | ใช้ `-c` เพื่อเปิดการแสดงผลแบบมีสี เช่น ข้อความสีเขียวคือ status 200, สีแดงคือ error, ฯลฯ ทำให้อ่านง่ายและเห็น pattern ชัดเจนเวลารันใน terminal |
