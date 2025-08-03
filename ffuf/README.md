@@ -10,11 +10,11 @@
 
 # 🧠 TryHackMe - FFUF 🔍💥
 
-> 🟡 หมวด: Web / Fuzzing / Content Discovery
-> 🧩 ความยาก: ง่ายถึงปานกลาง (Easy-Medium)
-> 🕵️‍♂️ โหมด: CTF แบบ Walkthrough + Hands-on Lab
-> 🔗 URL: [FFUF](https://tryhackme.com/room/ffuf)
-> 👨‍💻 ผู้ทำ: Thanyakorn
+🟡 **หมวด:** Web / Fuzzing / Content Discovery  
+🧩 **ความยาก:** ง่ายถึงปานกลาง (Easy-Medium)  
+🕵️‍♂️ **โหมด:** CTF แบบ Walkthrough + Hands-on Lab  
+🔗 **URL:** [FFUF](https://tryhackme.com/room/ffuf)  
+👨‍💻 **ผู้ทำ:** Thanyakorn
 
 ---
 
