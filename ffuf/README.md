@@ -307,3 +307,15 @@ p@ssword       [Status: 200, Size: 1526, Words: 100, Lines: 50, Duration: 252ms]
 ✅ จากผลลัพธ์:
 - Response เดียวที่ ไม่ถูก filter (ขนาดไม่ใช่ 1435) คือ `p@ssword`
 - แปลว่าเว็บตอบกลับไม่เหมือนเดิม ซึ่งมักเป็นการตอบกลับของ Login สำเร็จ
+
+## 📚 คำถามย่อยเกี่ยวกับ ffuf (ใน Task Reviewing the options)
+
+| ❓ Question | ✅ Correct Answer | 📌 Explanation |
+|------------|------------------|----------------|
+| **1. How do you save the output to a markdown file (`ffuf.md`)?** | `-of md -o ffuf.md` | Save scan results as a Markdown file. `-of` specifies format; `-o` specifies output filename. |
+| **2. How do you re-use a raw HTTP request file?** | `-request` | Load and replay a full HTTP request from a file (e.g., exported from Burp Suite). |
+| **3. How do you strip comments from a wordlist?** | `-ic` | Ignores comment lines in wordlist that start with `#`. Useful to clean up big lists. |
+| **4. How would you read a wordlist from STDIN?** | `-w -` | Accept input from a pipe, such as `seq`, `for`, or `cat`. Dash `-` means STDIN. |
+| **5. How do you print full URLs and redirect locations?** | `-v` | Enables verbose output to show full URLs, redirect targets, and more info. |
+| **6. What option would you use to follow redirects?** | `-r` | Automatically follow HTTP redirects during fuzzing. |
+| **7. How do you enable colorized output?** | `-c` | Show output in color (default in many terminals); improves readability. |
