@@ -107,12 +107,13 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
 ```
 
+![ffuf](images/6.png)
+
 📊 ผลลัพธ์ที่ได้
 - เจอ directory ที่ตอบกลับสถานะ HTTP 301 (redirect) ได้แก่:
-  
-  - docs
-  - config
-  - external
-  - ส่วน server-status ถูกตอบกลับด้วยสถานะ 403 (Forbidden) ซึ่งไม่ถือเป็น directory ที่เปิดให้เข้าชม
+  - `docs`
+  - `config`
+  - `external`
+  - `server-status` 
 
-✅ คำตอบ: จำนวน directory ที่พบและเข้าถึงได้ (status 200-299 หรือ 301) มีทั้งหมด 3 directories คือ docs, config, และ external
+✅ จำนวน directory ที่พบและเข้าถึงได้ คือ docs, config, external และ server-status
