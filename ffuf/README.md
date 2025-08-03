@@ -60,6 +60,7 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 ✅ จากการใช้คำสั่ง ffuf พบว่า ไฟล์แรกที่มีสถานะ HTTP 200 คือ favicon.ico
 แต่ถ้าดูเฉพาะ ไฟล์ที่เป็น .txt จะพบว่า:
+
 ➡️ robots.txt คือไฟล์ที่ค้นพบและตรงกับคำถาม
 
 ## ขั้นตอนที่ 4: ตรวจสอบนามสกุลไฟล์ของ index
