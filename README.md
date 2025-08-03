@@ -11,6 +11,7 @@
 |------|-------|
 | 🦆 [**Revenge**](./revenge/README.md) | Web | 
 | 🐶 [**Dogcat**](./dogcat/README.md) | Web |
+| 🧪 [**ffuz**](./ffuz/README.md) | Web |
 
 ---
 
