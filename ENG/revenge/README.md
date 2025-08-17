@@ -1,102 +1,101 @@
 ### ✨ Introduction
 Revenge is a Web-focused CTF room on TryHackMe, designed to challenge participants with tasks such as exploiting web applications, performing SQL Injection, escalating privileges, and defacing the website's front page according to the objectives provided.
 
-### 🔍 เป้าหมายของโจทย์
-“Break into the server that’s running the website and deface the front page.”
+### 🔍 Challenge Objective
+"Break into the server that’s running the website and deface the front page."
 
-สรุป:
-- เข้าเครื่องให้ได้
-- แก้ไฟล์หน้าเว็บให้เปลี่ยน
-- พร้อมตามหา Flags ทั้ง 3 ใบ
+Summary:
+- Gain access to the target machine
+- Modify the website's front page
+- Capture all three flags
 
 # 🧠 TryHackMe - Revenge
 
-> 🟡 หมวด: Web / Privilege Escalation  
-> 🧩 ความยาก: Medium  
-> 🕵️‍♂️ โหมด: CTF แบบ Capture The Flag  
+> 🟡 Category: Web / Privilege Escalation
+> 🧩 Difficulty: Medium
+> 🕵️‍♂️ Mode: Capture The Flag (CTF)
 > 🧩 URL: [Revenge](https://tryhackme.com/room/revenge)  
-> 👨‍💻 ผู้ทำ: Thanyakorn
+> 👨‍💻 Author: Thanyakorn
 
 ---
 
-## 📚 สารบัญ
-
-- 📌 ข้อมูลจากโจทย์  
-- 🛰️ 1. ข้อมูลเบื้องต้น (Target Info)  
-- 🌐 2. ทดลองเข้าใช้งานเว็บไซต์  
-- 📌 พิจารณาเบื้องต้น  
-- 🚪 3. Initial Access  
-  - 🔸 3.1 ตรวจสอบ SQL Injection ด้วย sqlmap  
-  - 🔸 3.2 ตรวจสอบโครงสร้างฐานข้อมูล  
-  - 🔸 3.3 ดึงข้อมูลจากตาราง user  
-  - 🔸 3.4 ดึงข้อมูลจากตาราง system_user  
-  - 🔐 3.5 Credential Cracking with John the Ripper  
-- 🛠️ ขั้นตอนการเตรียมไฟล์ hash  
-- 🧂 Crack Bcrypt Hash ด้วย John the Ripper  
-  - 📦 ใช้ john คู่กับ rockyou.txt  
-- 🔐 4. SSH เข้าเครื่องเป้าหมาย  
-- 📁 5. ค้นหา Flag  
+## 📚 Table of Contents
+- 📌 Challenge Overview
+- 🛰️ 1. Target Information
+- 🌐 2. Exploring the Website
+- 📌 Initial Observations  
+- 🚪 3. Initial Access
+  - 🔸 3.1 Testing for SQL Injection using sqlmap
+  - 🔸 3.2 Database Structure Enumeration 
+  - 🔸 3.3 Dumping the user Table
+  - 🔸 3.4 Dumping the system_user Table
+  - 🔐 3.5 Credential Cracking with John the Ripper
+- 🛠️ Preparing Hash Files
+- 🧂 Cracking Bcrypt Hashes with John the Ripper
+  - 📦 Using john with rockyou.txt
+- 🔐 4. SSH into the Target Machine
+- 📁 5. Searching for Flags
 - 🔼 6. Privilege Escalation  
-  - 🔍 6.1 ตรวจสอบสิทธิ์ด้วยคำสั่ง  
-  - ✏️ 6.2 แก้ไขไฟล์ Service ด้วย `sudoedit`  
-  - ⚙️ 6.3 แก้ไข Unit File เพื่อ Exploit สิทธิ์ผ่าน Service  
+  - 🔍 6.1 Checking Sudo Privileges
+  - ✏️ 6.2 Editing Service Files using sudoedit 
+  - ⚙️ 6.3 Modifying Unit File to Exploit Service Privileges  
   - 🔄 Reload และ Restart Service  
-  - 🧑‍💻 6.4 ยกระดับสิทธิ์เป็น Root  
-  - 📂 ค้นหา Flag เพิ่มเติม  
-- 🌐 7. แก้ไขหน้าเว็บ (Deface)  
-  - 📁 7.1 ค้นหา Directory เว็บไซต์  
-  - ✍️ 7.2 แก้ไขหน้าแรกของเว็บไซต์  
-  - 🛠️ 7.3 ทำการแก้ไขหน้าเว็บและบันทึกการเปลี่ยนแปลง  
-- 🏁 8. ค้นหา Flag สุดท้าย (flag3.txt)
+  - 🧑‍💻 6.4 Escalating to Root
+  - 📂 Searching for Additional Flags  
+- 🌐 7. Defacing the Website 
+  - 📁 7.1 Locating the Website Directory
+  - ✍️ 7.2 Editing the Front Page
+  - 🛠️ 7.3 Saving and Verifying Changes
+- 🏁 8. Capturing the Final Flag (flag3.txt)
 
 
 
 
 ---
 
-## 📌 ข้อมูลจากโจทย์
+## 📌 Challenge Overview
 
 > "What I want you to do is simple. Break into the server that's running the website and deface the front page."
 
-💬 แปล: สิ่งที่โจทย์ต้องการคือ เจาะเข้าเซิร์ฟเวอร์ที่รันเว็บไซต์ แล้วแก้หน้าแรกของเว็บ (deface)
+💬 Interpretation: The goal is to gain access to the server hosting the website and modify its front page (deface).
 
 ---
 
-## 🛰️ 1. ข้อมูลเบื้องต้น (Target Info)
+## 🛰️ 1. Target Information
 
-- IP เครื่องเป้าหมาย: `10.10.28.30`
-- พอร์ตที่เปิด: `22`, `80`
+- Target IP: `10.10.28.30`
+- Open Ports: `22`, `80`
 
 ---
 
-## 🌐 2. ทดลองเข้าใช้งานเว็บไซต์
+## 🌐 2. Exploring the Website
 
-- ไปที่เมนู **Products** จะเจอชื่อสินค้า 4 รายการ  
-- คลิก **LEARN MORE** ของสินค้าใดก็ได้
+- Navigate to the **Products** menu; four products are listed.  
+- Click **LEARN MORE** on any product.
 
 ![Web site](images/1.png)
 
-- ตัวอย่างสินค้า: Box of Duckies  
-- จะแสดงรูปสินค้า, คำอธิบาย, ราคา, สี  
-- สังเกต Path ด้านบนจะเป็น `/products/1`  
-- กลับไปหน้าเดิม แล้วคลิก **LEARN MORE** ของสินค้าอื่น
+- Example: Box of Duckies
+- Product details such as image, description, price, and color are displayed 
+- Notice the URL path: `/products/1`  
+- Navigate back and click **LEARN MORE** on another product
 
 ![Products-Path](images/2.png)
 
-- จะเห็นว่า Path เหมือนเดิมแต่ตัวเลขเปลี่ยนเป็น `/products/2`
+- The path updates only the product ID: `/products/2`
 
 ![Products-Path](images/3.png)
 
-- ลองเปลี่ยนตัวเลข 2 เป็น 3 ใน Path เพื่อดูสินค้าชิ้นที่ 3
+- Change the URL ID to 3 to view the third product
 
 ![Products-Path](images/4.png)
 
 ---
 
-## 📌 พิจารณาเบื้องต้น
+## 📌 Initial Observations
 
-- น่าจะมีการใช้ฐานข้อมูลเพื่อดึงข้อมูลสินค้าตาม ID ที่ส่งผ่าน URL
-- เมื่อลองใส่เครื่องหมาย `'` ลงในพารามิเตอร์ของ URL พบว่าเว็บไซต์แสดงข้อผิดพลาด HTTP 500 ซึ่ง อาจเป็นสัญญาณ บ่งชี้ถึงช่องโหว่ SQL Injection
+- The website likely fetches product data from a database using the URL ID parameter
+- Injecting a single quote `'` into the parameter triggers an HTTP 500 error, indicating a potential SQL Injection vulnerability
 
 ![Products-Path](images/5.png)
 
@@ -104,9 +103,9 @@ Revenge is a Web-focused CTF room on TryHackMe, designed to challenge participan
 
 ## 🚪 3. Initial Access
 
-### 🔸 3.1 ตรวจสอบ SQL Injection ด้วย sqlmap
+### 🔸 3.1 Testing SQL Injection with sqlmap
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 sqlmap -u "http://10.10.28.30/products/3*" --dbs
@@ -114,24 +113,24 @@ sqlmap -u "http://10.10.28.30/products/3*" --dbs
 
 ![Sqlmap](images/6.png)
 
-📝 **คำอธิบาย:**
+📝 **Explanation:**
 
-- `sqlmap` คือเครื่องมืออัตโนมัติสำหรับตรวจสอบช่องโหว่ SQL Injection และดึงข้อมูลฐานข้อมูล  
-- ตัวเลือก `-u` ใช้ระบุ URL ที่ต้องการทดสอบ โดย `"http://10.10.28.30/products/3*"` ใช้ wildcard 3* เพื่อให้ sqlmap ลองค่าหลาย ๆ ค่าในพารามิเตอร์ id  
-- ตัวเลือก `--dbs` สั่งให้ sqlmap ดึงชื่อฐานข้อมูลทั้งหมดที่เชื่อมต่อกับเว็บเป้าหมาย  
+- `sqlmap` is an automated tool to test SQL Injection and extract database information 
+- `-u` specifies the target URL; `"3*"` uses a wildcard to test multiple values for the `id` parameter  
+- `--dbs` lists all databases connected to the web application
 
 ![Sqlmap](images/7.png)
 
-💡 ผลลัพธ์: แสดงฐานข้อมูลต่าง ๆ เช่นฐานข้อมูลหลัก `duckyinc` และฐานข้อมูลระบบของ MySQL เช่น `mysql`, `information_schema` เป็นต้น
+💡 Result: Several databases were found, including the main `duckyinc` and system databases like `mysql` and `information_schema`.
 
-> เราจะมุ่งเน้นวิเคราะห์ฐานข้อมูล `duckyinc` ต่อไป เพราะเป็นฐานข้อมูลสำคัญของเว็บนี้
+> Focus will be on the `duckyinc` database as it contains the primary website data.
 
-**สรุป:**  
-พบช่องโหว่ SQL Injection ที่พารามิเตอร์ `id` ของ URL สามารถเข้าถึงฐานข้อมูลหลักได้
+**Summary:**  
+SQL Injection confirmed at the `id` URL parameter, granting access to the main database.
 
-### 🔸 3.2 ตรวจสอบโครงสร้างฐานข้อมูล
+### 🔸 3.2 Database Structure Enumeration
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --columns
@@ -139,23 +138,23 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --columns
 
 ![Sqlmap](images/8.png)
 
-📝 **คำอธิบาย:**
+📝 **Explanation:**
 
-- `-D duckyinc` ระบุชื่อฐานข้อมูลที่ต้องการให้ sqlmap ทำการดึงข้อมูล
-- `--columns` ให้ sqlmap ดึงชื่อคอลัมน์ทั้งหมดจากทุกตารางภายในฐานข้อมูลที่ระบุ
+- `-D duckyinc` specifies the database
+- `--columns` lists all columns in all tables of the database
 
 
-เมื่อรันคำสั่งแล้ว sqlmap จะถามว่าต้องการดำเนินการต่อหรือไม่ ให้ตอบ `Y`
+Respond `Y` when prompted to continue.
 
 ![Sqlmap](images/9.png)
 
-💡 ผลลัพธ์: จะเห็นรายชื่อคอลัมน์ทั้งหมดภายในฐานข้อมูล `duckyinc` ซึ่งเป็นข้อมูลโครงสร้างที่จำเป็นสำหรับการดึงข้อมูลเป้าหมายในขั้นตอนถัดไป
+💡 Result: Database structure obtained, necessary for extracting target data.
 
-### 🔸 3.3 ดึงข้อมูลจากตาราง user
+### 🔸 3.3 Dumping the user Table
 
-หลังจากเราทราบโครงสร้างของฐานข้อมูลแล้ว ขั้นตอนนี้จะเป็นการดึงข้อมูลภายในตาราง user ซึ่งอาจมีข้อมูลสำคัญ เช่น รหัสผ่าน หรือค่า Flag ที่เราต้องการ
+After enumerating the database, the next step is to retrieve data from the user table, which may contain sensitive information like passwords or flags.
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc -T user --dump
@@ -163,23 +162,23 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc -T user --dump
 
 ![Sqlmap](images/10.png)
 
-📝 **คำอธิบาย:**
+📝 **Explanation:**
 
-- `-D duckyinc` ระบุชื่อฐานข้อมูลที่ต้องการให้ sqlmap ทำการดึงข้อมูล
-- `-T user` ระบุตารางที่ต้องการดึงข้อมูล
-- `--dump` ดึงข้อมูลทั้งหมดจากตารางที่ระบุ
+- `-D duckyinc` specifies the target database.
+- `-T user` specifies the table to dump.
+- `--dump` extracts all data from the table.
 
 ![Sqlmap](images/11.png)
 
-💡 ผลลัพธ์: สังเกตคอลัมน์ `credit_card` ของ `id = 6` พบ Flag ซ่อนอยู่ เอาไปตอบใน Tryhackme
+💡 Result: The `credit_card` column of `id=6` contains a hidden flag.
 
 ![flag1](images/12.png)
 
-### 🔸 3.4 ดึงข้อมูลจากตาราง system_user
+### 🔸 3.4 Dumping the system_user Table
 
-หลังจากนั้น เราจะโฟกัสที่ตาราง `system_user` ซึ่งคาดว่าอาจมีข้อมูลผู้ใช้งานระบบ เช่น admin หรือข้อมูลที่เกี่ยวข้องกับการยกระดับสิทธิ์
+Next, focus on the `system_user` table, which may contain user credentials or information relevant for privilege escalation.
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --dump -T system_user
@@ -188,17 +187,17 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --dump -T system_user
 
 📝 **คำอธิบาย:**
 
-- `-T system_user` ระบุตารางที่ต้องการ
+- `-T system_user` specifies the table to dump
 
 ![Sqlmap](images/14.png)
 
-💡 ผลลัพธ์: พบ `username` และ `password` ที่เป็น hash (bcrypt)
+💡 Result: Found `username` and `password` stored as bcrypt hashes.
 
 ### 🔐 3.5 Credential Cracking with John the Ripper
 
-หลังจากดึงข้อมูลจากตาราง `system_user` เราพบว่า password ของผู้ใช้งานอยู่ในรูปแบบ bcrypt ซึ่งเป็น hash ที่นิยมใช้ในระบบจริง
+The passwords retrieved from the `system_user` table are in bcrypt format, a commonly used hashing algorithm.
 
-## 🛠️ ขั้นตอนการเตรียมไฟล์ hash
+## 🛠️ Preparing Hash Files
 
 1. สร้างโฟลเดอร์ชื่อ `ducky` แล้วเข้าไปในโฟลเดอร์:
 
@@ -255,7 +254,7 @@ john --show hashes.txt
 
 - หลังจากได้รหัสผ่าน `inuyasha` ของผู้ใช้ `server-admin` ใช้ SSH เข้าเครื่องเป้าหมายผ่านพอร์ต 22
   
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 ssh server-admin@10.10.28.30
@@ -317,7 +316,7 @@ sudo -l
 
 ### ✏️6.2 แก้ไขไฟล์ Service ด้วย `sudoedit`
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 sudoedit /etc/systemd/system/duckyinc.service
@@ -397,7 +396,7 @@ sudo -l
 
 หลังจากรีโหลดและรีสตาร์ท service แล้ว ตอนนี้ผู้ใช้ `server-admin` จะสามารถรันคำสั่ง `/bin/bash` ด้วยสิทธิ์ `root` ได้โดยไม่ต้องใช้รหัสผ่าน
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 sudo bash
@@ -459,7 +458,7 @@ ls
 
 > เมื่อเปิดไฟล์ index.html จะพบว่าเป็นโค้ด HTML สำหรับหน้าแรกของเว็บไซต์ทั้งหมด
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 nano index.html
