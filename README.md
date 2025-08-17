@@ -10,10 +10,10 @@
 ## 🇹🇭 ภาษาไทย
 | ห้อง | หมวด | 
 |------|-------|
-| 🦆 [**Revenge**](./revenge/README.md) | Web | 
-| 🐶 [**Dogcat**](./dogcat/README.md) | Web |
-| 🧪 [**ffuf**](./ffuf/README.md) | Web |
-| 🪟 [**VulnNetActive**](./VulnNet(Active)/README.md) | Windows |
+| 🦆 [**Revenge**](./TH/revenge/README.md) | Web | 
+| 🐶 [**Dogcat**](./TH/dogcat/README.md) | Web |
+| 🧪 [**ffuf**](./TH/ffuf/README.md) | Web |
+| 🪟 [**VulnNetActive**](./TH/VulnNet(Active)/README.md) | Windows |
 
 ---
 
