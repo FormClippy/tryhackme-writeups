@@ -499,7 +499,6 @@ cat flag3.txt
 
 - ✅ Last `Flag`
 
-![done](images/35.png)
 
 
 
