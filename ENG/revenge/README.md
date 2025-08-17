@@ -1,5 +1,5 @@
-### ✨ บทนำ
-Revenge เป็นห้อง CTF สาย Web บน TryHackMe ที่ท้าทายด้วยภารกิจเจาะเข้าเว็บ, ใช้ SQL Injection, ยกระดับสิทธิ์ และแก้หน้าแรกของเว็บไซต์ (deface) ให้ได้ตามเป้าหมายที่โจทย์กำหนด
+### ✨ Introduction
+Revenge is a Web-focused CTF room on TryHackMe, designed to challenge participants with tasks such as exploiting web applications, performing SQL Injection, escalating privileges, and defacing the website's front page according to the objectives provided.
 
 ### 🔍 เป้าหมายของโจทย์
 “Break into the server that’s running the website and deface the front page.”
