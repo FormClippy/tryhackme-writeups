@@ -7,12 +7,23 @@
 
 ## 🗂️ รายการห้อง (CTF Rooms)
 
+## 🇹🇭 ภาษาไทย
 | ห้อง | หมวด | 
 |------|-------|
 | 🦆 [**Revenge**](./revenge/README.md) | Web | 
 | 🐶 [**Dogcat**](./dogcat/README.md) | Web |
-| 🧪 [**ffuz**](./ffuf/README.md) | Web |
-| 🪟 [**VulnNetActive**](./VulnNet(Active)/README.md) | windows |
+| 🧪 [**ffuf**](./ffuf/README.md) | Web |
+| 🪟 [**VulnNetActive**](./VulnNet(Active)/README.md) | Windows |
+
+---
+
+## 🇬🇧 English
+| Room | Category |
+|------|----------|
+| 🦆 [**Revenge**](./revenge/README.md) | Web |
+| 🐶 [**Dogcat**](./dogcat/README.md) | Web |
+| 🧪 [**ffuf**](./ffuf/README.md) | Web |
+| 🪟 [**VulnNetActive**](./VulnNet(Active)/README.md) | Windows |
 
 ---
 
