@@ -12,7 +12,7 @@
 | 🦆 [**Revenge**](./revenge/README.md) | Web | 
 | 🐶 [**Dogcat**](./dogcat/README.md) | Web |
 | 🧪 [**ffuz**](./ffuf/README.md) | Web |
-| 🪟 [**VulnNet: Active**](./VulnNet: Active/README.md) | windows |
+| 🪟 [**VulnNetActive**](./VulnNet: Active/README.md) | windows |
 
 ---
 
