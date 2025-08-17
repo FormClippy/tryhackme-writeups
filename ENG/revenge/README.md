@@ -152,7 +152,7 @@ Respond `Y` when prompted to continue.
 
 ### 🔸 3.3 Dumping the user Table
 
-After enumerating the database, the next step is to retrieve data from the user table, which may contain sensitive information like passwords or flags.
+After enumerating the database, the next step is to retrieve data from the `user` table, which may contain sensitive information like passwords or flags.
 
 📥 Use the command:
 
