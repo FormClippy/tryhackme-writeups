@@ -20,10 +20,10 @@
 ## 🇬🇧 English
 | Room | Category |
 |------|----------|
-| 🦆 [**Revenge**](./revenge/README.md) | Web |
-| 🐶 [**Dogcat**](./dogcat/README.md) | Web |
-| 🧪 [**ffuf**](./ffuf/README.md) | Web |
-| 🪟 [**VulnNetActive**](./VulnNet(Active)/README.md) | Windows |
+| 🦆 [**Revenge**](./ENG/revenge/README.md) | Web |
+| 🐶 [**Dogcat**](./ENG/dogcat/README.md) | Web |
+| 🧪 [**ffuf**](./ENG/ffuf/README.md) | Web |
+| 🪟 [**VulnNetActive**](./ENG/VulnNet(Active)/README.md) | Windows |
 
 ---
 
