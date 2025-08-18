@@ -1,114 +1,118 @@
-## ✨Introduction
-This room introduces the ffuf (Fuzz Faster U Fool) tool, a powerful fuzzing tool for fast and long-lasting web applications. When you brute-force URL paths, parameters, and virtual hosts, you can do a lot of things.
+## ✨ Introduction
+This room introduces the ffuf (Fuzz Faster U Fool) tool, a fast and flexible fuzzing tool for web applications. It can be used to brute-force URL paths, parameters, virtual hosts, and more through a variety of customizable commands.
 
-## 🎯 Goals
-- Learn how to use the ffuf tool for directory and file fuzzing on web servers.
-- Analyze and interpret HTTP status codes returned by fuzzers.
-- Practice using wordlists with ffuf for port paths like /admin, /backup, /login, and more.
-- Additional uses of ffuf, such as setting headers, such as .htaccess, and output formats.
-- Understand structured fuzzing, such as fuzzing in URLs, similarly, or in form values.
+## 🎯 Exercise Objectives
+- Learn how to use the ffuf tool to perform directory and file fuzzing on web servers.
+- Analyze and interpret HTTP status codes returned by fuzzing.
+- Practice using wordlists with ffuf to find hidden paths, such as /admin, /backup, /login, etc.
+- Use additional ffuf features, such as setting headers, drilling parameters, and adjusting output formatting.
+- Understand structured fuzzing, such as fuzzing URLs, parameters, and form values.
 
-# 🧠 Try HackMe - FFUF 🔍💥
+# 🧠 TryHackMe - FFUF 🔍💥
 
 🟡 **Category:** Web / Fuzzing / Content Discovery
 🧩 **Difficulty:** Easy
 🕵️‍♂️ **Mode:** CTF Walkthrough + Hands-on Lab
 🔗 **URL:** [FFUF](https://tryhackme.com/room/ffuf)
-👨‍💻 **Creator:** Thanyakorn
+👨‍💻 **Author:** Thanyakorn
 
--
-
-## 📚Sanban
+---
+## 📚 Table of Contents
 
 1. ✨ [Introduction]
-2. 🎯 [Our Goal]
-3. 🛠️ [Steps to Implementation]
+2. 🎯 [Objective of the Challenge]
+3. 🛠️ [Steps to Complete]
 - 3.1 🔍 [Access the Target Website]
-- 3.2 🧪 [Fuzz with ffuf]
-- 3.3 🧱 [Deep-Dive with Wordlist for .txt Files]
-- 3.4 🧾 [Check Index Extensions]
+- 3.2 🧪 [Fuzz Files and Folders with ffuf]
+- 3.3 🧱 [Deeper Analysis with a Wordlist for .txt Files]
+- 3.4 🧾 [Check Index Extension]
 - 3.5 🧩 [Search .php and .txt Files]
-- 3.6 📂 [Search the Entire Seaweed Directory]
-- 3.7 🚫 [HTTP 403 Status Filter]
-- 3.8 ✅ [Show Only HTTP 200]
-- 3.9 🕵️‍♂️ [Comparing -fc and -fr]
-4. 🧪 [Task 5 – Fuzz Parameters]
-- 4.1 🌐 [Accessing the URL Database]
-- 4.2 🔎 [Fuzz Finding Common Names]
-- 4.3 🔢 [Fuzz Finding Reliable Values in IDs]
-- 4.4 🔐 [Brute-Forcing Passwords with ffuf]
+- 3.6 📂 [Search Directory All Available]
+- 3.7 🚫 [Filter HTTP 403 Status]
+- 3.8 ✅ [Show HTTP 200 Only]
+- 3.9 🕵️‍♂️ [Compare -fc and -fr]
+4. 🧪 [Task 5 – Fuzzing Parameters]
+- 4.1 🌐 [Access Base URL]
+- 4.2 🔎 [Fuzz Parameter Names]
+- 4.3 🔢 [Fuzz Response Values in ID]
+- 4.4 🔐 [Brute-Force Passwords with ffuf]
 5. 🧠 [FFUFF Review Questions]
 
 🟡 **Category:** Web / Fuzzing / Content Discovery
 🧩 **Difficulty:** Easy
-🕵️‍♂️ **Mode:** CTF Walkthrough + Hands-on Lab
+🕵️‍♂️ **Mode:** Walkthrough CTF + Hands-on Lab
 🔗 **URL:** [FFUF](https://tryhackme.com/room/ffuf)
-👨‍💻 **Created by:** Thanyakorn
+👨‍💻 **Author:** Thanyakorn
 
--
-# 🛠️Meet the tutorial
+---
 
-## Treatment 1. **Access the target website**
-- Open the website again and enter the desired IP address (e.g., `http://10.201.120.42`)
-- You will see the code shown in the image below.
+# 🛠️ Steps
+
+## Step 1. **Access the target website**
+- Open a web browser and enter the IP address specified in the question (e.g., `http://10.201.120.42`)
+- You will see the main web page as shown in the image below.
 
 ![Web](images/1-1.png)
 
-## Cage 2: **Use the ffuf command to view and collect files.** 🔍
+## Step 2: **Use the ffuf command to search for files and folders** 🔍
 
-- Use this command to fuzz filenames or server descriptions.
+- Use this command to fuzz the names of files or folders on the web server.
 
-``` Bash
+```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/big.txt
--
+```
+
 ![ffuf](images/2.png)
 
 📌 Command Description:
-- `-u` is the URL to be tested, where `FUZZ` is a word from the vocabulary list.
-- `-w` is the vocabulary file to search for words that mention `FUZZ`.
+- `-u` is the URL to be tested, with the `FUZZ` location replaced with a word from the wordlist.
+- `-w` is the wordlist file used to search for possible words in the `FUZZ` location.
 
-📊 The result is a list of files or email replies that respond with HTTP status codes such as 200, 301, etc.
+📊 The output is as follows: A list of files or folders found on the server that responded with interesting HTTP status codes, such as 200, 301, etc.
 
-✅ Using the ffuf command, the first file with an HTTP status of 200 is favicon.ico
+✅ Using the ffuf command, we found that the first file with an HTTP status of 200 was favicon.ico.
 
-## Treatment 3: 🔍 Fuzz Searches Filenames with a Detailed Wordlist
+## Step 3: 🔍 Fuzz finds filenames with a detailed wordlist.
 
-🛠️ Commands Used
+🛠️ Command used:
 
-``` Bash
+```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
--
-![ffuf](Image/3.png)
+```
+
+![ffuf](images/3.png)
 
 📌 Command Description:
-- `-w` points to the file's wordlist, which can be used in all lowercase.
-(Deep-Dive into Finding Important Files in the Basic Root Directory)
+- `-w` points to the wordlist file used, which in this case is a wordlist for medium-sized filenames, all lowercase.
+(This is ideal for digging deeper into important files that are not in the root directory.)
 
-✅ The first time the ffuf command was used, the HTTP status was 200, which was favicon.ico.
-If you look specifically at .txt, you'll see:
+✅ Using the ffuf command, we found that the first file with an HTTP status of 200 was favicon.ico
+But if you only look at .txt files, you'll see:
 
-➡️ robots.txt is a known file and frequently asked questions.
+➡️ robots.txt is the file found that matches the query.
 
-## Filter 4: Trimming Index File Extensions
+## Step 4: Check the index file extension
 
-- 📥 The goal is to find out what extensions the index files actually have. This is used to run the ffuf command and the wordlist for web file extensions.
+- 📥 The goal is to find out which file extensions actually exist in the index file system by using the ffuf command with a wordlist for web file extensions.
 
-``` Bash
+```bash
 ffuf -u http://10.201.120.42/indexFUZZ -w /usr/share/seclists/Discovery/Web-Content/web-extensions.txt
--
-![ffuf](image/4.png)
+```
+
+![ffuf](images/4.png)
 
 📌 Command Description:
 
-- `indexFUZZ` expands from a wordlist such as `.php`, `.html`, `.bak`, and others.
+- `indexFUZZ` will replace the extensions from the wordlist, such as `.php`, `.html`, `.bak`, etc.
 - Wordlist Used: `web-extensions.txt` is a list of popular file extensions commonly found in web apps.
 
 ✅ Results found:
-- 🔒 `index.phps` → [Status: 403] (Access Forbidden)
+- 🔒 `index.phps` → [Status: 403] (Access prohibited)
 - 🔁 `index.php` → [Status: 302] (Redirected to another page)
 
-## Pure 5: Can be found with the .php and .txt file extensions.
-- In this step, we'll use the ffuf command to search for files or web pages with the .php and .txt extensions.
+## Step 5: Add a search using the .php and .txt file extensions
+
+- In this step, we will use the ffuf command to search for files or web pages with the .php and .txt extensions.
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -e .php,.txt
@@ -117,13 +121,13 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 ![ffuf](images/5.png)
 
 📌 Additional command description:
-- `-u` specifies the URL to be tested, with FUZZ locations replaced with words from the wordlist.
-- `-w` specifies the wordlist file to search for possible words.
-- `-e .php,.txt` tells `ffuf` to test with the specified file extensions, `.php` and `.txt`, to search for files with these extensions.
+- `-u` specifies the URL to be tested, with the FUZZ location replaced with the word from wordlist
+- `-w` specifies a wordlist file to search for possible words.
+- `-e .php,.txt` tells `ffuf` to test the specified file extensions (.php) and `.txt` to find files with these extensions.
 
-✅ Using the ffuf command, search for files by adding the .php and .txt file found that the about.php file is 4840 bytes in size.
+✅ Using the ffuf command to search for files with the .php and .txt extensions, the file about.php was found to be 4840 bytes in size.
 
-## Step 6: Search all existing directories
+## Step 6: Search all available directories
 
 🛠️ Command used:
 
@@ -142,9 +146,9 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 ✅ The number of directories found and accessible are docs, config, external, and server-status.
 
-## Step 7: Use a filter to remove HTTP 403 statuses.
+## Step 7: Use Filter to Remove HTTP 403 Status
 
-🛠️ Command used:
+🛠️ Command Used:
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -fc 403
@@ -154,18 +158,18 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 📌 Command Description:
 
-- `-fc 403` filters out results with an HTTP 403 Forbidden status.
-(This means that ffuf will not display results with a 403 response.)
+- `-fc 403` filters out results with HTTP 403 Forbidden status.
+(This means that ffuf will not display results that return 403.)
 
 🎯 Purpose:
-To show only files or folders that are not blocked by permission (not 403), making searching easier.
+To show only files or folders that are not blocked with permissions (not 403), making searching easier.
 
 📊 Results:
-You will see responses with statuses other than 403, such as 200, 302, 301, etc.
+You'll see responses with statuses other than 403, such as 200, 302, 301, etc.
 
-✅ After using the 403 filter, the number of results returned is 11.
+✅ After applying the filter to eliminate 403 statuses, there are 11 results.
 
-## Step 8: Use the Filter to display only pages with a status HTTP 200 only
+## Step 8: Use the filter to display only pages with an HTTP status of 200.
 
 🛠️ Command used:
 
@@ -176,21 +180,21 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 ![ffuf](images/8.png)
 
 📌 Command Description:
-- `-mc 200` stands for `match code`, which means it will only display entries with an HTTP 200 OK status.
-- This filtering allows us to focus on pages that load successfully, excluding 302 redirects, 403 forbidden, or 404 not found.
+- `-mc 200` stands for `match code`, which means it displays only pages with an HTTP status. 200 OK only
+- This filtering method allows us to focus on pages that load successfully, excluding 302 redirects, 403 forbidden, or 404 not found.
 
 🎯 Purpose of this step:
-To determine which pages were actually accessed successfully (status 200) by brute-forcing a wordlist.
+To determine which pages were actually accessed successfully (status 200) by brute-forcing them with a wordlist.
 
-✅📊 There are six results in total, each showing the status. 200
+✅📊 There are six results showing status 200.
 
-## Step 9: Compare the results between -fc and -fr to determine which important files will be hidden.
+## Step 9: Compare the results between -fc and -fr to determine which important files are hidden.
 
-🔍 TryHackMe Question:
-> "Which valuable file would have been hidden if you used -fc 403 instead of -fr?"
-> (What important file would be invisible if you used -fc 403 instead of -fr?)
+🔍 Question from TryHackMe:
+> "Which valuable files would have been hidden if you used -fc 403 instead of -fr?"
+> (What important files would be invisible if you used -fc 403 instead of -fr?)
 
-🛠️ Command used:
+🛠️ Commands used:
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -fr '/\..*'
@@ -199,22 +203,22 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 ![ffuf](images/9.png)
 
 📌 Command Description:
-- `-fr '/\..*'` = Filter Regex. Filters the results list starting with a period (`.`), such as `.git` or `.env` is removed from the output.
-- Using `-fr` doesn't filter by status code like `-fc`, but rather by a pattern in the path we specify.
-- In this case, we don't filter out 403 statuses, so we still see blocked files (e.g., 403 Forbidden).
+- `-fr '/\..*'` = Filter Regex. This filter removes results starting with a period (`.`), such as `.git` or `.env`.
+- Using `-fr` does not filter by status code like `-fc`, but by a pattern in the path you specify.
+- In this section, we do not filter out 403 statuses, so we still see files that are blocked (e.g., 403 Forbidden).
 
-If we use this command instead:
+If you use this command instead:
 
 ```bash
 ffuf ... -fc 403
 ```
 
-It will immediately filter out all results with a 403 status, meaning that the wp-forum.phps file will not be displayed at all.
+It will immediately filter out all results with a 403 status, which means that the file wp-forum.phps will not be displayed at all.
 
-✅ From the output, one file with a 403 status is: wp-forum.phps
+✅ From the results, one file received a 403 status: wp-forum.phps
 
 🧠 Additional note (seriously technical):
-The `.phps` file is often configured by servers to display PHP source code instead of executing it — so if it leaks, it opens a doorway to reveal the internal logic without actually executing it. This is a "good" hacking tool. And should be monitored.
+The `.phps` file is often configured by servers to display PHP source code instead of executing it — so if it's leaked, it opens a doorway to reveal the internal logic without actually executing it. This is considered a "good" hack. And should be monitored.
 
 ## 🧪 Task 5 – Fuzzing Parameters
 > 🔍 Base URL used: `http://10.201.92.170/sqli-labs/Less-1/`
@@ -222,9 +226,10 @@ The `.phps` file is often configured by servers to display PHP source code inste
 🔧 Objectives of this task:
 1. Test what parameters the `/sqli-labs/Less-1/` endpoint accepts.
 2. Use ffuf to find out what parameters are in use, such as `id`, `user`, `page`, etc.
-3. Prepare for the next SQLi or input validation test.
+3. Prepare for future SQLi or input validation testing.
 
 ### Step 1: Try accessing the URL page first.
+
 Open in browser:
 
 ```bash
@@ -233,7 +238,7 @@ http://10.201.92.170/sqli-labs/Less-1/
 
 ![ffuf](images/10.png)
 
-### Step 2: Fuzz to find usable parameter names
+### Step 2: Fuzz Find Usable Parameter Names
 
 🎯 Objective
 We will fuzz to find out which parameter names the server accepts via this URL:
@@ -242,7 +247,7 @@ We will fuzz to find out which parameter names the server accepts via this URL:
 http://10.201.92.170/sqli-labs/Less-1/
 ```
 
-🛠️ Command used
+🛠️ Commands Used
 
 ```bash
 ffuf -u 'http://10.201.92.170/sqli-labs/Less-1/?FUZZ=1' -c -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -fw 39
@@ -252,9 +257,9 @@ ffuf -u 'http://10.201.92.170/sqli-labs/Less-1/?FUZZ=1' -c -w /usr/share/seclist
 
 📌 Command Explanation
 - `-u 'http://.../?FUZZ=1'`: The fuzzing point is the parameter name, such as `?id=1`, `?user=1`
-- `-w /.../burp-parameter-names.txt`: A wordlist for parameter names, based on the Burp Suite, which compiles common parameter names.
-- `-fw 39`: Filters and excludes results with a word count of 39 — which are often the same responses that don't respond to the parameter.
-- `-c`: Displays results in color. Improved visibility
+- -w /.../burp-parameter-names.txt: A wordlist for parameter names, based on the Burp Suite, which compiles common parameter names.
+- -fw 39: Filters out results with a word count of 39 — which are often the same responses that don't respond to the parameter.
+- -c: Colorizes results. Improved visibility
 
 ✅ Result
 
@@ -285,7 +290,7 @@ for i in {0..255}; do echo $i; done | ffuf -u 'http://10.201.92.170/sqli-labs/Le
 📌 Command explanation
 - `for i in {0..255}; do echo $i; done`: Generates numeric values from 0 to 255 one at a time.
 - `-u '...id=FUZZ'`: Fuzzes the value of the id parameter.
-- `-fw 33`: Filters responses with a word count of 33, which is a normal response that doesn't display important information.
+- `-fw 33`: Filters responses with a word count of 33, which is a normal response that does not display important information.
 - `-c`: Enables color mode for easier viewing of results.
 
 ✅ The maximum number of results obtained from running the command is 14.
@@ -315,7 +320,7 @@ ffuf -u http://10.201.92.170/sqli-labs/Less-11/ \
 - `-X POST` specifies HTTP POST.
 - `-d` sends POST data, such as `uname=Dummy&passwd=FUZZ` (guessing `passwd`).
 - `-H` specifies the header to use `application/x-www-form-urlencoded` (a common web form).
-- `-fs 1435` filters results with a size of 1435 bytes (meaning "invalid response" to hide them).
+- `-fs 1435` filters results with a size of 1435 bytes (indicates "invalid response" and hides them).
 - `-c` displays colored text for easy reading.
 
 ![ffuf](images/13.png)
@@ -326,9 +331,9 @@ ffuf -u http://10.201.92.170/sqli-labs/Less-11/ \
 p@ssword [Status: 200, Size: 1526, Words: 100, Lines: 50, Duration: 252ms]
 ```
 
-✅ From the results:
-- The only response that wasn't filtered (size not 1435) was `p@ssword`.
-- This means the website responded differently. This is often the response to a successful login.
+✅ From the output:
+- Response The only one that wasn't filtered (size not 1435) was `p@ssword`
+- meaning the website responded differently. This is often the response to a successful login.
 
 ## 📚 Sub-questions about ffuf (in Task Reviewing the options)
 
