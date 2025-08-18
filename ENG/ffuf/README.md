@@ -1,120 +1,114 @@
-## ✨ บทนำ
-ห้องนี้เป็นห้องแนะนำเครื่องมือ ffuf (Fuzz Faster U Fool) ซึ่งเป็นเครื่องมือ fuzzing สำหรับเว็บแอปพลิเคชันที่เร็วและยืดหยุ่นมาก ใช้สำหรับ brute-force URL paths, parameters, virtual hosts, และอื่น ๆ ผ่านคำสั่งที่สามารถปรับแต่งได้หลากหลาย
+## ✨Introduction
+This room introduces the ffuf (Fuzz Faster U Fool) tool, a powerful fuzzing tool for fast and long-lasting web applications. When you brute-force URL paths, parameters, and virtual hosts, you can do a lot of things.
 
-## 🎯 เป้าหมายของโจทย์
-- เรียนรู้การใช้งานเครื่องมือ ffuf เพื่อทำ Directory และ File fuzzing บน Web Server
-- วิเคราะห์และตีความค่า HTTP status code ที่ตอบกลับจากการ fuzz
-- ฝึกการใช้ wordlists กับ ffuf เพื่อค้นหา paths ที่ซ่อนอยู่ เช่น /admin, /backup, /login ฯลฯ
-- ใช้ฟีเจอร์เพิ่มเติมของ ffuf เช่นการตั้ง header, การเจาะพารามิเตอร์, และการปรับ output format
-- เข้าใจการ fuzz แบบมีโครงสร้าง เช่น fuzz ใน URL, ในพารามิเตอร์, หรือในค่าต่าง ๆ ของฟอร์ม
+## 🎯 Goals
+- Learn how to use the ffuf tool for directory and file fuzzing on web servers.
+- Analyze and interpret HTTP status codes returned by fuzzers.
+- Practice using wordlists with ffuf for port paths like /admin, /backup, /login, and more.
+- Additional uses of ffuf, such as setting headers, such as .htaccess, and output formats.
+- Understand structured fuzzing, such as fuzzing in URLs, similarly, or in form values.
 
-# 🧠 TryHackMe - FFUF 🔍💥
+# 🧠 Try HackMe - FFUF 🔍💥
 
-🟡 **หมวด:** Web / Fuzzing / Content Discovery  
-🧩 **ความยาก:** Easy  
-🕵️‍♂️ **โหมด:** CTF แบบ Walkthrough + Hands-on Lab  
-🔗 **URL:** [FFUF](https://tryhackme.com/room/ffuf)  
-👨‍💻 **ผู้ทำ:** Thanyakorn
+🟡 **Category:** Web / Fuzzing / Content Discovery
+🧩 **Difficulty:** Easy
+🕵️‍♂️ **Mode:** CTF Walkthrough + Hands-on Lab
+🔗 **URL:** [FFUF](https://tryhackme.com/room/ffuf)
+👨‍💻 **Creator:** Thanyakorn
 
----
+-
 
-## 📚 สารบัญ
+## 📚Sanban
 
-1. ✨ [บทนำ]
-2. 🎯 [เป้าหมายของโจทย์]
-3. 🛠️ [ขั้นตอนการทำ]
-   - 3.1 🔍 [เข้าถึงเว็บเป้าหมาย]
-   - 3.2 🧪 [Fuzz ไฟล์และโฟลเดอร์ด้วย ffuf] 
-   - 3.3 🧱 [เจาะลึกด้วย Wordlist สำหรับไฟล์ .txt]
-   - 3.4 🧾 [ตรวจสอบนามสกุลของ index]
-   - 3.5 🧩 [ค้นหาไฟล์ .php และ .txt] 
-   - 3.6 📂 [ค้นหา Directory ที่มีอยู่ทั้งหมด]
-   - 3.7 🚫 [Filter สถานะ HTTP 403]
-   - 3.8 ✅ [แสดงเฉพาะ HTTP 200]
-   - 3.9 🕵️‍♂️ [เปรียบเทียบ -fc และ -fr]
-4. 🧪 [Task 5 – Fuzzing Parameters]
-   - 4.1 🌐 [เข้าถึง URL ฐาน]
-   - 4.2 🔎 [Fuzz หาชื่อพารามิเตอร์]
-   - 4.3 🔢 [Fuzz หาค่าที่ตอบสนองใน id]
-   - 4.4 🔐 [Brute-force รหัสผ่านด้วย ffuf]
-5. 🧠 [คำถามทบทวนเกี่ยวกับ ffuf]
+1. ✨ [Introduction]
+2. 🎯 [Our Goal]
+3. 🛠️ [Steps to Implementation]
+- 3.1 🔍 [Access the Target Website]
+- 3.2 🧪 [Fuzz with ffuf]
+- 3.3 🧱 [Deep-Dive with Wordlist for .txt Files]
+- 3.4 🧾 [Check Index Extensions]
+- 3.5 🧩 [Search .php and .txt Files]
+- 3.6 📂 [Search the Entire Seaweed Directory]
+- 3.7 🚫 [HTTP 403 Status Filter]
+- 3.8 ✅ [Show Only HTTP 200]
+- 3.9 🕵️‍♂️ [Comparing -fc and -fr]
+4. 🧪 [Task 5 – Fuzz Parameters]
+- 4.1 🌐 [Accessing the URL Database]
+- 4.2 🔎 [Fuzz Finding Common Names]
+- 4.3 🔢 [Fuzz Finding Reliable Values in IDs]
+- 4.4 🔐 [Brute-Forcing Passwords with ffuf]
+5. 🧠 [FFUFF Review Questions]
 
+🟡 **Category:** Web / Fuzzing / Content Discovery
+🧩 **Difficulty:** Easy
+🕵️‍♂️ **Mode:** CTF Walkthrough + Hands-on Lab
+🔗 **URL:** [FFUF](https://tryhackme.com/room/ffuf)
+👨‍💻 **Created by:** Thanyakorn
 
-🟡 **หมวด:** Web / Fuzzing / Content Discovery  
-🧩 **ความยาก:** Easy
-🕵️‍♂️ **โหมด:** CTF แบบ Walkthrough + Hands-on Lab  
-🔗 **URL:** [FFUF](https://tryhackme.com/room/ffuf)  
-👨‍💻 **ผู้ทำ:** Thanyakorn
+-
+# 🛠️Meet the tutorial
 
----
-
-# 🛠️ ขั้นตอนการทำ
-
-## ขั้นตอนที่ 1. **เข้าถึงเว็บเป้าหมาย**
-   - เปิดเว็บเบราว์เซอร์ แล้วใส่ IP Address ที่โจทย์กำหนด (เช่น `http://10.201.120.42`)
-   - จะพบหน้าเว็บหลักตามภาพด้านล่าง
+## Treatment 1. **Access the target website**
+- Open the website again and enter the desired IP address (e.g., `http://10.201.120.42`)
+- You will see the code shown in the image below.
 
 ![Web](images/1-1.png)
 
-## ขั้นตอนที่ 2: **ใช้คำสั่ง ffuf เพื่อค้นหาไฟล์และโฟลเดอร์** 🔍
+## Cage 2: **Use the ffuf command to view and collect files.** 🔍
 
-- ใช้คำสั่งนี้เพื่อฟัซซ์ (fuzz) ชื่อไฟล์หรือโฟลเดอร์บนเว็บเซิร์ฟเวอร์
+- Use this command to fuzz filenames or server descriptions.
 
-```bash
+``` Bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/big.txt
-```
-
+-
 ![ffuf](images/2.png)
 
-📌 คำอธิบายคำสั่ง:  
-- `-u` คือ URL ที่ต้องการทดสอบ โดยตำแหน่ง `FUZZ` จะถูกแทนที่ด้วยคำจาก wordlist  
-- `-w` คือไฟล์ wordlist ที่ใช้ค้นหาคำที่เป็นไปได้ในตำแหน่ง `FUZZ`  
+📌 Command Description:
+- `-u` is the URL to be tested, where `FUZZ` is a word from the vocabulary list.
+- `-w` is the vocabulary file to search for words that mention `FUZZ`.
 
-📊 ผลลัพธ์ที่ได้คือ รายการไฟล์หรือโฟลเดอร์ที่พบในเซิร์ฟเวอร์ซึ่งตอบกลับด้วย HTTP status code ที่น่าสนใจ เช่น 200, 301 เป็นต้น
+📊 The result is a list of files or email replies that respond with HTTP status codes such as 200, 301, etc.
 
-✅ จากการใช้คำสั่ง ffuf พบว่าไฟล์แรกที่มีสถานะ HTTP 200 คือ favicon.ico
+✅ Using the ffuf command, the first file with an HTTP status of 200 is favicon.ico
 
-## ขั้นตอนที่ 3: 🔍 Fuzz หาชื่อไฟล์ด้วย Wordlist แบบละเอียด
+## Treatment 3: 🔍 Fuzz Searches Filenames with a Detailed Wordlist
 
-🛠️ คำสั่งที่ใช้
+🛠️ Commands Used
 
-```bash
+``` Bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt
-```
+-
+![ffuf](Image/3.png)
 
-![ffuf](images/3.png)
+📌 Command Description:
+- `-w` points to the file's wordlist, which can be used in all lowercase.
+(Deep-Dive into Finding Important Files in the Basic Root Directory)
 
-📌 คำอธิบายคำสั่ง:
-- `-w` ชี้ไปยังไฟล์ wordlist ที่ใช้ ซึ่งในที่นี้คือ wordlist สำหรับชื่อ ไฟล์ ขนาดกลางและเป็น lowercase ทั้งหมด
-(เหมาะสำหรับการเจาะลึกหาไฟล์สำคัญที่ไม่ได้อยู่ใน root directory แบบพื้นฐาน)
+✅ The first time the ffuf command was used, the HTTP status was 200, which was favicon.ico.
+If you look specifically at .txt, you'll see:
 
-✅ จากการใช้คำสั่ง ffuf พบว่า ไฟล์แรกที่มีสถานะ HTTP 200 คือ favicon.ico
-แต่ถ้าดูเฉพาะ ไฟล์ที่เป็น .txt จะพบว่า:
+➡️ robots.txt is a known file and frequently asked questions.
 
-➡️ robots.txt คือไฟล์ที่ค้นพบและตรงกับคำถาม
+## Filter 4: Trimming Index File Extensions
 
-## ขั้นตอนที่ 4: ตรวจสอบนามสกุลไฟล์ของ index
+- 📥 The goal is to find out what extensions the index files actually have. This is used to run the ffuf command and the wordlist for web file extensions.
 
-- 📥 เป้าหมายคือค้นหาว่าไฟล์ index มีนามสกุลอะไรบ้างที่มีอยู่จริงในระบบ โดยใช้คำสั่ง ffuf กับ wordlist สำหรับนามสกุลของไฟล์เว็บ
-
-```bash
+``` Bash
 ffuf -u http://10.201.120.42/indexFUZZ -w /usr/share/seclists/Discovery/Web-Content/web-extensions.txt
-```
+-
+![ffuf](image/4.png)
 
-![ffuf](images/4.png)
+📌 Command Description:
 
-📌 คำอธิบายคำสั่ง:
+- `indexFUZZ` expands from a wordlist such as `.php`, `.html`, `.bak`, and others.
+- Wordlist Used: `web-extensions.txt` is a list of popular file extensions commonly found in web apps.
 
-- `indexFUZZ` จะถูกแทนที่ด้วยนามสกุลจาก wordlist เช่น `.php`, `.html`, `.bak` ฯลฯ
-- Wordlist ที่ใช้: `web-extensions.txt` เป็นลิสต์ของนามสกุลไฟล์ยอดนิยมที่มักพบในเว็บแอป
+✅ Results found:
+- 🔒 `index.phps` → [Status: 403] (Access Forbidden)
+- 🔁 `index.php` → [Status: 302] (Redirected to another page)
 
-✅ ผลลัพธ์ที่ค้นพบ:
-- 🔒 `index.phps` → [Status: 403] (ถูกห้ามเข้าถึง)
-- 🔁 `index.php` → [Status: 302] (ถูก redirect ไปที่หน้าอื่น)
-
-## ขั้นตอนที่ 5: เพิ่มการค้นหาด้วยนามสกุลไฟล์ .php และ .txt
-
-- ในขั้นตอนนี้ เราจะใช้คำสั่ง ffuf เพื่อค้นหาไฟล์หรือหน้าเว็บที่มีนามสกุล .php และ .txt
+## Pure 5: Can be found with the .php and .txt file extensions.
+- In this step, we'll use the ffuf command to search for files or web pages with the .php and .txt extensions.
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -e .php,.txt
@@ -122,16 +116,16 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 ![ffuf](images/5.png)
 
-📌 คำอธิบายคำสั่งเพิ่มเติม:
-- `-u` กำหนด URL ที่ต้องการทดสอบ โดยตำแหน่ง FUZZ จะถูกแทนที่ด้วยคำจาก wordlist
-- `-w` ระบุไฟล์ wordlist ที่ใช้ค้นหาคำที่เป็นไปได้
-- `-e .php,.txt` บอก `ffuf` ให้ทดสอบด้วยนามสกุลไฟล์ที่ระบุ คือ `.php` และ `.txt` (extension) เพื่อค้นหาไฟล์ที่มีนามสกุลเหล่านี้
+📌 Additional command description:
+- `-u` specifies the URL to be tested, with FUZZ locations replaced with words from the wordlist.
+- `-w` specifies the wordlist file to search for possible words.
+- `-e .php,.txt` tells `ffuf` to test with the specified file extensions, `.php` and `.txt`, to search for files with these extensions.
 
-✅ จากการใช้คำสั่ง ffuf ค้นหาไฟล์โดยเพิ่มนามสกุล .php และ .txt พบว่าไฟล์ about.php มีขนาด 4840 ไบต์
+✅ Using the ffuf command, search for files by adding the .php and .txt file found that the about.php file is 4840 bytes in size.
 
-## ขั้นตอนที่ 6: ค้นหา Directory ที่มีอยู่ทั้งหมด
+## Step 6: Search all existing directories
 
-🛠️ คำสั่งที่ใช้:
+🛠️ Command used:
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt
@@ -139,18 +133,18 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 ![ffuf](images/6.png)
 
-📊 ผลลัพธ์ที่ได้
-- เจอ directory ทั้งหมดได้แก่:
-  - `docs`
-  - `config`
-  - `external`
-  - `server-status` 
+📊 Results
+- All directories found:
+- `docs`
+- `config`
+- `external`
+- `server-status`
 
-✅ จำนวน directory ที่พบและเข้าถึงได้ คือ docs, config, external และ server-status
+✅ The number of directories found and accessible are docs, config, external, and server-status.
 
-## ขั้นตอนที่ 7: ใช้ Filter เพื่อตัดสถานะ HTTP 403 ออก
+## Step 7: Use a filter to remove HTTP 403 statuses.
 
-🛠️ คำสั่งที่ใช้:
+🛠️ Command used:
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -fc 403
@@ -158,22 +152,22 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 ![ffuf](images/7.png)
 
-📌 คำอธิบายคำสั่ง:
+📌 Command Description:
 
-- `-fc 403` คือการกรอง (filter) ผลลัพธ์ที่มีสถานะ HTTP 403 Forbidden ออกไป
-(หมายความว่า ffuf จะไม่แสดงผลลัพธ์ที่ตอบกลับด้วย 403)
+- `-fc 403` filters out results with an HTTP 403 Forbidden status.
+(This means that ffuf will not display results with a 403 response.)
 
-🎯 วัตถุประสงค์:
-เพื่อให้เห็นเฉพาะไฟล์หรือโฟลเดอร์ที่ไม่ถูกบล็อกด้วยสิทธิ์ (ไม่ใช่ 403) ทำให้ค้นหาได้สะดวกขึ้น
+🎯 Purpose:
+To show only files or folders that are not blocked by permission (not 403), making searching easier.
 
-📊 ผลลัพธ์:
-จะเห็นรายการที่ตอบกลับสถานะอื่น ๆ ที่ไม่ใช่ 403 เช่น 200, 302, 301 เป็นต้น
+📊 Results:
+You will see responses with statuses other than 403, such as 200, 302, 301, etc.
 
-✅ หลังจากใช้ filter ตัดสถานะ 403 แล้ว จำนวนผลลัพธ์ที่ได้คือ 11 รายการ
+✅ After using the 403 filter, the number of results returned is 11.
 
-## ขั้นตอนที่ 8: ใช้ Filter เพื่อแสดงเฉพาะหน้าเว็บที่มีสถานะ HTTP 200 เท่านั้น
+## Step 8: Use the Filter to display only pages with a status HTTP 200 only
 
-🛠️ คำสั่งที่ใช้:
+🛠️ Command used:
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -mc 200
@@ -181,23 +175,22 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 ![ffuf](images/8.png)
 
-📌 คำอธิบายคำสั่ง:
-- `-mc 200` ย่อมาจาก `match code` หมายถึง แสดงผลเฉพาะรายการที่มีสถานะ HTTP 200 OK เท่านั้น
-- การกรองแบบนี้ช่วยให้เรามุ่งเน้นเฉพาะหน้าเว็บที่โหลดสำเร็จ ไม่รวมพวก 302 redirect, 403 forbidden หรือ 404 not found
+📌 Command Description:
+- `-mc 200` stands for `match code`, which means it will only display entries with an HTTP 200 OK status.
+- This filtering allows us to focus on pages that load successfully, excluding 302 redirects, 403 forbidden, or 404 not found.
 
-🎯 วัตถุประสงค์ของขั้นตอนนี้:
-เพื่อหาว่ามีหน้าเว็บไหนที่สามารถเข้าถึงได้สำเร็จจริง (status 200) จากการ brute-force ด้วย wordlist
+🎯 Purpose of this step:
+To determine which pages were actually accessed successfully (status 200) by brute-forcing a wordlist.
 
-✅📊 ผลลัพธ์ที่ได้มีทั้งหมด 6 รายการ ที่แสดงผลลัพธ์ status 200
+✅📊 There are six results in total, each showing the status. 200
 
- ## ขั้นตอนที่ 9: เปรียบเทียบผลระหว่าง -fc และ -fr เพื่อหาว่าไฟล์สำคัญไหนจะถูกซ่อนไป
+## Step 9: Compare the results between -fc and -fr to determine which important files will be hidden.
 
- 
-🔍 คำถามจาก TryHackMe:
+🔍 TryHackMe Question:
 > "Which valuable file would have been hidden if you used -fc 403 instead of -fr?"
-> (ไฟล์สำคัญอะไรที่เราจะมองไม่เห็นถ้าใช้ -fc 403 แทน -fr?)
+> (What important file would be invisible if you used -fc 403 instead of -fr?)
 
-🛠️ คำสั่งที่ใช้:
+🛠️ Command used:
 
 ```bash
 ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt -fr '/\..*'
@@ -205,35 +198,34 @@ ffuf -u http://10.201.120.42/FUZZ -w /usr/share/seclists/Discovery/Web-Content/r
 
 ![ffuf](images/9.png)
 
-📌 คำอธิบายคำสั่ง:
-- `-fr '/\..*'` = Filter Regex ใช้กรองรายการผลลัพธ์ที่ขึ้นต้นด้วยจุด (`.`) เช่น `.git` หรือ `.env` ออกจากผลลัพธ์
-- การใช้ `-fr` ไม่ได้กรองตาม Status Code เหมือน `-fc` แต่กรองตามแพทเทิร์นใน path ที่เรากำหนด
-- ในข้อนี้เราไม่กรอง status 403 ออกไป ทำให้ยังเห็นไฟล์ที่ถูก block อยู่ (เช่น 403 Forbidden)
+📌 Command Description:
+- `-fr '/\..*'` = Filter Regex. Filters the results list starting with a period (`.`), such as `.git` or `.env` is removed from the output.
+- Using `-fr` doesn't filter by status code like `-fc`, but rather by a pattern in the path we specify.
+- In this case, we don't filter out 403 statuses, so we still see blocked files (e.g., 403 Forbidden).
 
-หากใช้คำสั่งแบบนี้แทน:
+If we use this command instead:
 
 ```bash
 ffuf ... -fc 403
 ```
 
-มันจะ กรองผลลัพธ์ทั้งหมดที่มีสถานะ 403 ออกไปทันที ซึ่งหมายความว่าไฟล์ wp-forum.phps จะ ไม่ถูกแสดงให้เห็นเลย
+It will immediately filter out all results with a 403 status, meaning that the wp-forum.phps file will not be displayed at all.
 
-✅ จากผลลัพธ์ มีไฟล์หนึ่งที่ได้สถานะ 403 คือ: wp-forum.phps
+✅ From the output, one file with a 403 status is: wp-forum.phps
 
-🧠 Note เพิ่มเติม (เชิงเทคนิคจริงจัง):
-ไฟล์ `.phps` มักจะถูกเซิร์ฟเวอร์ config ไว้ให้แสดงซอร์สโค้ดของ PHP แทนที่จะ execute — ดังนั้นหากหลุดออกมา เป็นประตูให้เราเห็น logic ภายในโดยไม่ต้อง execute จริง นี่ถือว่า "ของดี" ในการเจาะระบบ และควรถูกจับตา
+🧠 Additional note (seriously technical):
+The `.phps` file is often configured by servers to display PHP source code instead of executing it — so if it leaks, it opens a doorway to reveal the internal logic without actually executing it. This is a "good" hacking tool. And should be monitored.
 
 ## 🧪 Task 5 – Fuzzing Parameters
-> 🔍 Base URL ที่ใช้: `http://10.201.92.170/sqli-labs/Less-1/`
+> 🔍 Base URL used: `http://10.201.92.170/sqli-labs/Less-1/`
 
-🔧 เป้าหมายของ Task นี้:
-1. ทดสอบว่า endpoint `/sqli-labs/Less-1/` รับ parameter อะไรบ้าง
-2. ใช้ ffuf เพื่อค้นหาพารามิเตอร์ที่ใช้งานอยู่ เช่น `id`, `user`, `page`, etc.
-3. เตรียมไว้สำหรับการทดสอบ SQLi หรือ input validation ถัดไป
+🔧 Objectives of this task:
+1. Test what parameters the `/sqli-labs/Less-1/` endpoint accepts.
+2. Use ffuf to find out what parameters are in use, such as `id`, `user`, `page`, etc.
+3. Prepare for the next SQLi or input validation test.
 
-### ขั้นตอนที่ 1: ลองเข้าหน้า URL ก่อน
-
-เปิดใน browser:
+### Step 1: Try accessing the URL page first.
+Open in browser:
 
 ```bash
 http://10.201.92.170/sqli-labs/Less-1/
@@ -241,16 +233,16 @@ http://10.201.92.170/sqli-labs/Less-1/
 
 ![ffuf](images/10.png)
 
-### ขั้นตอนที่ 2: Fuzz หาชื่อพารามิเตอร์ที่ใช้งานได้
+### Step 2: Fuzz to find usable parameter names
 
-🎯 วัตถุประสงค์
-เราจะทำการ fuzz เพื่อค้นหาว่า server ยอมรับ พารามิเตอร์ชื่ออะไร ผ่าน URL นี้:
+🎯 Objective
+We will fuzz to find out which parameter names the server accepts via this URL:
 
 ```bash
 http://10.201.92.170/sqli-labs/Less-1/
 ```
 
-🛠️ คำสั่งที่ใช้
+🛠️ Command used
 
 ```bash
 ffuf -u 'http://10.201.92.170/sqli-labs/Less-1/?FUZZ=1' -c -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -fw 39
@@ -258,31 +250,31 @@ ffuf -u 'http://10.201.92.170/sqli-labs/Less-1/?FUZZ=1' -c -w /usr/share/seclist
 
 ![ffuf](images/11.png)
 
-📌 อธิบายคำสั่ง
-- `-u 'http://.../?FUZZ=1'`: จุดที่จะทำ Fuzz คือชื่อของพารามิเตอร์ เช่น `?id=1`, `?user=1`
-- `-w /.../burp-parameter-names.txt`: Wordlist ที่ใช้สำหรับชื่อพารามิเตอร์ โดยอิงจาก Burp Suite ซึ่งรวบรวมชื่อพารามิเตอร์ที่พบบ่อย
-- `-fw 39`:	เป็นการกรอง (filter) ไม่แสดงผลลัพธ์ที่จำนวนคำ (Words) เท่ากับ 39 — ซึ่งมักเป็น response เดิม ๆ ที่ไม่ตอบสนองต่อพารามิเตอร์
-- `-c`: แสดงผลลัพธ์เป็นสี ช่วยให้มองเห็นได้ชัดเจนขึ้น
+📌 Command Explanation
+- `-u 'http://.../?FUZZ=1'`: The fuzzing point is the parameter name, such as `?id=1`, `?user=1`
+- `-w /.../burp-parameter-names.txt`: A wordlist for parameter names, based on the Burp Suite, which compiles common parameter names.
+- `-fw 39`: Filters and excludes results with a word count of 39 — which are often the same responses that don't respond to the parameter.
+- `-c`: Displays results in color. Improved visibility
 
-✅ ผลลัพธ์
+✅ Result
 
 ```bash
-id        [Status: 200, Size: 721, Words: 37, Lines: 29, Duration: 360ms]
+id [Status: 200, Size: 721, Words: 37, Lines: 29, Duration: 360ms]
 ```
 
-💡 หมายความว่า:
-- Web App ยอมรับพารามิเตอร์ `id` จริง
-- เมื่อใส่ `?id=1` แล้ว Response แตกต่างจากพารามิเตอร์อื่นที่ไม่มีผล
-- ตรงตามจุดมุ่งหมายของการ fuzz
+💡 This means:
+- The web app actually accepts the `id` parameter.
+- When `?id=1` is specified, the response differs from other non-valid parameters.
+- This meets the purpose of fuzzing.
 
-### 🔢 ขั้นตอนที่ 3: Fuzz หาค่าตัวเลขที่ใช้งานได้ในพารามิเตอร์ id
+### 🔢 Step 3: Fuzz to find usable numeric values in the `id` parameter.
 
-🎯 เป้าหมายของขั้นตอน
-- ตรวจสอบว่า Web App ยอมรับค่าใดบ้างในพารามิเตอร์ `id`
-- ใช้เทคนิคการ generate number range (0-255) เพื่อระบุค่าที่ทำให้ response ของเว็บเปลี่ยนแปลง
-- หาค่าที่ response แตกต่างจากปกติ ซึ่งอาจหมายถึงข้อมูลหรือผลลัพธ์ที่น่าสนใจ
+🎯 Step Goal
+- Determine which values the web app accepts in the `id` parameter.
+- Use the number range (0-255) generation technique to identify values that cause the web app to change its response.
+- Find values that differ from normal responses. This could mean interesting data or results.
 
-🛠️ คำสั่งที่ใช้
+🛠️ Commands used
 
 ```bash
 for i in {0..255}; do echo $i; done | ffuf -u 'http://10.201.92.170/sqli-labs/Less-1/?id=FUZZ' -c -w - -fw 33
@@ -290,62 +282,62 @@ for i in {0..255}; do echo $i; done | ffuf -u 'http://10.201.92.170/sqli-labs/Le
 
 ![ffuf](images/12.png)
 
-📌 อธิบายคำสั่ง
-- `for i in {0..255}; do echo $i; done`: สร้างค่าตัวเลขตั้งแต่ 0 ถึง 255 ทีละค่า
-- `-u '...id=FUZZ'`: Fuzz ค่าของพารามิเตอร์ id
-- `-fw 33`: กรอง response ที่มีจำนวนคำ (Words) เท่ากับ 33 ซึ่งเป็น response ปกติที่ไม่แสดงข้อมูลสำคัญ
-- `-c`: เปิดโหมดสีให้ดูผลลัพธ์ง่ายขึ้น
+📌 Command explanation
+- `for i in {0..255}; do echo $i; done`: Generates numeric values from 0 to 255 one at a time.
+- `-u '...id=FUZZ'`: Fuzzes the value of the id parameter.
+- `-fw 33`: Filters responses with a word count of 33, which is a normal response that doesn't display important information.
+- `-c`: Enables color mode for easier viewing of results.
 
-✅ ผลลัพธ์ที่ได้จากการรันคำสั่งสูงสุดคือ 14
+✅ The maximum number of results obtained from running the command is 14.
 
-### 🔐 ขั้นตอนที่ 4: ใช้ Ffuf ทำการเดารหัสผ่าน (Password Brute-force)
+### 🔐 Step 4: Use Ffuf to Brute-force Passwords
 
-> 🧠 เป้าหมาย: ใช้ `ffuf` เพื่อทำ Brute-force attack กับแบบฟอร์มล็อกอิน โดยเดารหัสผ่านจาก wordlist ที่มีรหัสผ่านหลุดจากฐานข้อมูล
+> 🧠 Goal: Use `ffuf` to brute-force the login form by guessing passwords from a wordlist containing leaked passwords from the database.
 
-🧪 คำอธิบายเบื้องหลัง
-ในกรณีนี้เราต้องการหาว่า รหัสผ่านของผู้ใช้ Dummy คืออะไร โดยยิง request แบบ POST ไปยังเว็บ `http://10.201.92.170/sqli-labs/Less-11/` ด้วยรหัสผ่านจาก wordlist
+🧪 Explanation
+In this case, we want to find out: What is the dummy user password? A POST request to the website `http://10.201.92.170/sqli-labs/Less-11/` is executed using a password from a wordlist.
 
-🛠️ คำสั่งที่ใช้
+🛠️ Commands used
 
 ```bash
 ffuf -u http://10.201.92.170/sqli-labs/Less-11/ \
-  -c \
-  -w /usr/share/seclists/Passwords/Leaked-Databases/hak5.txt \
-  -X POST \
-  -d 'uname=Dummy&passwd=FUZZ&submit=Submit' \
-  -fs 1435 \
-  -H 'Content-Type: application/x-www-form-urlencoded'
+-c \
+-w /usr/share/seclists/Passwords/Leaked-Databases/hak5.txt \
+-X POST \
+-d 'uname=Dummy&passwd=FUZZ&submit=Submit' \
+-fs 1435 \
+-H 'Content-Type: application/x-www-form-urlencoded'
 ```
 
-📌 อธิบายคำสั่ง
-- `-u`	URL ที่จะยิง request
-- `-w`	Wordlist ที่ใช้ในการเดารหัสผ่าน (`FUZZ` จะถูกแทนด้วยแต่ละบรรทัดในไฟล์)
-- `-X POST`	ระบุให้ใช้ HTTP POST
-- `-d`	ข้อมูลที่ส่งไปกับ POST เช่น `uname=Dummy&passwd=FUZZ` (เดา `passwd`)
-- `-H`	กำหนด Header ว่าใช้ `application/x-www-form-urlencoded` (แบบฟอร์มเว็บทั่วไป)
-- `-fs 1435`	Filter ผลลัพธ์ที่มีขนาด 1435 byte (หมายถึง “response ผิด” เพื่อซ่อนมัน)
-- `-c`	แสดงผลแบบมีสี อ่านง่าย
+📌 Command explanation
+- `-u` URL to be requested
+- `-w` Wordlist to be used to guess passwords (`FUZZ` will be replaced with each line in the file.)
+- `-X POST` specifies HTTP POST.
+- `-d` sends POST data, such as `uname=Dummy&passwd=FUZZ` (guessing `passwd`).
+- `-H` specifies the header to use `application/x-www-form-urlencoded` (a common web form).
+- `-fs 1435` filters results with a size of 1435 bytes (meaning "invalid response" to hide them).
+- `-c` displays colored text for easy reading.
 
 ![ffuf](images/13.png)
 
-✅ ผลลัพธ์ที่ได้
+✅ Output
 
 ```bash
-p@ssword       [Status: 200, Size: 1526, Words: 100, Lines: 50, Duration: 252ms]
+p@ssword [Status: 200, Size: 1526, Words: 100, Lines: 50, Duration: 252ms]
 ```
 
-✅ จากผลลัพธ์:
-- Response เดียวที่ ไม่ถูก filter (ขนาดไม่ใช่ 1435) คือ `p@ssword`
-- แปลว่าเว็บตอบกลับไม่เหมือนเดิม ซึ่งมักเป็นการตอบกลับของ Login สำเร็จ
+✅ From the results:
+- The only response that wasn't filtered (size not 1435) was `p@ssword`.
+- This means the website responded differently. This is often the response to a successful login.
 
-## 📚 คำถามย่อยเกี่ยวกับ ffuf (ใน Task Reviewing the options)
+## 📚 Sub-questions about ffuf (in Task Reviewing the options)
 
 | ❓ Question | ✅ Correct Answer | 📌 Explanation |
 |------------|------------------|---------------------------|
-| **1. How do you save the output to a markdown file (`ffuf.md`)?** | `-of md -o ffuf.md` | ใช้ `-of md` เพื่อระบุว่าให้ออกรูปแบบผลลัพธ์เป็น Markdown และ `-o ffuf.md` เพื่อระบุชื่อไฟล์ที่ต้องการบันทึก เช่น `ffuf.md` เหมาะกับการส่งรายงานหรือบันทึกผลแบบสวยงาม |
-| **2. How do you re-use a raw http request file?** | `-request` | ใช้ `-request` เพื่อโหลดคำขอ HTTP ที่เขียนไว้ล่วงหน้า เช่น จาก Burp Suite หรือ ZAP ซึ่งบันทึกไว้เป็น raw HTTP request ทั้งหมด (GET/POST + Header + Body) ใช้กรณี fuzzing form หรือ API |
-| **3. How do you strip comments from a wordlist?** | `-ic` | ใช้ `-ic` (ignore comments) สำหรับข้ามบรรทัดที่ขึ้นต้นด้วย `#` ใน wordlist เพื่อให้ ffuf ใช้เฉพาะคำที่จำเป็นจริง ๆ ลด noise และหลีกเลี่ยง error จากบรรทัดที่ไม่ใช่ payload |
-| **4. How would you read a wordlist from STDIN?** | `-w -` | เครื่องหมาย `-w -` หมายถึงให้อ่าน wordlist จาก STDIN เช่น `seq 1 100 | ffuf -w -` หรือ `for i in {0..255}; do echo $i; done | ffuf -w -` ช่วยให้ไม่ต้องสร้างไฟล์ wordlist ชั่วคราว |
-| **5. How do you print full URLs and redirect locations?** | `-v` | ใช้ `-v` (verbose) เพื่อให้แสดง URL เต็ม ๆ ที่ส่ง request ไป พร้อม redirect ที่เกิดขึ้น เช่น จาก HTTP 302 ที่พาไปหน้าล็อกอิน, หน้า error, หรือ location อื่น ๆ |
-| **6. What option would you use to follow redirects?** | `-r` | ใช้ `-r` (follow redirect) ถ้า target มีการเปลี่ยนเส้นทาง (301/302) เช่น Login Form ที่ Redirect เมื่อ login fail/success หรือเวลาทำ brute force แล้วโดน redirect ไป error page |
-| **7. How do you enable colorized output?** | `-c` | ใช้ `-c` เพื่อเปิดการแสดงผลแบบมีสี เช่น ข้อความสีเขียวคือ status 200, สีแดงคือ error, ฯลฯ ทำให้อ่านง่ายและเห็น pattern ชัดเจนเวลารันใน terminal |
+| **1. How do you save the output to a Markdown file (`ffuf.md`)?** | `-of md -o ffuf.md` | Use `-of md` to specify that the output be formatted in Markdown, and `-o ffuf.md` to specify the filename to save, such as `ffuf.md`. This is ideal for sending reports or saving beautiful results. |
+| **2. How do you reuse a raw HTTP request file?** | `-request` | Use `-request` to load a pre-written HTTP request, such as from Burp Suite or ZAP, which is saved as a raw HTTP request (GET/POST + Header + Body). This is used for fuzzing forms or APIs. |
+| **3. How do you Strip comments from a wordlist?** | `-ic` | Use `-ic` (ignore comments) to ignore lines beginning with `#` in a wordlist, allowing ffuf to use only the words that are absolutely necessary, reducing noise and avoiding errors from non-payload lines. |
+| **4. How would you read a wordlist from STDIN?** | `-w -` | The `-w -` symbol means to read the wordlist from STDIN, e.g., `seq 1 100 | ffuf -w -` or `for i in {0..255}; do echo $i; done | ffuf -w -` eliminates the need to create a temporary wordlist file. |
+| **5. How do you print full URLs and redirect locations?** | `-v` | Use `-v` (verbose) to display the full URL sent to the request, along with any redirects that occur, such as HTTP 302s that lead to the login page, error page, or other locations. |
+| **6. What option would you use to follow? redirects?** | `-r` | Use `-r` (follow redirect) if the target has a redirection (301/302), such as a login form that redirects when a login fails/successes, or when a brute force operation redirects to an error page. |
+| **7. How do you enable colorized output?** | `-c` | Use `-c` to enable colored output, such as green text for status 200, red for error, etc. This makes it easier to read and visually pattern the output when running in the terminal. |
