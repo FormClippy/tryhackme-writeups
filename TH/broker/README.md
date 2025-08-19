@@ -117,3 +117,33 @@ Which videogame are Paul and Max talking about? (พอลกับแม็ก�
 1. สร้างไฟล์ชื่อ `client.py`
 2. วางโค้ดด้านล่างนี้ลงไป
 
+```bash
+import paho.mqtt.client as mqtt
+
+# The callback for when the client receives a CONNACK response from the server.
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code " + str(rc))
+    # Subscribing in on_connect() means that if we lose the connection and
+    # reconnect then subscriptions will be renewed.
+    client.subscribe("secret_chat")
+
+# The callback for when a PUBLISH message is received from the server.
+def on_message(client, userdata, msg):
+    print(msg.topic + " " + str(msg.payload))
+
+client = mqtt.Client(protocol=mqtt.MQTTv31)
+client.on_connect = on_connect
+client.on_message = on_message
+
+client.connect("10.10.94.190", 1883, 60)
+
+client.loop_forever()
+```
+
+📝 คำอธิบายโค้ด
+- 📡 `on_connect` → เชื่อมต่อกับ MQTT broker และ subscribe ไปยัง topic secret_chat
+- 📩 `on_message` → ฟังก์ชันสำหรับรับข้อความและพิมพ์ผลออกมา
+- ⚙️ ใช้ โปรโตคอล MQTT v3.1 (MQTTv31) และพอร์ตมาตรฐาน 1883
+- 🌐 `client.connect("10.9.0.246", 1883, 60)` → เปลี่ยน IP เป็น VPN tun0 ของคุณเองใน TryHackMe
+
+โค้ดนี้นำมาจาก (Eclipse Paho MQTT Python Client)[https://github.com/eclipse-paho/paho.mqtt.python#getting-started] ซึ่งเป็นไลบรารีมาตรฐานสำหรับเขียน MQTT Client
