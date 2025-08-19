@@ -125,7 +125,7 @@ def on_connect(client, userdata, flags, rc):
     print("Connected with result code " + str(rc))
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
-    client.subscribe("secret_chat")
+    client.subscribe("$SYS/#")
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -135,7 +135,7 @@ client = mqtt.Client(protocol=mqtt.MQTTv31)
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("10.10.94.190", 1883, 60)
+client.connect("tun0", 1883, 60)
 
 client.loop_forever()
 ```
