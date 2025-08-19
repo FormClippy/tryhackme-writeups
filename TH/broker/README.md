@@ -140,6 +140,8 @@ client.connect("10.10.94.190", 1883, 60)
 client.loop_forever()
 ```
 
+![code](images/6.png)
+
 📝 คำอธิบายโค้ด
 - 📡 `on_connect` → เชื่อมต่อกับ MQTT broker และ subscribe ไปยัง topic secret_chat
 - 📩 `on_message` → ฟังก์ชันสำหรับรับข้อความและพิมพ์ผลออกมา
