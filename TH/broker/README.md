@@ -52,5 +52,5 @@ nmap -sS -p 1001-9999 -T5 10.10.94.190
 พบว่าพอร์ตที่เปิดอยู่คือ: 
 | Port      | Service                       |
 |-----------|-------------------------------|
-| `1883/tcp` | MQTT                          |
-| `8161/tcp` | Apache ActiveMQ Web Console   |
+| 1883/tcp | MQTT                          |
+| 8161/tcp | Apache ActiveMQ Web Console   |
