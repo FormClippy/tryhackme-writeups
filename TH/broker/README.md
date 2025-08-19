@@ -146,4 +146,4 @@ client.loop_forever()
 - ⚙️ ใช้ โปรโตคอล MQTT v3.1 (MQTTv31) และพอร์ตมาตรฐาน 1883
 - 🌐 `client.connect("10.9.0.246", 1883, 60)` → เปลี่ยน IP เป็น VPN tun0 ของคุณเองใน TryHackMe
 
-โค้ดนี้นำมาจาก (Eclipse Paho MQTT Python Client)[https://github.com/eclipse-paho/paho.mqtt.python#getting-started] ซึ่งเป็นไลบรารีมาตรฐานสำหรับเขียน MQTT Client
+โค้ดนี้นำมาจาก [Eclipse Paho MQTT Python Client](https://github.com/eclipse-paho/paho.mqtt.python#getting-started) ซึ่งเป็นไลบรารีมาตรฐานสำหรับเขียน MQTT Client
