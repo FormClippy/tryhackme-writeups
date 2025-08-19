@@ -66,6 +66,9 @@ What is the name of the software they use? (ซอฟต์แวร์ที่
 - เมื่อทดลองเข้าที่พอร์ต 1883 → ไม่สามารถเข้าผ่านเว็บเบราเซอร์ได้ เนื่องจากพอร์ตนี้ใช้สำหรับ MQTT (Message Queuing Telemetry Transport)
   - โปรโตคอลนี้มักถูกใช้ในงาน IoT (Internet of Things)
   - ไม่ใช่โปรโตคอลที่รองรับการแสดงผลผ่านเว็บโดยตรง
+ 
+![test](images/2.png)
+
 - เมื่อทดลองเข้าที่พอร์ต 8161 → พบหน้า Web Console ที่สามารถเข้าผ่านเบราเซอร์ได้
   - พอร์ตนี้เป็นพอร์ตมาตรฐานของ Apache ActiveMQ
   - ActiveMQ คือ Message Broker ที่ใช้จัดการ message queuing
