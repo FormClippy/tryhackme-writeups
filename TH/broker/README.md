@@ -15,3 +15,14 @@ Broker เป็นห้อง CTF ที่เน้นเจาะระบ�
 > 🕵️‍♂️ โหมด: CTF แบบ Capture The Flag  
 > 🧩 URL: [Revenge](https://tryhackme.com/room/broker)  
 > 👨‍💻 ผู้ทำ: Thanyakorn
+
+## 📚 สารบัญ
+
+- 🛰️ 1. สแกนพอร์ต (Port Scanning)
+- 🌐 2. วิเคราะห์บริการ (Service Enumeration)
+- 🔐 3. เข้าสู่ระบบ ActiveMQ
+- 📡 4. อ่านข้อความลับจาก MQTT
+- 🚪 5. Exploit ActiveMQ (CVE-2016-3088)
+- 🖥️ 6. Reverse Shell & Initial Access
+- 🔼 7. Privilege Escalation → Root
+- 🏁 8. เก็บ Flag
