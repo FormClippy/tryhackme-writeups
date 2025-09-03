@@ -8,24 +8,23 @@
 ## 🗂️ รายการห้อง (CTF Rooms)
 
 ## 🇹🇭 ภาษาไทย
-| ห้อง | หมวด | 
-|------|-------|
-| 🦆 [**Revenge**](./TH/revenge/README.md) | Web | 
-| 🐶 [**Dogcat**](./TH/dogcat/README.md) | Web |
-| 🧪 [**ffuf**](./TH/ffuf/README.md) | Web |
-| 🪟 [**VulnNetActive**](./TH/VulnNet(Active)/README.md) | Windows |
-| 📈 [**Broker**](./TH/broker/README.md) | Web |
+| ห้อง | หมวด | ระดับความยาก |
+|------|-------|---------------|
+| 🦆 [**Revenge**](./TH/revenge/README.md) | Web | 🟡 Medium |
+| 🐶 [**Dogcat**](./TH/dogcat/README.md) | Web | 🟡 Medium |
+| 🧪 [**ffuf**](./TH/ffuf/README.md) | Web | 🟢 Easy |
+| 📈 [**Broker**](./TH/broker/README.md) | Web | 🟡 Medium |
 
 ---
 
 ## ENG English
-| Room | Category |
-|------|----------|
-| 🦆 [**Revenge**](./ENG/revenge/README.md) | Web |
-| 🐶 [**Dogcat**](./ENG/dogcat/README.md) | Web |
-| 🧪 [**ffuf**](./ENG/ffuf/README.md) | Web |
-| 🪟 [**VulnNetActive**](./ENG/VulnNet(Active)/README.md) | Windows |
-| 📈 [**Broker**](./ENG/broker/README.md) | Web |
+| Room | Category | Difficulty |
+|------|----------|------------|
+| 🦆 [**Revenge**](./ENG/revenge/README.md) | Web | 🟡 Medium |
+| 🐶 [**Dogcat**](./ENG/dogcat/README.md) | Web | 🟡 Medium |
+| 🧪 [**ffuf**](./ENG/ffuf/README.md) | Web | 🟢 Easy |
+| 🪟 [**VulnNetActive**](./ENG/VulnNet(Active)/README.md) | Windows | 🟡 Medium |
+| 📈 [**Broker**](./ENG/broker/README.md) | Web | 🟡 Medium |
 
 ---
 
