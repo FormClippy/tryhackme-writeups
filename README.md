@@ -23,7 +23,6 @@
 | 🦆 [**Revenge**](./ENG/revenge/README.md) | Web | 🟡 Medium |
 | 🐶 [**Dogcat**](./ENG/dogcat/README.md) | Web | 🟡 Medium |
 | 🧪 [**ffuf**](./ENG/ffuf/README.md) | Web | 🟢 Easy |
-| 🪟 [**VulnNetActive**](./ENG/VulnNet(Active)/README.md) | Windows | 🟡 Medium |
 | 📈 [**Broker**](./ENG/broker/README.md) | Web | 🟡 Medium |
 
 ---
