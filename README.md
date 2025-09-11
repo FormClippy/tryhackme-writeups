@@ -20,6 +20,7 @@
 | 🦆 [**Revenge**](./TH/revenge/README.md) | Web | 🟡 Medium |
 | 🐶 [**Dogcat**](./TH/dogcat/README.md) | Web | 🟡 Medium |
 | 📈 [**Broker**](./TH/broker/README.md) | Web | 🟡 Medium |
+| 🔥 [**The Server From Hell**](./TH/theserverfromhell/README.md) | CTF / Boot-to-Root | 🟡 Medium |
 
 ---
 
@@ -36,6 +37,7 @@
 | 🦆 [**Revenge**](./ENG/revenge/README.md) | Web | 🟡 Medium |
 | 🐶 [**Dogcat**](./ENG/dogcat/README.md) | Web | 🟡 Medium |
 | 📈 [**Broker**](./ENG/broker/README.md) | Web | 🟡 Medium |
+| 🔥 [**The Server From Hell**](./ENG/theserverfromhell/README.md) | CTF / Boot-to-Root | 🟡 Medium |
 
 ---
 
