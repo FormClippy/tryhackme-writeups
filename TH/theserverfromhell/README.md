@@ -48,6 +48,8 @@ nmap -sC -sV -Pn <TARGET_IP>
 ```bash
 nmap -sV -vv <TARGET_IP>
 ```
+![nmap](images/1.png)
+
 - ตัด `-sC` ออก → ไม่ต้องรัน NSE scripts → scan ไวกว่า
 - ใช้ `-sV` เพียงอย่างเดียว → เน้นดู service และ version
 - เพิ่ม `-vv` (very verbose) → ให้ Nmap รายงานผลทีละพอร์ตแบบ realtime ทำให้เห็นผลลัพธ์ “เร็วขึ้น” ถึงแม้เบื้องหลังยังสแกนอยู่
