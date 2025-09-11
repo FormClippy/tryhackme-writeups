@@ -13,6 +13,7 @@ The Server From Hell เป็นห้อง CTF สาย Linux บน TryHack
 - เก็บ Flags ให้ครบ
 
 # 🧠 TryHackMe - The Server From Hell
+
 🟡 หมวด: CTF / Boot-to-Root  
 🧩 ความยาก: Medium
 🕵️‍♂️ โหมด: CTF แบบ Boot-to-Root
