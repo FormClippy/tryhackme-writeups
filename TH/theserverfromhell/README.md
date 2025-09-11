@@ -70,7 +70,7 @@ nc 10.201.52.151 1337
 ![nc](images/2.png)
 
 ผลลัพธ์ที่ได้:
-```bash
+```text
 Welcome traveller, to the beginning of your journey
 To begin, find the trollface
 Legend says he's hiding in the first 100 ports
