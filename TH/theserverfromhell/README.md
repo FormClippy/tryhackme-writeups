@@ -184,7 +184,37 @@ mount 10.201.52.151:/home/nfs mount
 
 - ls -la → แสดงไฟล์ทั้งหมด รวมถึง hidden files พร้อม permission
 
+## 🔎 พบ backup.zip → แตกไฟล์ด้วยรหัสจาก wordlist
 
+1. ใช้ fcrackzip ทำ dictionary attack เพื่อหา password ของ backup.zip
+
+```bash
+fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt backup.zip
+```
+
+![nc](images/8.png)
+
+- `-v` : verbose (แสดงผลละเอียด)
+- `-u` : use unzip test (ทดสอบแตกจริงเหมือน unzip)
+- `-D` : dictionary mode
+- `-p /path/to/wordlist` : ระบุไฟล์ wordlist (ที่นี่ใช้ rockyou.txt)
+
+ผลลัพธ์: พบรหัสผ่าน `zxcvbnm` (PASSWORD FOUND!!!!: pw = zxcvbnm)
+
+2. คัดลอก backup.zip มาที่ working directory แล้วแตกไฟล์
+
+```bash
+cp mount/backup.zip .
+unzip backup.zip
+```
+- `unzip` จะถาม password → ใส่ `zxcvbnm` แล้วระบบจะแตกไฟล์ภายใน
+
+3. ผลการแตกไฟล์ (ไฟล์ที่เห็น)
+- `home/hades/.ssh/id_rsa` (private key)
+- `home/hades/.ssh/hint.txt`
+- `home/hades/.ssh/authorized_keys`
+- `home/hades/.ssh/flag.txt`
+- `home/hades/.ssh/id_rsa.pub`
 
 
 
