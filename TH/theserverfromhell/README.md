@@ -148,6 +148,9 @@ It's on the standard port, no need for another scan
 ```bash
 showmount -e 10.201.52.151
 ```
+
+![nc](images/6.png)
+
 ผลลัพธ์:
 ```text
 Export list for 10.201.52.151:
