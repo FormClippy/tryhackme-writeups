@@ -310,7 +310,7 @@ bash Secure-shell.sh
 
 ## 🔓 7. จาก irb → หลุดเป็น /bin/bash (Shell escape)
 - เชื่อมต่อด้วย private key:
-```ruby
+```bash
 ssh -i id_rsa hades@10.201.52.151 -p 3333
 ```
 เมื่อเชื่อมต่อสำเร็จ ได้ prompt เป็น Ruby interactive shell (`irb(main):001:0>`)
