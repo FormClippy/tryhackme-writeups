@@ -99,3 +99,34 @@ nc <TARGET_IP> 4
 ```
 
 📌 หมายความว่าต้องทำ enumeration **ครบทุกพอร์ตในช่วง** 1–100 เพื่อตามหาพอร์ตที่ซ่อนข้อความพิเศษ (“trollface”)
+
+## 🌐 3.1 สแกนพอร์ต 1–100 อัตโนมัติ (Netcat script)
+ไฟล์สคริปต์ Netcat.sh:
+```bash
+for i in {1..100}
+do
+  nc 10.201.52.151 $i
+  echo "\n"
+done
+```
+คำสั่งรัน:
+```bash
+bash Netcat.sh
+```
+
+![nc](images/4.png)
+
+ผลลัพธ์: แสดง banner/response ของแต่ละพอร์ต 1–100 เพื่อค้นหา message/“trollface” ที่ซ่อนอยู่ตาม hint
+
+
+
+
+
+
+
+
+
+
+
+
+
