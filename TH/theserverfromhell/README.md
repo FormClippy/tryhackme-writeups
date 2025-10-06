@@ -20,22 +20,22 @@ The Server From Hell เป็นห้อง CTF สาย Linux บน TryHack
 
 ## 📚 สารบัญ (Table of Contents)
 
-- [📌 ข้อมูลจากโจทย์](#ข้อมูลจากโจทย์)
-- [🔎 1) Recon & Port Scan](#1-recon--port-scan)
-- [📡 2) ตรวจสอบ Banner และ Web Services](#2-ตรวจสอบ-banner-และ-web-services)
-- [🌐 3) สแกนพอร์ต 1–100 ตาม Hint](#3-สแกนพอร์ต-1-100-ตาม-hint)
-  - [🌐 3.1) สแกนพอร์ต 1–100 อัตโนมัติ (Netcat Script)](#31-สแกนพอร์ต-1-100-อัตโนมัติ-netcat-script)
-  - [🌐 3.2) พบคำสั่งชี้พอร์ตจากการรันสคริปต์](#32-พบคำสั่งชี้พอร์ตจากการรันสคริปต์)
-- [📂 4) ตรวจหาและเมานต์ NFS Share](#4-ตรวจหาและเมานต์-nfs-share)
-- [🔎 5) พบ backup.zip → แตกไฟล์ด้วยรหัสจาก Wordlist](#5-พบ-backupzip-แตกไฟล์ด้วยรหัสจาก-wordlist)
-- [📂 6) ขั้นตอนถัดไปหลังแตก backup.zip](#6-ขั้นตอนถัดไปหลังแตก-backupzip)
-- [🔑 7) ทดลองเข้า SSH (ตาม Hint: 2500–4500)](#7-ทดลองเข้า-ssh-ตาม-hint-2500-4500)
-- [🔓 8) หลุดจาก IRB → ได้ Shell จริง (Bash)](#8-หลุดจาก-irb-ได้-shell-จริง-bash)
-- [🧭 9) ใช้ tar (cap_dac_read_search) ดึงไฟล์ของ root](#9-ใช้-tar-cap_dac_read_search-ดึงไฟล์ของ-root)
-  - [🪄 ตรวจหา Linux Capabilities](#ตรวจหา-linux-capabilities)
-  - [📂 สร้างและแตก archive ของ /root](#สร้างและแตก-archive-ของ-root)
-  - [🏁 อ่าน Root Flag](#อ่าน-root-flag)
-- [⚙️ ทางเลือกที่ 2 — ดึง /etc/shadow แล้ว crack เพื่อเป็น root](#ทางเลือกที่-2-ดึง-etcshadow-แล้ว-crack-เพื่อเป็น-root)
+- 📌 ข้อมูลจากโจทย์
+- 🔎 1) Recon & Port Scan
+- 📡 2) ตรวจสอบ Banner และ Web Services
+- 🌐 3) สแกนพอร์ต 1–100 ตาม Hint
+  - 🌐 3.1) สแกนพอร์ต 1–100 อัตโนมัติ (Netcat Script)
+  - 🌐 3.2) พบคำสั่งชี้พอร์ตจากการรันสคริปต์
+- 📂 4) ตรวจหาและเมานต์ NFS Share
+- 🔎 5) พบ backup.zip → แตกไฟล์ด้วยรหัสจาก Wordlist
+- 📂 6) ขั้นตอนถัดไปหลังแตก backup.zip
+- 🔑 7) ทดลองเข้า SSH (ตาม Hint: 2500–4500)
+- 🔓 8) หลุดจาก IRB → ได้ Shell จริง (Bash)
+- 🧭 9) ใช้ tar (cap_dac_read_search) ดึงไฟล์ของ root
+  - 🪄 ตรวจหา Linux Capabilities
+  - 📂 สร้างและแตก archive ของ /root
+  - 🏁 อ่าน Root Flag
+- ⚙️ ทางเลือกที่ 2 — ดึง /etc/shadow แล้ว crack เพื่อเป็น root
 
 ---
 
