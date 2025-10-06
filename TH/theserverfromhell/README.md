@@ -313,6 +313,9 @@ bash Secure-shell.sh
 ```bash
 ssh -i id_rsa hades@10.201.52.151 -p 3333
 ```
+
+![connect](images/13.png)
+
 เมื่อเชื่อมต่อสำเร็จ ได้ prompt เป็น Ruby interactive shell (`irb(main):001:0>`)
 
 ### ทำไมมันเชื่อมต่อสำเร็จ (ไม่ต้องใส่รหัสผ่าน)
