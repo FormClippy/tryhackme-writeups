@@ -1,5 +1,3 @@
-# The Server From Hell - Writeup (English)
-
 ### ✨ Introduction
 **The Server From Hell** is a Linux CTF room on TryHackMe focused on full-system exploitation: enumerating hidden ports, finding a misconfigured NFS share, cracking a zip file, using an SSH key to log in, and abusing Linux capabilities to get a root shell.
 
@@ -44,10 +42,14 @@ nmap -sC -sV -Pn <TARGET_IP>
 - `-sV` → service/version detection
 - `-Pn` → treat host as up (skip ping)
 
+❌ Problem: Using -sC causes Nmap to run a lot of scripts → each script must wait for a response or timeout from the service → causing **slow scanning**, especially if multiple open ports are found.
+
 For speed you can use:
 ```bash
 nmap -sV -vv <TARGET_IP>
 ```
+
+![nmap](images/1.png)
 
 ### ℹ️ Scan Analysis
 The scan reveals many open ports (20+). There are also odd high ports like `10628`, `16000`, `2607`, `5001` that may be custom services or deliberate honeyports used in a CTF.
