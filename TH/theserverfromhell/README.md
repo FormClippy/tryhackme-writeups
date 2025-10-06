@@ -349,6 +349,7 @@ exec '/bin/bash'
 
 - ผล: ได้ shell ของระบบ (bash)
 
+<details>
 ## 🪄 8. ตรวจหา Linux Capabilities (Privilege escalation vector)
 
 ```bash
@@ -429,7 +430,7 @@ ls
 ## 🏁 10. Root Flag
 
 ![root](images/16.png)
-
+</details>
 
 
 
