@@ -398,7 +398,7 @@ tar -cvf test.tar /root
 โปรแกรมสำหรับสร้าง/จัดการ archive (tarball)
 
 - `-c` (create)
-สร้าง archive ใหม่
+สร้าง archive (คลังเก็บเอกสารสำคัญ) ใหม่
 
 - `-v` (verbose)
 แสดงรายการไฟล์ที่กำลังถูกเพิ่มลงใน archive (เห็น output ทีละไฟล์)
