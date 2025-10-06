@@ -320,7 +320,7 @@ ssh -i id_rsa hades@10.201.52.151 -p 3333
 
 ### ทำไมมันเชื่อมต่อสำเร็จ (ไม่ต้องใส่รหัสผ่าน)
 
-<details>
+# <details>
 
 1. Key-based authentication
 - SSH ใช้คู่กุญแจ `private key` (เราถือ: `id_rsa`) กับ `public key` (อยู่บนเครื่องเป้าหมายใน `~hades/.ssh/authorized_keys`) แทนการใส่รหัสผ่าน
