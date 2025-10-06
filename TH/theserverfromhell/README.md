@@ -27,10 +27,9 @@ The Server From Hell เป็นห้อง CTF สาย Linux บน TryHack
   - 🌐 3.1) สแกนพอร์ต 1–100 อัตโนมัติ (Netcat Script)
   - 🌐 3.2) พบคำสั่งชี้พอร์ตจากการรันสคริปต์
 - 📂 4) ตรวจหาและเมานต์ NFS Share
-- 🔎 5) พบ backup.zip → แตกไฟล์ด้วยรหัสจาก Wordlist
-- 📂 6) ขั้นตอนถัดไปหลังแตก backup.zip
-- 🔑 7) ทดลองเข้า SSH (ตาม Hint: 2500–4500)
-- 🔓 8) หลุดจาก IRB → ได้ Shell จริง (Bash)
+- 📂 5) ขั้นตอนถัดไป (หลังแตก backup.zip)
+- 🔑 6) ทดลองเข้า SSH (ตาม hint: 2500–4500)
+- 🔓 7) จาก irb → หลุดเป็น /bin/bash (Shell escape)
 - 🔎 2 วิธีในการหาไฟล์ root.txt
 
 ---
