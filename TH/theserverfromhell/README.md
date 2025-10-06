@@ -456,13 +456,30 @@ tar -cvf /tmp/shadow.tar /etc/shadow
 ```bash
 tar -xvf /tmp/shadow.tar -C /tmp
 ```
+
+![root](images/17.png)
+
 - จะได้บรรทัด hash ของ user เช่น `root:$6$.......`
 
+3. เอา hash ของ root ไปไว้ที่เครื่อง attacker (หรือไฟล์บนเครื่องเป้าหมาย) เพื่อ crack
+ตัวอย่าง — สร้างไฟล์ roots.hash ที่มีบรรทัด hash ของ root:
 
+```bash
+echo 'root:$6$.......' > roots.hash
+```
 
+![root](images/18.png)
 
+4. ใช้ John the Ripper (หรือ hashcat) ทำ dictionary attack
 
+5. ดูผลเมื่อแตกได้แล้ว
 
+- john --show roots.hash
+
+6. ใช้รหัสผ่านที่ได้เข้าสู่ root
+บน target:
+
+![root](images/19.png)
 	
 </details>
 
