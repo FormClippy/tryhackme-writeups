@@ -315,6 +315,13 @@ ssh -i id_rsa hades@10.201.52.151 -p 3333
 ```
 เมื่อเชื่อมต่อสำเร็จ ได้ prompt เป็น Ruby interactive shell (`irb(main):001:0>`)
 
+### ทำไมมันเชื่อมต่อสำเร็จ (ไม่ต้องใส่รหัสผ่าน)
+1. Key-based authentication
+- SSH ใช้คู่กุญแจ private key (เราถือ: id_rsa) กับ public key (อยู่บนเครื่องเป้าหมายใน ~hades/.ssh/authorized_keys) แทนการใส่รหัสผ่าน
+
+2. ขั้นตอนย่อของการพิสูจน์ตัวตน
+<pre>bash<br>ls -la<br></pre>
+
 ทำอะไรต่อ
 - เปิดหน้า GTFOBins ดู entry สำหรับ irb (irb สามารถ exec โปรแกรมอื่นได้)
 - ใช้คำสั่งจาก GTFOBins เพื่อ spawn bash:
