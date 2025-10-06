@@ -24,8 +24,8 @@ The Server From Hell is a Linux CTF room on TryHackMe that focuses on hacking, f
 - 🔎 1) Recon & Port Scan
 - 📡 2) Check Banner and Web Services
 - 🌐 3) Scan Ports 1–100 According to Hint
-- 🌐 3.1) Automatically Scan Ports 1–100 (Netcat Script)
-- 🌐 3.2) Find Port Commands by Running the Script
+   - 🌐 3.1) Automatically Scan Ports 1–100 (Netcat Script)
+   - 🌐 3.2) Find Port Commands by Running the Script
 - 📂 4) Detect and Mount NFS Share
 - 📂 5) Next Steps (After Extracting Backup.zip)
 - 🔑 6) Try SSH Access (According to Hint: 2500–4500)
