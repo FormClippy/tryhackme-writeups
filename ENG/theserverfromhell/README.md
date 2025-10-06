@@ -19,16 +19,21 @@ The Server From Hell is a Linux CTF room on TryHackMe that focuses on hacking, f
 ---
 
 ## 📚 Table of Contents
+
+- 📌 Information from the Problem
 - 🔎 1) Recon & Port Scan
-- 🧵 2) Banner/Manual Check with `nc`
-- 📦 3) NFS Enumeration & Mount
-- 🔑 4) SSH with Extracted Keys
-- 🧯 5) Escape from IRB → Get Real Bash
-- 🧗 6) Privilege Escalation with Linux Capabilities (tar)
-- 🧨 7) Crack `/etc/shadow` → `su root`
-- 🏁 8) Workflow Summary + Lessons
+- 📡 2) Check Banner and Web Services
+- 🌐 3) Scan Ports 1–100 According to Hint
+- 🌐 3.1) Automatically Scan Ports 1–100 (Netcat Script)
+- 🌐 3.2) Find Port Commands by Running the Script
+- 📂 4) Detect and Mount NFS Share
+- 📂 5) Next Steps (After Extracting Backup.zip)
+- 🔑 6) Try SSH Access (According to Hint: 2500–4500)
+- 🔓 7) From irb → Exit to /bin/bash (Shell Escape)
+- 🔎 2 Methods to Find the Root.txt File
 
 ---
+
 ## 📌 Problem Information
 > “Start at port 1337 and enumerate your way. Good luck.”
 
