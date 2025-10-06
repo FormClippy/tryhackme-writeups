@@ -31,11 +31,7 @@ The Server From Hell เป็นห้อง CTF สาย Linux บน TryHack
 - 📂 6) ขั้นตอนถัดไปหลังแตก backup.zip
 - 🔑 7) ทดลองเข้า SSH (ตาม Hint: 2500–4500)
 - 🔓 8) หลุดจาก IRB → ได้ Shell จริง (Bash)
-- 🧭 9) ใช้ tar (cap_dac_read_search) ดึงไฟล์ของ root
-  - 🪄 ตรวจหา Linux Capabilities
-  - 📂 สร้างและแตก archive ของ /root
-  - 🏁 อ่าน Root Flag
-- ⚙️ ทางเลือกที่ 2 — ดึง /etc/shadow แล้ว crack เพื่อเป็น root
+- 🔎 2 วิธีในการหาไฟล์ root.txt
 
 ---
 
