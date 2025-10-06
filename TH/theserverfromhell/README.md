@@ -320,7 +320,7 @@ ssh -i id_rsa hades@10.201.52.151 -p 3333
 - SSH ใช้คู่กุญแจ private key (เราถือ: id_rsa) กับ public key (อยู่บนเครื่องเป้าหมายใน ~hades/.ssh/authorized_keys) แทนการใส่รหัสผ่าน
 
 2. ขั้นตอนย่อของการพิสูจน์ตัวตน
-<pre>bash<br>ls -la<br></pre>
+<details>หฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟ</details>
 
 ทำอะไรต่อ
 - เปิดหน้า GTFOBins ดู entry สำหรับ irb (irb สามารถ exec โปรแกรมอื่นได้)
