@@ -355,7 +355,7 @@ exec '/bin/bash'
 getcap -r / 2>/dev/null
 ```
 
-![Capabilities](images/15.png)
+![Capabilities](images/14-1.png)
 
 ความหมายสั้น ๆ
 - `getcap` ตรวจหาไฟล์ที่มี Linux capabilities
