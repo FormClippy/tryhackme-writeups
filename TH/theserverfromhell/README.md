@@ -345,7 +345,7 @@ ssh -i id_rsa hades@10.201.52.151 -p 3333
 exec '/bin/bash'
 ```
 
-![irb](images/14.1.png)
+![irb](images/14.png)
 
 - ผล: ได้ shell ของระบบ (bash)
 
