@@ -352,7 +352,9 @@ exec '/bin/bash'
 # 🔍 2 วิธีในการหาไฟล์ root.txt
 
 ### 1
+
 <details>
+
 
 🪄 ตรวจหา Linux Capabilities (Privilege escalation vector)
 
