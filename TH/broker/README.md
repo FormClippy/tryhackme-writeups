@@ -224,8 +224,9 @@ python3 -c "import pty; pty.spawn('/bin/bash')"
 
 ![netcat](images/11.png)
 
+## 7) ยกระดับสิทธิ์เป็น root
 
-
+- เราจะมาใช้คำสั่ง sudo -l เพื่อดูว่า user activemq สามารถใช้คำสั่งอะไรบ้างในระบบท่ี่มีสิทธิ์ root โดยไม่ต้องใช้รหัสผ่ำน
 
 
 
