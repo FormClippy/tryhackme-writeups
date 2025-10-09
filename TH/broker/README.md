@@ -13,7 +13,7 @@ Broker เป็นห้อง CTF ที่เน้นเจาะระบ�
 > 🟡 หมวด: Web / Privilege Escalation  
 > 🧩 ความยาก: Medium  
 > 🕵️‍♂️ โหมด: CTF แบบ Capture The Flag  
-> 🧩 URL: [Revenge](https://tryhackme.com/room/broker)  
+> 🧩 URL: [broker](https://tryhackme.com/room/broker)  
 > 👨‍💻 ผู้ทำ: Thanyakorn
 
 ## 📚 สารบัญ
