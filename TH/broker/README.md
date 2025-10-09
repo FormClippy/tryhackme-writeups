@@ -150,6 +150,9 @@ client.loop_forever()
 
 โค้ดนี้นำมาจาก [Eclipse Paho MQTT Python Client](https://github.com/eclipse-paho/paho.mqtt.python#getting-started) ซึ่งเป็นไลบรารีมาตรฐานสำหรับเขียน MQTT Client
 
+
+**รัน `client.py` ด้วย `python3 client.py` เพื่อ subscribe topic `secret_chat` บน broker (พอร์ต 1883)**
+
 รันสคริปต์ด้วย:
 ```bash
 python3 client.py
@@ -157,6 +160,9 @@ python3 client.py
 
 ![python3](images/7.png)
 
+ผลลัพธ์:
+เมื่อเชื่อมต่อสำเร็จ โปรแกรมแสดง `Connected with result code 0`
+  
 
 
 
